@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AppController!{% endblock %}
+
+{% block body %}
+
+    {% for locale, lang in languages %}
+        <a href="{{ path('app_homepage', {target: locale}) }}">
+            {{ lang }}
+        </a>
+        |
+    {% endfor %}
+
+
+    <table>
+        <tbody>
+        {% for idx, product in products %}
+        <tr>
+            <td>
+                <img style="width: 100px" src="{{ product.thumbnail }}" />
+            </td>
+            <td>
+                {{ product.title }}
+                <br />
+                <i>
+                    {{ translations[idx] }}
+                </i>
+
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock %}
