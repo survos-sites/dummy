@@ -4,7 +4,10 @@
 
 {% block body %}
 
-    {% for locale, lang in languages %}
+    {% if response|default(false) %}
+    {{ dump(response) }}
+    {% endif %}
+    {% for locale, lang in languages|default([]) %}
         <a href="{{ path('app_homepage', {target: locale}) }}">
             {{ lang }}
         </a>
@@ -14,7 +17,7 @@
 
     <table>
         <tbody>
-        {% for idx, product in products %}
+        {% for idx, product in products|default([]) %}
         <tr>
             <td>
                 <img style="width: 100px" src="{{ product.thumbnail }}" />

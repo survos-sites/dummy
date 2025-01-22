@@ -4,3 +4,5 @@ survos_libre_translate:
   apikey: 'MasterKey'
   sourceLanguage: 'en'
   targetLanguage: 'es'
+  server: https://trans.wip
+#  server: https://translation-server.survos.com
