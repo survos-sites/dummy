@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Jefs42\LibreTranslate;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
 use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +17,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class AppController extends AbstractController
 {
 
+    const SAIS_CLIENT_CODE='dummy-sais';
     public function __construct(
         private CacheInterface $cache,
         private SaisClientService $saisService,
@@ -53,18 +53,27 @@ class AppController extends AbstractController
     #[Route('/compress', name: 'app_compress_images')]
     public function listFeatured(): Response
     {
+        // example of sending multiple images
         $products = $this->getDummyProducts();
+        $responses = [];
         foreach ($products->products as $product) {
             $payload = new \Survos\SaisBundle\Model\ProcessPayload(
                 $product->images,
                 ['small'],
-                $this->urlGenerator->generate('app_webhook')
+                context: [
+                    'productId' => $product->id
+                ],
+                mediaCallbackUrl: $this->urlGenerator->generate('app_webhook')
             );
             $response = $this->saisService->dispatchProcess($payload);
-            dd($payload, $response);
+            $responses[] = [
+                'payload' => $payload,
+                'response' => $response,
+            ];
         }
+        dd($responses);
         return $this->render('app/index.html.twig', [
-            'payload' => $payload,
+            'responses' => $responses,
         ]);
     }
 
@@ -87,14 +96,16 @@ class AppController extends AbstractController
 
     #[Route('/{target}', name: 'app_homepage')]
     public function home(
-//        LibreTranslate $libreTranslate,
         HttpClientInterface $httpClient,
+        ?LibreTranslate $libreTranslate=null,
         string         $target = 'es'): Response
     {
 
-        $libreTranslate = new LibreTranslate(httpClient: $httpClient);
-        $libreTranslate->setHttpClient($httpClient);
+        if ($libreTranslate) {
+            $libreTranslate = new LibreTranslate(httpClient: $httpClient);
+            $libreTranslate->setHttpClient($httpClient);
 //        $libreTranslate->setTarget($target);
+        }
 
 
         $translations = [];
@@ -102,12 +113,15 @@ class AppController extends AbstractController
         $data = $this->getDummyProducts();
         foreach ($data->products as $idx => $product) {
             $x[] = $product->title;
-            $z[] = $libreTranslate->translate($product->title, target: $target);
-            $translations[] = $this->cache->get(md5($product->title).$target,
-                fn(CacheItem $cacheItem) =>
+            if ($libreTranslate) {
+                $z[] = $libreTranslate->translate($product->title, target: $target);
+                $translations[] = $this->cache->get(md5($product->title).$target,
+                    fn(CacheItem $cacheItem) =>
                     $libreTranslate->translate($product->title, target: $target)
-            );
-            if ($idx > 0) break;
+                );
+                if ($idx > 0) break;
+
+            }
         }
         // argh.  Proof that bulk translations don't work well.
         $xx = [

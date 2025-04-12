@@ -8,13 +8,18 @@
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-iconv": "*",
+        "api-platform/doctrine-orm": "*",
+        "api-platform/symfony": "*",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16|^3.0",
+        "easycorp/easyadmin-bundle": "^4.24",
+        "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.23",
-        "survos/libre-translate-bundle": "^1.5",
         "survos/sais-bundle": "^1.5",
+        "survos/workflow-helper-bundle": "^1.5",
+        "symfony/amqp-messenger": "^7.1",
         "symfony/asset": "^7.1",
         "symfony/console": "^7.1",
         "symfony/doctrine-messenger": "^7.1",
@@ -41,12 +46,12 @@
         "symfony/validator": "^7.1",
         "symfony/web-link": "^7.1",
         "symfony/yaml": "^7.1",
-        "tacman/libretranslate": "*@dev",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
+            "endroid/installer": true,
             "php-http/discovery": true,
             "symfony/flex": true,
             "symfony/runtime": true
@@ -94,7 +99,9 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
         "phpunit/phpunit": "^9.5||^10.0||^11.0",
+        "survos/maker-bundle": "*",
         "symfony/browser-kit": "^7.1",
         "symfony/css-selector": "^7.1",
         "symfony/debug-bundle": "^7.1",
@@ -102,11 +109,5 @@
         "symfony/phpunit-bridge": "^6.4 || ^7.1",
         "symfony/stopwatch": "^7.1",
         "symfony/web-profiler-bundle": "^7.1"
-    },
-    "repositories": {
-        "libretranslate": {
-            "type": "path",
-            "url": "~/g/tacman/libretranslate"
-        }
     }
 }
