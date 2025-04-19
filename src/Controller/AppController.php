@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\ImageRepository;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
 use Survos\SaisBundle\Service\SaisClientService;
+use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +24,7 @@ class AppController extends AbstractController
         private CacheInterface $cache,
         private SaisClientService $saisService,
         private UrlGeneratorInterface $urlGenerator,
+        private ImageRepository $imageRepository,
     )
     {
 
@@ -93,6 +96,17 @@ class AppController extends AbstractController
 
     }
 
+    #[Route('/images', name: 'app_images')]
+    #[Template('app/images.html.twig')]
+    public function images(
+        HttpClientInterface $httpClient,
+        string         $target = 'es'): Response|array
+    {
+        return [
+            'images' => $this->imageRepository->findBy([], [], 10),
+        ];
+    }
+
 
     #[Route('/{target}', name: 'app_homepage')]
     public function home(
@@ -124,24 +138,24 @@ class AppController extends AbstractController
             }
         }
         // argh.  Proof that bulk translations don't work well.
-        $xx = [
-            "My name is Robert",
-            "Where is the bathroom?",
-            "Eyeshadow Palette with Mirror"
-        ];
-        $x = array_merge($x, $xx);
-        foreach ($xx as $xxx) {
-            $individual[$xxx] = $libreTranslate->translate($xxx, target: $target);
-        }
-        $bulk= $libreTranslate->translate($xx, 'en', target: $target);
-        dd(original: $xx, bulk: $bulk, individual: $individual);
+//        $xx = [
+//            "My name is Robert",
+//            "Where is the bathroom?",
+//            "Eyeshadow Palette with Mirror"
+//        ];
+//        $x = array_merge($x, $xx);
+//        foreach ($xx as $xxx) {
+//            $individual[$xxx] = $libreTranslate->translate($xxx, target: $target);
+//        }
+//        $bulk= $libreTranslate->translate($xx, 'en', target: $target);
+//        dd(original: $xx, bulk: $bulk, individual: $individual);
 
 
 //        dd($translations);
         return $this->render('app/index.html.twig', [
             'products' => $data->products,
             'translations' => $translations,
-            'languages' => $libreTranslate->getLanguages()
+            'languages' => [], // $libreTranslate->getLanguages()
         ]);
     }
 }

@@ -14,19 +14,18 @@
         |
     {% endfor %}
 
-
     <table>
         <tbody>
         {% for idx, product in products|default([]) %}
         <tr>
             <td>
-                <img style="width: 100px" src="{{ product.thumbnail }}" />
+                <img style="width: 100px" src="{{ product.thumbnail }}" title="{{ product.thumbnail }}" />
             </td>
             <td>
                 {{ product.title }}
                 <br />
                 <i>
-                    {{ translations[idx] }}
+                    {{ translations[idx]??'~' }}
                 </i>
 
             </td>

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for image in images %}
+        <li>
+            {{ image.originalUrl }}
+        {% for size,thumb in image.resized %}
+            <b>{{ size }}</b>
+            <a href="{{ thumb }}" target="_blank">
+                <img src="{{ thumb }}" title="{{ thumb }}" style="max-height: 200px"/>
+            </a>
+        {% endfor %}
+        </li>
+    {% endfor %}
+
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

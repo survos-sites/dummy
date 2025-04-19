@@ -23,30 +23,6 @@ class ImageWorkflow implements IImageWorkflow
 	{
 	}
 
-	#[AsGuardListener(self::WORKFLOW_NAME)]
-	public function onGuard(GuardEvent $event): void
-	{
-		/** @var Image image */
-		$image = $event->getSubject();
-
-		switch ($event->getTransition()->getName()) {
-		/*
-		e.g.
-		if ($event->getSubject()->cannotTransition()) {
-		  $event->setBlocked(true, "reason");
-		}
-		App\Entity\Image
-		*/
-		    case self::TRANSITION_DISPATCH:
-		        break;
-		    case self::TRANSITION_COMPLETE:
-		        break;
-		    case self::TRANSITION_FAIL:
-		        break;
-		}
-	}
-
-
 	#[AsTransitionListener(self::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
 	public function onTransition(TransitionEvent $event): void
 	{
@@ -55,7 +31,12 @@ class ImageWorkflow implements IImageWorkflow
             $response = $this->saisClientService->dispatchProcess(new ProcessPayload(
                 AppController::SAIS_CLIENT_CODE,
                 [$image->getOriginalUrl()],
-
         ));
+            // hack alert: just fail if the resized isn't there, then re-run
+        $resized = $response[0]['resized']??[];
+        if (!count($resized)) {
+            throw new \Exception('Image resized empty for , run again later ' . $image->getOriginalUrl());
+        }
+        $image->setResized($resized);
 	}
 }
