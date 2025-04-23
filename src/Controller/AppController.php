@@ -67,21 +67,21 @@ class AppController extends AbstractController
         $response = $this->saisService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
 
         foreach ($products->products as $idx => $product) {
-            $payload = new \Survos\SaisBundle\Model\ProcessPayload(
-                AppController::SAIS_CLIENT_CODE,
-                $product->images,
-                ['small'],
-                context: [
-                    'productId' => $product->id
-                ],
-                mediaCallbackUrl: $this->urlGenerator->generate('app_media_webhook'),
-                thumbCallbackUrl: $this->urlGenerator->generate('app_thumb_webhook'),
-            );
-            $response = $this->saisService->dispatchProcess($payload);
-            $responses[] = [
-                'payload' => $payload,
-                'response' => $response,
-            ];
+                $payload = new \Survos\SaisBundle\Model\ProcessPayload(
+                    AppController::SAIS_CLIENT_CODE,
+                    $product->images,
+                    ['small'],
+                    context: [
+                        'productId' => $product->id
+                    ],
+                    mediaCallbackUrl: $this->urlGenerator->generate('app_media_webhook', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                    thumbCallbackUrl: $this->urlGenerator->generate('app_thumb_webhook', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                );
+                $response = $this->saisService->dispatchProcess($payload);
+                $responses[] = [
+                    'payload' => $payload,
+                    'response' => $response,
+                ];
             if ($limit && count($responses) >= $limit) {
                 break;
             }
