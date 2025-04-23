@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ImageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
+use Survos\SaisBundle\Model\AccountSetup;
 use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +27,7 @@ class AppController extends AbstractController
         private SaisClientService $saisService,
         private UrlGeneratorInterface $urlGenerator,
         private ImageRepository $imageRepository,
+        private EntityManagerInterface $entityManager,
     )
     {
 
@@ -53,37 +56,64 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/compress', name: 'app_compress_images')]
-    public function listFeatured(): Response
+    #[Route('/compress/{limit}', name: 'app_compress_images')]
+    public function listFeatured(int $limit=3): Response
     {
+        // we only use this to make it easier to debug
         // example of sending multiple images
         $products = $this->getDummyProducts();
         $responses = [];
-        foreach ($products->products as $product) {
+        // makes sure dummy exists on sais!
+        $response = $this->saisService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
+
+        foreach ($products->products as $idx => $product) {
             $payload = new \Survos\SaisBundle\Model\ProcessPayload(
+                AppController::SAIS_CLIENT_CODE,
                 $product->images,
                 ['small'],
                 context: [
                     'productId' => $product->id
                 ],
-                mediaCallbackUrl: $this->urlGenerator->generate('app_webhook')
+                mediaCallbackUrl: $this->urlGenerator->generate('app_media_webhook'),
+                thumbCallbackUrl: $this->urlGenerator->generate('app_thumb_webhook'),
             );
             $response = $this->saisService->dispatchProcess($payload);
             $responses[] = [
                 'payload' => $payload,
                 'response' => $response,
             ];
+            if ($limit && count($responses) >= $limit) {
+                break;
+            }
         }
-        dd($responses);
         return $this->render('app/index.html.twig', [
             'responses' => $responses,
         ]);
     }
 
-    #[Route('/webhook', name: 'app_webhook')]
-    public function webHook(Request $request): Response
+    #[Route('/webhook/media', name: 'app_media_webhook')]
+    public function mediaWebhook(Request $request): Response
     {
         $data = $request->request->all();
+        // @todo: set the image resized data with whatever we received.
+        $image = $this->imageRepository->find($data['imageId']); // ???
+        $image->setOriginalSize($data['size']);
+        $this->entityManager->flush();
+        // we could also pass back the payload, for debugging.
+        return new Response(json_encode(['msg' => 'image updated with original size']));
+
+    }
+
+    #[Route('/webhook/thumb', name: 'app_thumb_webhook')]
+    public function thumbWebhook(Request $request): Response
+    {
+        $data = $request->request->all();
+        // @todo: set the image resized data with whatever we received.
+        $image = $this->imageRepository->find($data['imageId']); // ???
+        $image->setResized($data['resized']);
+        $this->entityManager->flush();
+        // we could also pass back the payload, for debugging.
+        return new Response(json_encode(['msg' => 'resized updated']));
 
     }
 

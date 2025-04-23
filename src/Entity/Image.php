@@ -30,6 +30,9 @@ class Image implements MarkingInterface
     #[ORM\Column(nullable: true)]
     private ?array $resized = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $originalSize = null;
+
     public function getCode(): ?string
     {
         return $this->code;
@@ -48,6 +51,18 @@ class Image implements MarkingInterface
     public function setResized(?array $resized): static
     {
         $this->resized = $resized;
+
+        return $this;
+    }
+
+    public function getOriginalSize(): ?int
+    {
+        return $this->originalSize;
+    }
+
+    public function setOriginalSize(?int $originalSize): static
+    {
+        $this->originalSize = $originalSize;
 
         return $this;
     }

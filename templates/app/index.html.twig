@@ -4,9 +4,10 @@
 
 {% block body %}
 
-    {% if response|default(false) %}
-    {{ dump(response) }}
-    {% endif %}
+    {% for response in responses|default([]) %}
+        {{ dump(response) }}
+    {% endfor %}
+
     {% for locale, lang in languages|default([]) %}
         <a href="{{ path('app_homepage', {target: locale}) }}">
             {{ lang }}
