@@ -28,6 +28,7 @@ class AppController extends AbstractController
         private UrlGeneratorInterface $urlGenerator,
         private ImageRepository $imageRepository,
         private EntityManagerInterface $entityManager,
+        private \Psr\Log\LoggerInterface $logger,
     )
     {
 
@@ -94,11 +95,29 @@ class AppController extends AbstractController
     #[Route('/webhook/media', name: 'app_media_webhook')]
     public function mediaWebhook(Request $request): Response
     {
-        $data = $request->request->all();
-        // @todo: set the image resized data with whatever we received.
-        $image = $this->imageRepository->find($data['imageId']); // ???
+        $data = json_decode($request->getContent(), true);
+
+        $imageId = $data['code'] ?? null;
+
+        //check if code is in url via GET
+        if (isset($_GET['code'])) {
+            $imageId = $_GET['code'];
+        }
+
+        if (!$imageId) {
+            return new Response('No imageId found ' . json_encode($data), Response::HTTP_BAD_REQUEST);
+        }
+        
+        $image = $this->imageRepository->findOneBy(['code' => $imageId]);
+        
+        if (!$image) {
+            return new Response('Image not found' . json_encode($data), Response::HTTP_NOT_FOUND);
+        }
+        
         $image->setOriginalSize($data['size']);
+        
         $this->entityManager->flush();
+
         // we could also pass back the payload, for debugging.
         return new Response(json_encode(['msg' => 'image updated with original size']));
 
@@ -108,6 +127,9 @@ class AppController extends AbstractController
     public function thumbWebhook(Request $request): Response
     {
         $data = $request->request->all();
+        //
+        //log data
+        $this->logger->info('Thumb webhook called', $data);
         // @todo: set the image resized data with whatever we received.
         $image = $this->imageRepository->find($data['imageId']); // ???
         $image->setResized($data['resized']);

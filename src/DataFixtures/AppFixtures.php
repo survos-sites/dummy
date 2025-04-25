@@ -21,7 +21,12 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // make sure the client is registered on the sais service
-        $response = $this->saisClientService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
+        try {
+            $response = $this->saisClientService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
+        } catch (\Exception $e) {
+            // Log the exception or handle it as needed
+            echo 'Error during account setup: ' . $e->getMessage();
+        }
 
         // wget https://dummyjson.com/products -O data/products.json
         foreach (json_decode(file_get_contents($this->filename))->products as $data) {

@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Controller\AppController;
+use App\DataFixtures\App;
 use App\Repository\ImageRepository;
 use App\Workflow\IImageWorkflow;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Survos\SaisBundle\Service\SaisClientService;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 
@@ -22,7 +25,8 @@ class Image implements MarkingInterface
     )
     {
         if (!$this->code) {
-            $this->code = hash('xxh3', $originalUrl);
+            //$this->code = hash('xxh3', $originalUrl);
+            $this->code = SaisClientService::calculateCode($originalUrl,AppController::SAIS_CLIENT_CODE);
         }
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
