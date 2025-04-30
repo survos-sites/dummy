@@ -1,4 +1,5 @@
 survos_sais:
+    root: dummy
     api_endpoint:         '%env(SAIS_API_ENDPOINT)%'
     api_key:              ''
 

@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {% for type, flash in app.flashes %}
+        {{ dump(type, flash) }}
+    {% endfor %}
+
     {% for response in responses|default([]) %}
         {{ dump(response) }}
     {% endfor %}
