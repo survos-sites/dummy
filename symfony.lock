@@ -64,6 +64,18 @@
             "config/routes/easyadmin.yaml"
         ]
     },
+    "jawira/doctrine-diagram-bundle": {
+        "version": "0.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.7",
+            "ref": "1c062f7d4e61eb3e7372c45d96d33358cccac15a"
+        },
+        "files": [
+            "config/packages/doctrine_diagram.yaml"
+        ]
+    },
     "nelmio/cors-bundle": {
         "version": "2.5",
         "recipe": {
