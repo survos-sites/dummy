@@ -46,7 +46,6 @@ class ImageWorkflow implements IImageWorkflow
         $resized = $response[0]['resized']??[];
         if (!count($resized)) {
             $this->logger->warning("Not yet resized, rerun later to update " . $image->getOriginalUrl());
-//            throw new \Exception('Image resized empty for , run again later ' . $image->getOriginalUrl());
         }
         $image->setResized($resized);
 
