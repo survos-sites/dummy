@@ -22,4 +22,5 @@ return [
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Survos\DocBundle\SurvosDocBundle::class => ['all' => true],
     Jawira\DoctrineDiagramBundle\DoctrineDiagramBundle::class => ['all' => true],
+    Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
 ];
