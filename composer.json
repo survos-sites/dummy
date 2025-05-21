@@ -3,23 +3,26 @@
     "name": "survos-sites/dummy",
     "description": "DummyJSON database with an image workflow",
     "license": "MIT",
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
+        "php": "^8.4",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-iconv": "*",
         "api-platform/doctrine-orm": "*",
         "api-platform/symfony": "*",
+        "ayaou/command-logger-bundle": "^1.4",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16|^3.0",
         "easycorp/easyadmin-bundle": "^4.24",
+        "jolicode/jolinotif": "dev-ffi as 3.0",
         "nadar/php-composer-reader": "^2.1",
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.23",
+        "survos/crawler-bundle": "^1.5",
         "survos/doc-bundle": "^1.5",
         "survos/sais-bundle": "dev-main",
         "survos/workflow-helper-bundle": "^1.5",
@@ -52,8 +55,8 @@
         "symfony/validator": "^7.1",
         "symfony/web-link": "^7.1",
         "symfony/yaml": "^7.1",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/extra-bundle": "^3.0",
+        "twig/twig": "^3.0"
     },
     "config": {
         "allow-plugins": {
@@ -95,6 +98,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "coverage": "rm var/test.db -f && bin/console d:sc:update --force --env=test && php -d xpcov.enabled=1 vendor/bin/phpunit --coverage-html coverage",
         "diagram": "bin/console doctrine:diagram --filename=assets/db.svg --exclude=doctrine_migration_versions,messenger_messages"
     },
     "conflict": {
@@ -103,20 +107,21 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^7.1"
+            "require": "^7.3"
         }
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "jawira/doctrine-diagram-bundle": "^0.8.0",
-        "phpunit/phpunit": "^9.5||^10.0||^11.0",
-        "survos/maker-bundle": "^1.5",
+        "phpunit/phpunit": "^12.1",
+        "survos/code-bundle": "dev-main",
         "symfony/browser-kit": "^7.1",
         "symfony/css-selector": "^7.1",
         "symfony/debug-bundle": "^7.1",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^6.4 || ^7.1",
+        "symfony/phpunit-bridge": "^7.1",
         "symfony/stopwatch": "^7.1",
-        "symfony/web-profiler-bundle": "^7.1"
+        "symfony/web-profiler-bundle": "^7.1",
+        "zenstruck/browser": "^1.9"
     }
 }

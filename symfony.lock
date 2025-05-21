@@ -13,6 +13,9 @@
             "src/ApiResource/.gitignore"
         ]
     },
+    "ayaou/command-logger-bundle": {
+        "version": "v1.4.0"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.10",
         "recipe": {
@@ -102,13 +105,26 @@
             "tests/bootstrap.php"
         ]
     },
+    "survos/code-bundle": {
+        "version": "dev-main"
+    },
     "survos/core-bundle": {
         "version": "1.5.529"
     },
-    "survos/doc-bundle": {
-        "version": "1.5.529"
+    "survos/crawler-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "d16db1be85e21925f873d8099ca9ae7c4d50a208"
+        },
+        "files": [
+            "config/packages/survos_crawler.yaml",
+            "config/routes/survos_crawler.yaml"
+        ]
     },
-    "survos/maker-bundle": {
+    "survos/doc-bundle": {
         "version": "1.5.529"
     },
     "survos/sais-bundle": {
@@ -388,5 +404,14 @@
     },
     "twig/extra-bundle": {
         "version": "v3.7.0"
+    },
+    "zenstruck/browser": {
+        "version": "1.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.9",
+            "ref": "66c5290398734ff02cedddf44dce6eb2002d958c"
+        }
     }
 }

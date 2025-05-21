@@ -16,11 +16,12 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Survos\CoreBundle\SurvosCoreBundle::class => ['all' => true],
     Survos\WorkflowBundle\SurvosWorkflowBundle::class => ['all' => true],
-    Survos\Bundle\MakerBundle\SurvosMakerBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Survos\DocBundle\SurvosDocBundle::class => ['all' => true],
     Jawira\DoctrineDiagramBundle\DoctrineDiagramBundle::class => ['all' => true],
     Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
+    Ayaou\CommandLoggerBundle\CommandLoggerBundle::class => ['all' => true],
+    Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
 ];

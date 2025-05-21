@@ -20,8 +20,7 @@
 <g id="node5" class="node">
 <title>transition_0</title>
 <polygon fill="none" stroke="#333333" points="180,-59 108,-59 108,-23 180,-23 180,-59"/>
-<text text-anchor="start" x="124.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">dispatch</text>
-<text text-anchor="start" x="159.5" y="-40.1" font-family="Arial" baseline-shift="super" font-size="8.00">1</text>
+<text text-anchor="start" x="126.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">dispatch</text>
 </g>
 <!-- place_new&#45;&gt;transition_0 -->
 <!-- new -->
@@ -40,8 +39,7 @@
 <g id="node6" class="node">
 <title>transition_1</title>
 <polygon fill="none" stroke="#333333" points="396,-59 324,-59 324,-23 396,-23 396,-59"/>
-<text text-anchor="start" x="339.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">complete</text>
-<text text-anchor="start" x="376.5" y="-40.1" font-family="Arial" baseline-shift="super" font-size="8.00">1</text>
+<text text-anchor="start" x="341.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">complete</text>
 </g>
 <!-- place_dispatched&#45;&gt;transition_1 -->
 <!-- dispatched -->
@@ -60,8 +58,7 @@
 <g id="node7" class="node">
 <title>transition_2</title>
 <polygon fill="none" stroke="#333333" points="612,-59 540,-59 540,-23 612,-23 612,-59"/>
-<text text-anchor="start" x="567.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">fail</text>
-<text text-anchor="start" x="580.5" y="-40.1" font-family="Arial" baseline-shift="super" font-size="8.00">1</text>
+<text text-anchor="start" x="569.5" y="-40.1" font-family="Arial" font-weight="bold" font-size="8.00">fail</text>
 </g>
 <!-- place_ready&#45;&gt;transition_2 -->
 <!-- ready -->
