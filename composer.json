@@ -20,6 +20,7 @@
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.23",
+        "survos/crawler-bundle": "*",
         "survos/doc-bundle": "^1.5",
         "survos/sais-bundle": "dev-main",
         "survos/workflow-helper-bundle": "^1.5",
