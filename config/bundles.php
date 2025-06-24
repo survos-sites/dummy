@@ -24,4 +24,5 @@ return [
     Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
     Ayaou\CommandLoggerBundle\CommandLoggerBundle::class => ['all' => true],
     Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
+    Survos\MeiliAdminBundle\SurvosMeiliAdminBundle::class => ['all' => true],
 ];
