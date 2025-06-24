@@ -119,7 +119,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
-        "jawira/doctrine-diagram-bundle": "^0.8.0",
+        "jawira/doctrine-diagram-bundle": "^1.0",
         "phpunit/phpunit": "^12.1",
         "survos/code-bundle": "dev-main",
         "survos/deployment-bundle": "^1.5",
