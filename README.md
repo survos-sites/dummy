@@ -7,6 +7,7 @@ git clone git@github.com:survos-sites/dummy dummy && cd dummy
 echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db" > .env.local
 echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data_test.db" > .env.test
 composer install
+curl "https://dummyjson.com/products?limit=200" -o data/products.json
 bin/console doctrine:schema:update --force
 symfony server:start -d
 symfony open:local

@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Controller\AppController;
 use App\Entity\Image;
 use App\Entity\Product;
 use App\Repository\ImageRepository;
@@ -47,13 +48,19 @@ class LoadCommand
         foreach (json_decode(file_get_contents($url))->products as $data) {
             // object Mapper?
             if (!$product = $this->productRepository->findOneBy(['sku' => $data->sku])) {
-                $product = new Product($data->sku);
+                $product = new Product(sku: $data->sku, data: $data);
                 $this->entityManager->persist($product);
             }
+            $product->name = $data->title;
 
-            foreach ($data->images as $image) {
-                $image = new Image($image);
-                $this->entityManager->persist($image);
+            foreach ($data->images as $imageUrl) {
+                if ($image = $this->imageRepository->findOneBy([
+                    'product' => $product,
+                    'code' => SaisClientService::calculateCode($imageUrl, AppController::SAIS_CLIENT_CODE),
+                ])) {
+                    $image = new Image($product, $imageUrl);
+                    $this->entityManager->persist($image);
+                }
             }
         }
 
