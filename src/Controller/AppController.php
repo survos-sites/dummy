@@ -142,6 +142,7 @@ class AppController extends AbstractController
     #[Route('/webhook/thumb', name: 'app_thumb_webhook')]
     public function thumbWebhook(Request $request): Response
     {
+        // @todo: use Symfony Webhook with Sais Payload
         $data = $request->request->all();
         //
         //log data

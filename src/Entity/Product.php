@@ -2,51 +2,37 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource]
 class Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    public function __construct(
+        #[ORM\Column(type: 'string', length: 255)]
+        #[ORM\Id]
+        #[Groups(['product.read'])]
+        public ?string $sku,
+
+        #[ORM\Column(nullable: true)]
+        #[Groups(['product.details'])]
+        private(set) ?array $extra = null, // catch all for everything, could be excluded from API in the listing
+
+        #[Groups(['product.read'])]
+        #[ApiProperty("category from extra, virtual but needs index")]
+        public ?string $category=null {
+            get => $this->extra['category']??null;
+        }
+
+    )
+    {
+    }
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    public ?string $name = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $extra = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getExtra(): ?array
-    {
-        return $this->extra;
-    }
-
-    public function setExtra(?array $extra): static
-    {
-        $this->extra = $extra;
-
-        return $this;
-    }
 }
