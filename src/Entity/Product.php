@@ -37,16 +37,16 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
 
-#[ApiFilter(OrderFilter::class, properties: ['title','price'])]
+#[ApiFilter(OrderFilter::class, properties: ['title','price','stock','rating'])]
 
 #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
 #[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'tags'],
+    properties: ['category', 'tags', 'rating', 'stock', 'price'],
     arguments: [ "searchParameterName" => "facet_filter"]
 )]
-#[ApiFilter(RangeFilter::class, properties: ['rating','stock'])]
+#[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
 
 class Product implements RouteParametersInterface
 {
@@ -77,6 +77,12 @@ class Product implements RouteParametersInterface
     #[ApiProperty("category from extra, virtual but needs index")]
     public ?string $category {
         get => $this->data['category']??null;
+    }
+
+    #[Groups(['product.read'])]
+    #[ApiProperty("virtual price")]
+    public ?float $price {
+        get => $this->data['price']??null;
     }
 
     #[Groups(['product.read'])]
