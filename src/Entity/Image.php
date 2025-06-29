@@ -17,11 +17,16 @@ class Image implements MarkingInterface
 {
     use MarkingTrait;
     public function __construct(
-        #[ORM\Column(type: Types::TEXT)]
-        private ?string $originalUrl = null,
-        #[ORM\Id]
-        #[ORM\Column(type: Types::TEXT)]
-        private ?string $code = null,
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(referencedColumnName: 'sku', nullable: false)]
+    private ?Product $product = null,
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $originalUrl = null,
+
+    #[ORM\Id]
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $code = null,
     )
     {
         if (!$this->code) {
@@ -36,6 +41,7 @@ class Image implements MarkingInterface
 
     #[ORM\Column(nullable: true)]
     private ?int $originalSize = null;
+
 
     public function getCode(): ?string
     {
@@ -67,6 +73,18 @@ class Image implements MarkingInterface
     public function setOriginalSize(?int $originalSize): static
     {
         $this->originalSize = $originalSize;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): static
+    {
+        $this->product = $product;
 
         return $this;
     }

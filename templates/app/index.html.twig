@@ -4,8 +4,9 @@
 
 {% block body %}
 
+    {{ products|length }} Products
     {% for type, flash in app.flashes %}
-        {{ dump(type, flash) }}
+        <li>{{ type }} {{ flash }}</li>
     {% endfor %}
 
     {% for response in responses|default([]) %}

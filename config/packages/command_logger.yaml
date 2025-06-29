@@ -1,0 +1,11 @@
+# Default configuration for extension with alias: "command_logger"
+command_logger:
+
+    # Enable or disable command logging
+    enabled:              true
+
+    # Number of days to keep logs before purging
+    purge_threshold:      100
+    commands:
+        - doctrine:fixtures:load
+

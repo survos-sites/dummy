@@ -1,0 +1,2 @@
+inspector:
+  ingestion_key: '%env(INSPECTOR_INGESTION_KEY)%'
