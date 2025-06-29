@@ -3,7 +3,7 @@
     "name": "survos-sites/dummy",
     "description": "DummyJSON database with an image workflow",
     "license": "MIT",
-    "minimum-stability": "beta",
+    "minimum-stability": "RC",
     "prefer-stable": true,
     "require": {
         "php": "^8.4",
@@ -17,7 +17,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16|^3.0",
         "easycorp/easyadmin-bundle": "^4.24",
-        "jolicode/jolinotif": "dev-ffi as 3.0",
+        "jolicode/jolinotif": "^3.1.1",
         "nadar/php-composer-reader": "^2.1",
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.3",
