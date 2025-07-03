@@ -54,7 +54,7 @@ class LoadCommand
             $product->name = $data->title;
 
             foreach ($data->images as $imageUrl) {
-                if ($image = $this->imageRepository->findOneBy([
+                if (!$image = $this->imageRepository->findOneBy([
                     'product' => $product,
                     'code' => SaisClientService::calculateCode($imageUrl, AppController::SAIS_CLIENT_CODE),
                 ])) {
