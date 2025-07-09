@@ -17,7 +17,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
-use Survos\MeiliAdminBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -39,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiFilter(OrderFilter::class, properties: ['title','price','stock','rating'])]
 
-#[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
+    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
 #[ApiFilter(FacetsFieldSearchFilter::class,
@@ -57,9 +57,14 @@ class Product implements RouteParametersInterface
         #[ORM\Id]
         #[Groups(['product.read'])]
         public ?string $sku,
+
+        #[ORM\Column(length: 255)]
+        #[Groups(['product.details'])]
+        public ?string $title = null,
+
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
         #[Groups(['product.details'])]
-        private(set) object|array $data {
+        public private(set) object|array $data {
             set(object|array $data) => $this->data = (object)$data;
         }
     )
@@ -69,8 +74,6 @@ class Product implements RouteParametersInterface
         $this->rating = round($this->data->rating??0);
     }
 
-    #[ORM\Column(length: 255)]
-    public ?string $name = null;
 
     // virtual property
     #[Groups(['product.read'])]
@@ -78,6 +81,13 @@ class Product implements RouteParametersInterface
     public ?string $category {
         get => $this->data['category']??null;
     }
+
+    #[Groups(['product.read'])]
+    #[ApiProperty("thumbnail from data (not sais)")]
+    public ?string $thumbnail {
+        get => $this->data['thumbnail']??null;
+    }
+
 
     #[Groups(['product.read'])]
     #[ApiProperty("virtual price")]
@@ -109,7 +119,7 @@ class Product implements RouteParametersInterface
      * @var Collection<int, Image>
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', orphanRemoval: true)]
-    private Collection $images {
+    private(set) Collection $images {
         get {
             return $this->images;
         }

@@ -173,9 +173,6 @@
     "survos/doc-bundle": {
         "version": "1.5.529"
     },
-    "survos/meili-admin-bundle": {
-        "version": "1.5.529"
-    },
     "survos/sais-bundle": {
         "version": "1.5.470"
     },

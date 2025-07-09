@@ -24,8 +24,20 @@
         <tbody>
         {% for idx, product in products|default([]) %}
         <tr>
+
             <td>
                 <img style="width: 100px" src="{{ product.thumbnail }}" title="{{ product.thumbnail }}" />
+                Thumb from dummyjson
+            </td>
+            <td>
+                <ul>
+                {% for image in product.images %}
+                    <li>
+                        {{ dump(image) }}
+                    </li>
+
+                {% endfor %}
+                </ul>
             </td>
             <td>
                 {{ product.title }}

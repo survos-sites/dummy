@@ -14,23 +14,9 @@ symfony open:local
 ```
 
 
-
-## Running tests
-
-```bash
-bin/console doctrine:schema:update --force --env=test
-bin/console doctrine:fixtures:load -n --env=test
-vendor/bin/phpunit
-```
-
-
-    usage here.
-
 ## Database
 
 ![Database Diagram](assets/db.svg)
-
-
 
 <img align="right" src="/doc/workflow.svg?raw=true" height="280" />
 
@@ -42,11 +28,21 @@ Steps:
 * the webhook update the Image record with the resized data and applies a transition
 
 ```bash
-rm var/data.db -f && bin/console d:sch:update --force
-bin/console d:fix:load -n
-bin/console workflow:iterate App\\Entity\\Image  --marking=new --transition=dispatch -vvv
+bin/console app:load
+bin/console workflow:iterate App\\Entity\\Image  --marking=new --transition=dispatch -vvv --limit 3
 symfony open:local --path=/images
 ```
+
+## Running tests
+
+```bash
+bin/console doctrine:schema:update --force --env=test
+bin/console doctrine:fixtures:load -n --env=test
+vendor/bin/phpunit
+```
+
+
+    usage here.
 
 
 

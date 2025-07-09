@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ImageRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
 use Survos\SaisBundle\Model\AccountSetup;
@@ -25,13 +26,13 @@ class AppController extends AbstractController
 
     const SAIS_CLIENT_CODE='dummy-sais';
     public function __construct(
-        private CacheInterface $cache,
-        private SaisClientService $saisService,
-        private UrlGeneratorInterface $urlGenerator,
-        private ImageRepository $imageRepository,
-        private EntityManagerInterface $entityManager,
+        private CacheInterface           $cache,
+        private SaisClientService        $saisService,
+        private UrlGeneratorInterface    $urlGenerator,
+        private ImageRepository          $imageRepository,
+        private EntityManagerInterface   $entityManager,
         private \Psr\Log\LoggerInterface $logger,
-        private TexterInterface $texter,
+        private TexterInterface          $texter, private readonly ProductRepository $productRepository,
     )
     {
 
@@ -104,13 +105,13 @@ class AppController extends AbstractController
             'New subscription! 🎉',
             json_encode($request->query->all())
         );
-        try {
-            $this->texter->send($message);
-        } catch (\Exception $e) {
-            $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
-        }
-        return $this->redirectToRoute('app_homepage');
-        return $this->json($request->query->all());
+//        try {
+//            $this->texter->send($message);
+//        } catch (\Exception $e) {
+//            $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
+//        }
+//        return $this->redirectToRoute('app_homepage');
+//        return $this->json($request->query->all());
 
 
         $imageId = $data['code'] ?? null;
@@ -123,15 +124,15 @@ class AppController extends AbstractController
         if (!$imageId) {
             return new Response('No imageId found ' . json_encode($data), Response::HTTP_BAD_REQUEST);
         }
-        
+
         $image = $this->imageRepository->findOneBy(['code' => $imageId]);
-        
+
         if (!$image) {
             return new Response('Image not found' . json_encode($data), Response::HTTP_NOT_FOUND);
         }
-        
+
         $image->setOriginalSize($data['size']);
-        
+
         $this->entityManager->flush();
 
         // we could also pass back the payload, for debugging.
@@ -158,6 +159,7 @@ class AppController extends AbstractController
 
     private function getDummyProducts()
     {
+        return $this->productRepository->findAll();
         $url = 'https://dummyjson.com/products?limit=100';
 //        dd($url);
         $data = $this->cache->get(md5($url), fn(CacheItem $item) => json_decode(file_get_contents($url)));
@@ -184,17 +186,17 @@ class AppController extends AbstractController
         string         $target = 'es'): Response
     {
 
-        if ($libreTranslate) {
-            $libreTranslate = new LibreTranslate(httpClient: $httpClient);
-            $libreTranslate->setHttpClient($httpClient);
-//        $libreTranslate->setTarget($target);
-        }
+//        if (!$libreTranslate) {
+//            $libreTranslate = new LibreTranslate(httpClient: $httpClient);
+//            $libreTranslate->setHttpClient($httpClient);
+////        $libreTranslate->setTarget($target);
+//        }
 
 
         $translations = [];
         $x = [];
-        $data = $this->getDummyProducts();
-        foreach ($data->products as $idx => $product) {
+        $products = $this->getDummyProducts(); // used to be json, now entities ->products;
+        foreach ($products as $idx => $product) {
             $x[] = $product->title;
             if ($libreTranslate) {
                 $z[] = $libreTranslate->translate($product->title, target: $target);
@@ -222,7 +224,7 @@ class AppController extends AbstractController
 
 //        dd($translations);
         return $this->render('app/index.html.twig', [
-            'products' => $data->products,
+            'products' => $products,
             'translations' => $translations,
             'languages' => [], // $libreTranslate->getLanguages()
         ]);

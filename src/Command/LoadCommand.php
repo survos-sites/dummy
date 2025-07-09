@@ -35,23 +35,26 @@ class LoadCommand
 		SymfonyStyle $io,
         #[Argument('url')] ?string $url = null,
 
-		#[Option('max number of records to import')]
-		?int $limit = null,
+		#[Option('max number of records to import')] ?int $limit = null,
+		#[Option('purge Products')] ?bool $purge = null,
 	): int
 	{
         $url ??= $this->filename;
 		if ($limit) {
 		    $io->writeln("Option limit: $limit");
 		}
+        if ($purge) {
+            $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete();
+        }
 
         // wget https://dummyjson.com/products -O data/products.json
         foreach (json_decode(file_get_contents($url))->products as $data) {
             // object Mapper?
             if (!$product = $this->productRepository->findOneBy(['sku' => $data->sku])) {
-                $product = new Product(sku: $data->sku, data: $data);
+                $product = new Product(sku: $data->sku, title: $data->title, data: $data);
                 $this->entityManager->persist($product);
             }
-            $product->name = $data->title;
+            $product->title = $data->title;
 
             foreach ($data->images as $imageUrl) {
                 if (!$image = $this->imageRepository->findOneBy([
