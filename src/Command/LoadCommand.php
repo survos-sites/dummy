@@ -8,6 +8,7 @@ use App\Entity\Product;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Survos\SaisBundle\Model\AccountSetup;
 use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -46,6 +47,14 @@ class LoadCommand
         if ($purge) {
             $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete();
         }
+
+        try {
+            $response = $this->saisClientService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
+        } catch (\Exception $e) {
+            // Log the exception or handle it as needed
+            echo 'Error during account setup: ' . $e->getMessage();
+        }
+
 
         // wget https://dummyjson.com/products -O data/products.json
         foreach (json_decode(file_get_contents($url))->products as $data) {
