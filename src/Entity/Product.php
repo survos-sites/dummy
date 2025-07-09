@@ -58,15 +58,16 @@ class Product implements RouteParametersInterface
         #[Groups(['product.read'])]
         public ?string $sku,
 
-        #[ORM\Column(length: 255)]
-        #[Groups(['product.details'])]
-        public ?string $title = null,
-
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
         #[Groups(['product.details'])]
         public private(set) object|array $data {
             set(object|array $data) => $this->data = (object)$data;
-        }
+        },
+
+        #[ORM\Column(length: 255)]
+        #[Groups(['product.details'])]
+        public ?string $title = null,
+
     )
     {
         $this->images = new ArrayCollection();
