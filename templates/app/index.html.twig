@@ -14,7 +14,7 @@
     {% endfor %}
 
     {% for response in responses|default([]) %}
-        {{ dump(response) }}
+        {{ response|json_pretty }}
     {% endfor %}
 
     {% for locale, lang in languages|default([]) %}
@@ -37,7 +37,7 @@
                 <ul>
                 {% for image in product.images %}
                     <li>
-                        {{ idx < 3 ? dump(image) }}
+                        {{ image|json_pretty }}
                     </li>
 
                 {% endfor %}
