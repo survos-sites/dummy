@@ -1,4 +1,9 @@
 survos_meili:
-  host: '%env(MEILI_SERVER)%'
-
-
+    host: '%env(MEILI_SERVER)%'
+    core_name: core
+    enabled: true
+    apiKey: '%env(default::MEILI_API_KEY)%'
+    searchKey: '%env(default::MEILI_SEARCH_KEY)%'
+    meiliPrefix: '%env(default::MEILI_PREFIX)%'
+    passLocale: false
+    maxValuesPerFacet: 1000
