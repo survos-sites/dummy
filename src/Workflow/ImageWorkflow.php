@@ -35,7 +35,7 @@ class ImageWorkflow implements IImageWorkflow
 		$image = $event->getSubject();
         $payload = new ProcessPayload(
             AppController::SAIS_CLIENT_CODE,
-            [$image->getOriginalUrl()],
+            [$image->originalUrl],
             mediaCallbackUrl: $this->urlGenerator->generate('app_media_webhook', ['code' => $image->getCode()], UrlGeneratorInterface::ABSOLUTE_URL),
             thumbCallbackUrl: $this->urlGenerator->generate('app_thumb_webhook', ['code' => $image->getCode()], UrlGeneratorInterface::ABSOLUTE_URL),
         );
@@ -45,9 +45,9 @@ class ImageWorkflow implements IImageWorkflow
         // this won't be necessary after the webhook is working, but we _could_ update the data now since we know it's ready.
         $resized = $response[0]['resized']??[];
         if (!count($resized)) {
-            $this->logger->warning("Not yet resized, rerun later to update " . $image->getOriginalUrl());
+            $this->logger->warning("Not yet resized, rerun later to update " . $image->originalUrl);
         }
-        $image->setResized($resized);
+        $image->resized = $resized;
 
 
 	}

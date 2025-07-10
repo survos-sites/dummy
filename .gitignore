@@ -27,3 +27,7 @@
 ###> survos/inspection-bundle ###
 /flickr-downloads
 ###< survos/inspection-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

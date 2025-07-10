@@ -131,9 +131,7 @@ class AppController extends AbstractController
             return new Response('Image not found' . json_encode($data), Response::HTTP_NOT_FOUND);
         }
 
-        dump($data);
-
-        $image->setOriginalSize($data['size']);
+        $image->originalSize = $data['size'];
 
         $this->entityManager->flush();
 
@@ -160,7 +158,7 @@ class AppController extends AbstractController
             $this->logger->error('Image not found for code', ['code' => $code]);
             return new Response('Image not found', Response::HTTP_NOT_FOUND);
         }
-        $image->setResized($data['media']['resized'] ?? null);
+        $image->resized = $data['media']['resized'] ?? null;
         //add thumbs via the media
         $this->entityManager->flush();
 

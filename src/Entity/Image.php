@@ -34,7 +34,7 @@ class Image implements MarkingInterface
     private ?Product $product = null,
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $originalUrl = null,
+    public ?string $originalUrl = null,
 
     #[ORM\Id]
     #[ORM\Column(type: Types::TEXT)]
@@ -48,45 +48,21 @@ class Image implements MarkingInterface
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
 
-    #[ORM\Column(nullable: true)]
-    private ?array $resized = null;
+    #[Groups(['image.read'])]
+    public string $productSku {
+        get => $this->product->sku;
+    }
 
     #[ORM\Column(nullable: true)]
-    private ?int $originalSize = null;
+    public ?array $resized = null;
+
+    #[ORM\Column(nullable: true)]
+    public ?int $originalSize = null;
 
 
     public function getCode(): ?string
     {
         return $this->code;
-    }
-
-    public function getOriginalUrl(): ?string
-    {
-        return $this->originalUrl;
-    }
-
-    public function getResized(): ?array
-    {
-        return $this->resized;
-    }
-
-    public function setResized(?array $resized): static
-    {
-        $this->resized = $resized;
-
-        return $this;
-    }
-
-    public function getOriginalSize(): ?int
-    {
-        return $this->originalSize;
-    }
-
-    public function setOriginalSize(?int $originalSize): static
-    {
-        $this->originalSize = $originalSize;
-
-        return $this;
     }
 
     public function getProduct(): ?Product
