@@ -101,15 +101,15 @@ class AppController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         //$data = $request->query->all();
-        $message = new DesktopMessage(
-            'New subscription! 🎉',
-            json_encode($request->query->all())
-        );
-       try {
-           $this->texter->send($message);
-       } catch (\Exception $e) {
-           $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
-       }
+//        $message = new DesktopMessage(
+//            'New subscription! 🎉',
+//            json_encode($request->query->all())
+//        );
+//       try {
+//           $this->texter->send($message);
+//       } catch (\Exception $e) {
+//           $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
+//       }
 //        return $this->redirectToRoute('app_homepage');
 //        return $this->json($request->query->all());
 
