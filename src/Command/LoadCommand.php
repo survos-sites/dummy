@@ -77,7 +77,7 @@ class LoadCommand
                 }
             }
 
-            if ($limit && ($idx > $limit)) {
+            if ($limit && ($idx >= $limit - 1)) {
                 break;
             }
 
