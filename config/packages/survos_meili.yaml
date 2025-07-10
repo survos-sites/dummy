@@ -1,5 +1,4 @@
 survos_meili:
-  core_name: 'table'
-  host: http://127.0.0.1:7700
+  host: '%env(MEILI_SERVER)%'
 
 
