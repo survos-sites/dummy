@@ -1,3 +1,4 @@
+import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -6,4 +7,10 @@
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+import '@tabler/core';
+import '@tabler/core/dist/css/tabler.min.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "@andypf/json-viewer"
+
+

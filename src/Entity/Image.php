@@ -2,17 +2,29 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
 use App\Controller\AppController;
 use App\DataFixtures\App;
 use App\Repository\ImageRepository;
 use App\Workflow\IImageWorkflow;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\SaisBundle\Service\SaisClientService;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
+use Symfony\Component\Serializer\Attribute\Groups;
 
+#[ApiResource(
+    normalizationContext: ['groups' => ['image.read','marking']],
+)]
+#[ApiFilter(FacetsFieldSearchFilter::class,
+    properties: ['marking'],
+    arguments: [ "searchParameterName" => "facet_filter"]
+)]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
+#[Groups(['image.read'])]
 class Image implements MarkingInterface
 {
     use MarkingTrait;

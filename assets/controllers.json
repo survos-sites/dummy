@@ -1,0 +1,44 @@
+{
+    "controllers": {
+        "@survos/bootstrap-bundle": {
+            "search": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
+        "@survos/meili-bundle": {
+            "insta": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "flag-icons/css/flag-icons.min.css": true,
+                    "instantsearch.css/themes/algolia.min.css": true,
+                    "pretty-print-json/dist/css/pretty-print-json.min.css": true
+                }
+            },
+            "json": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
+        "@survos/workflow-helper-bundle": {
+            "workflow": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
+        "@symfony/ux-turbo": {
+            "turbo-core": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "mercure-turbo-stream": {
+                "enabled": false,
+                "fetch": "eager"
+            }
+        }
+    },
+    "entrypoints": []
+}

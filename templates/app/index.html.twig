@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {% for indexName in ['dummy_Product', 'dummy_Image'] %}
+        <a href="{{ path('meili_insta', {indexName: indexName}) }}">{{ indexName }}</a>
+    {% endfor %}
+
     {{ products|length }} Products
     {% for type, flash in app.flashes %}
         <li>{{ type }} {{ flash }}</li>

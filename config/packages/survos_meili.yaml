@@ -1,5 +1,5 @@
 survos_meili:
   core_name: 'table'
-  host: 127.0.0.1:7700
+  host: http://127.0.0.1:7700
 
 
