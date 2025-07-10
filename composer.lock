@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31447040e95c70ed0fd98698b4e88de7",
+    "content-hash": "0fab7f7d70d72871a86c4c3708770cf3",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -5072,30 +5072,31 @@
         },
         {
             "name": "survos/meili-bundle",
-            "version": "1.5.0",
+            "version": "1.5.600",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/meili-bundle.git",
-                "reference": "23a70fcc7a4ec21691c430a5b375f39315ac11cb"
+                "reference": "1a298d6747b97b0645620f29f073f47599e3475b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/23a70fcc7a4ec21691c430a5b375f39315ac11cb",
-                "reference": "23a70fcc7a4ec21691c430a5b375f39315ac11cb",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/1a298d6747b97b0645620f29f073f47599e3475b",
+                "reference": "1a298d6747b97b0645620f29f073f47599e3475b",
                 "shasum": ""
             },
             "require": {
                 "adbario/php-dot-notation": "^3.3",
                 "cebe/php-openapi": "^1.8",
                 "meilisearch/meilisearch-php": "^1.14",
-                "php": "^8.3",
+                "nyholm/psr7": "^1.8",
+                "php": "^8.4",
                 "survos/core-bundle": "^1.5",
                 "survos/inspection-bundle": "^1.5",
-                "survos/installer": "^1.5 || ^2.0",
-                "symfony/config": "^6.4 || ^7.1",
+                "survos/installer": "^2.1.2",
+                "symfony/config": "^7.3",
                 "symfony/console": "^7.3",
-                "symfony/dependency-injection": "^6.4 || ^7.1",
-                "symfony/http-kernel": "^6.4 || ^7.1",
+                "symfony/dependency-injection": "^7.3",
+                "symfony/http-kernel": "^7.3",
                 "symfony/property-access": "^7.2",
                 "twig/twig": "^3.4"
             },
@@ -5103,15 +5104,15 @@
                 "api-platform/doctrine-orm": "^4.1",
                 "phpstan/phpstan": "^2.0",
                 "rector/rector": "^2.0",
-                "symfony/browser-kit": "^6.4 || ^7.1",
-                "symfony/framework-bundle": "^6.4 || ^7.1",
+                "symfony/browser-kit": "^7.3",
+                "symfony/framework-bundle": "^7.3",
                 "symfony/http-client": "^7.2",
                 "symfony/intl": "^7.3",
-                "symfony/phpunit-bridge": "^6.4 || ^7.1",
-                "symfony/twig-bundle": "^6.4 || ^7.1",
+                "symfony/phpunit-bridge": "^7.3",
+                "symfony/twig-bundle": "^7.3",
                 "symfony/ux-chartjs": "^2.23",
                 "symfony/ux-twig-component": "^2.27",
-                "symfony/var-dumper": "^6.4 || ^7.1"
+                "symfony/var-dumper": "^7.3"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -5123,13 +5124,13 @@
             "license": [
                 "MIT"
             ],
-            "description": "Utilies for managing a meilisearch indexes",
+            "description": "Utilities for managing a meilisearch indexes",
             "keywords": [
                 "symfony-ux"
             ],
             "support": {
                 "issues": "https://github.com/survos/meili-bundle/issues",
-                "source": "https://github.com/survos/meili-bundle/tree/1.5.0"
+                "source": "https://github.com/survos/meili-bundle/tree/1.5.600"
             },
             "funding": [
                 {
@@ -5137,7 +5138,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-09T14:19:39+00:00"
+            "time": "2025-07-10T10:18:17+00:00"
         },
         {
             "name": "survos/sais-bundle",

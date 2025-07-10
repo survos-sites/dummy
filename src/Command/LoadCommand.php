@@ -57,7 +57,7 @@ class LoadCommand
 
 
         // wget https://dummyjson.com/products -O data/products.json
-        foreach (json_decode(file_get_contents($url))->products as $data) {
+        foreach (json_decode(file_get_contents($url))->products as $idx => $data) {
             // object Mapper?
             if (!$product = $this->productRepository->findOneBy(['sku' => $data->sku])) {
                 $product = new Product(sku: $data->sku, title: $data->title, data: $data);
@@ -74,6 +74,11 @@ class LoadCommand
                     $this->entityManager->persist($image);
                 }
             }
+
+            if ($limit && ($idx >= $limit)) {
+                break;
+            }
+
         }
 
         // $product = new Product();
