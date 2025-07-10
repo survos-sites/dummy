@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     normalizationContext: ['groups' => ['image.read','marking']],
 )]
 #[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['marking'],
+    properties: ['marking', 'productSku'],
     arguments: [ "searchParameterName" => "facet_filter"]
 )]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -48,7 +48,6 @@ class Image implements MarkingInterface
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
 
-    #[Groups(['image.read'])]
     public string $productSku {
         get => $this->product->sku;
     }
