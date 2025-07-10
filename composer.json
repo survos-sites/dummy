@@ -21,6 +21,7 @@
         "friendsofsymfony/jsrouting-bundle": "^3.5",
         "inspector-apm/inspector-symfony": "^1.8",
         "jolicode/jolinotif": "^3.1.1",
+        "jwage/phpamqplib-messenger": "^0.8.5",
         "meilisearch/meilisearch-php": "^1.15",
         "nadar/php-composer-reader": "^2.1",
         "nelmio/cors-bundle": "^2.5",
