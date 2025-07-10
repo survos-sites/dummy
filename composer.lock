@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fab7f7d70d72871a86c4c3708770cf3",
+    "content-hash": "0f8a4f5ba130e12a1c5cd4c673a2fe81",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -4653,16 +4653,16 @@
         },
         {
             "name": "survos/core-bundle",
-            "version": "1.5.529",
+            "version": "1.5.601",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/SurvosCoreBundle.git",
-                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf"
+                "reference": "78afcb7ea0eed5e6b49db5a5be0d20478d3217b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
-                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
+                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/78afcb7ea0eed5e6b49db5a5be0d20478d3217b5",
+                "reference": "78afcb7ea0eed5e6b49db5a5be0d20478d3217b5",
                 "shasum": ""
             },
             "require": {
@@ -4704,6 +4704,7 @@
                 "phpstan/phpstan": "^2.0",
                 "symfony/asset-mapper": "^6.4 || ^7.1",
                 "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/console": "^7.2",
                 "symfony/framework-bundle": "^6.4 || ^7.1",
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/twig-bundle": "^6.4 || ^7.1",
@@ -4730,7 +4731,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/SurvosCoreBundle/issues",
-                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.529"
+                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.601"
             },
             "funding": [
                 {
@@ -4738,7 +4739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-20T13:35:55+00:00"
+            "time": "2025-07-10T01:43:38+00:00"
         },
         {
             "name": "survos/crawler-bundle",
@@ -5072,16 +5073,16 @@
         },
         {
             "name": "survos/meili-bundle",
-            "version": "1.5.600",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/meili-bundle.git",
-                "reference": "1a298d6747b97b0645620f29f073f47599e3475b"
+                "reference": "38651dcdfb46f25d13d6363144f3c8402bd23701"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/1a298d6747b97b0645620f29f073f47599e3475b",
-                "reference": "1a298d6747b97b0645620f29f073f47599e3475b",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/38651dcdfb46f25d13d6363144f3c8402bd23701",
+                "reference": "38651dcdfb46f25d13d6363144f3c8402bd23701",
                 "shasum": ""
             },
             "require": {
@@ -5114,6 +5115,7 @@
                 "symfony/ux-twig-component": "^2.27",
                 "symfony/var-dumper": "^7.3"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -5130,7 +5132,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/meili-bundle/issues",
-                "source": "https://github.com/survos/meili-bundle/tree/1.5.600"
+                "source": "https://github.com/survos/meili-bundle/tree/main"
             },
             "funding": [
                 {
@@ -5138,7 +5140,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-10T10:18:17+00:00"
+            "time": "2025-07-10T10:29:29+00:00"
         },
         {
             "name": "survos/sais-bundle",
@@ -15437,6 +15439,7 @@
     "minimum-stability": "RC",
     "stability-flags": {
         "survos/code-bundle": 20,
+        "survos/meili-bundle": 20,
         "survos/sais-bundle": 20
     },
     "prefer-stable": true,
