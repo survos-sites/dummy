@@ -151,9 +151,19 @@ class AppController extends AbstractController
         //log data
         $this->logger->info('Thumb webhook called', $data);
         // @todo: set the image resized data with whatever we received.
-        $image = $this->imageRepository->find($data['imageId']); // ???
-        $image->setResized($data['resized']);
+
+        //received payload : //{"media":{"mimeType":"image/webp","size":63250,"resized":{"small":"https://sais.wip/media/cache/small/dummy-sais/0/69a7fecfa1d2a3af.webp","medium":"https://sais.wip/media/cache/medium/dummy-sais/0/69a7fecfa1d2a3af.webp","large":"https://sais.wip/media/cache/large/dummy-sais/0/69a7fecfa1d2a3af.webp"},"createdAt":"2025-07-10T15:24:00Z","updatedAt":"2025-07-10T15:39:32.405601Z","thumbs":[{"id":1,"size":2396,"w":125,"h":125,"url":"https://sais.wip/media/cache/small/dummy-sais/0/69a7fecfa1d2a3af.webp","liipCode":"small","marking":"done","markingHistory":[],"lastTransitionTime":null,"enabledTransitions":[]},{"id":2,"size":7244,"w":300,"h":300,"url":"https://sais.wip/media/cache/medium/dummy-sais/0/69a7fecfa1d2a3af.webp","liipCode":"medium","marking":"done","markingHistory":[],"lastTransitionTime":null,"enabledTransitions":[]},{"id":3}],"code":"69a7fecfa1d2a3af"}}
+
+        $code = $data['code'] ?? null;
+        $image = $this->imageRepository->findOneBy(['code' => $code]);
+        if (!$image) {
+            $this->logger->error('Image not found for code', ['code' => $code]);
+            return new Response('Image not found', Response::HTTP_NOT_FOUND);
+        }
+        $image->setResized($data['media']['resized'] ?? null);
+        //add thumbs via the media
         $this->entityManager->flush();
+
         // we could also pass back the payload, for debugging.
         return new Response(json_encode(['msg' => 'resized updated']));
 
