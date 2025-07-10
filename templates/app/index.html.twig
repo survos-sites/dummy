@@ -37,7 +37,7 @@
                 <ul>
                 {% for image in product.images %}
                     <li>
-                        {{ dump(image) }}
+                        {{ idx < 3 ? dump(image) }}
                     </li>
 
                 {% endfor %}
