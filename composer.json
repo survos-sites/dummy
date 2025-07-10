@@ -113,7 +113,7 @@
             "@auto-scripts"
         ],
         "coverage": "rm var/test.db -f && bin/console d:sc:update --force --env=test && php -d xpcov.enabled=1 vendor/bin/phpunit --coverage-html coverage",
-        "diagram": "bin/console doctrine:diagram --filename=assets/db.svg --exclude=doctrine_migration_versions,messenger_messages"
+        "diagram": "bin/console doctrine:diagram:er --filename=assets/db.svg --exclude=doctrine_migration_versions,messenger_messages"
     },
     "conflict": {
         "symfony/symfony": "*"
