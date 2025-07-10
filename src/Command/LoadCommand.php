@@ -45,6 +45,8 @@ class LoadCommand
 		    $io->writeln("Option limit: $limit");
 		}
         if ($purge) {
+            //$io show "Purging Products";
+            $io->writeln("Purging Products");
             $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete();
         }
 
@@ -75,7 +77,7 @@ class LoadCommand
                 }
             }
 
-            if ($limit && ($idx >= $limit)) {
+            if ($limit && ($idx > $limit)) {
                 break;
             }
 
