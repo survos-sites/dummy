@@ -99,17 +99,17 @@ class AppController extends AbstractController
     #[Route('/webhook/media', name: 'app_media_webhook')]
     public function mediaWebhook(Request $request): Response
     {
-//        $data = json_decode($request->getContent(), true);
-        $data = $request->query->all();
+        $data = json_decode($request->getContent(), true);
+        //$data = $request->query->all();
         $message = new DesktopMessage(
             'New subscription! 🎉',
             json_encode($request->query->all())
         );
-//        try {
-//            $this->texter->send($message);
-//        } catch (\Exception $e) {
-//            $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
-//        }
+       try {
+           $this->texter->send($message);
+       } catch (\Exception $e) {
+           $this->addFlash('error', 'Error sending message: ' . $e->getMessage());
+       }
 //        return $this->redirectToRoute('app_homepage');
 //        return $this->json($request->query->all());
 
@@ -130,6 +130,8 @@ class AppController extends AbstractController
         if (!$image) {
             return new Response('Image not found' . json_encode($data), Response::HTTP_NOT_FOUND);
         }
+
+        dump($data);
 
         $image->setOriginalSize($data['size']);
 
