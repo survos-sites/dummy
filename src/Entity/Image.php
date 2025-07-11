@@ -75,4 +75,10 @@ class Image implements MarkingInterface
 
         return $this;
     }
+
+    public function addThumbData($filter, ?string $url=null): static
+    {
+        $this->resized[$filter] = $url;
+        return $this;
+    }
 }

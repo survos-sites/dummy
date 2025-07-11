@@ -144,27 +144,33 @@ class AppController extends AbstractController
     public function thumbWebhook(Request $request): Response
     {
         // @todo: use Symfony Webhook with Sais Payload
-        $data = $request->request->all();
+        $data = json_decode($request->getContent(), true);
         //
         //log data
-        $this->logger->info('Thumb webhook called', $data);
         // @todo: set the image resized data with whatever we received.
-
-        //received payload : //{"media":{"mimeType":"image/webp","size":63250,"resized":{"small":"https://sais.wip/media/cache/small/dummy-sais/0/69a7fecfa1d2a3af.webp","medium":"https://sais.wip/media/cache/medium/dummy-sais/0/69a7fecfa1d2a3af.webp","large":"https://sais.wip/media/cache/large/dummy-sais/0/69a7fecfa1d2a3af.webp"},"createdAt":"2025-07-10T15:24:00Z","updatedAt":"2025-07-10T15:39:32.405601Z","thumbs":[{"id":1,"size":2396,"w":125,"h":125,"url":"https://sais.wip/media/cache/small/dummy-sais/0/69a7fecfa1d2a3af.webp","liipCode":"small","marking":"done","markingHistory":[],"lastTransitionTime":null,"enabledTransitions":[]},{"id":2,"size":7244,"w":300,"h":300,"url":"https://sais.wip/media/cache/medium/dummy-sais/0/69a7fecfa1d2a3af.webp","liipCode":"medium","marking":"done","markingHistory":[],"lastTransitionTime":null,"enabledTransitions":[]},{"id":3}],"code":"69a7fecfa1d2a3af"}}
-
-        $code = $data['code'] ?? null;
+        $code = $request->query->get('code') ?? null;
         $image = $this->imageRepository->findOneBy(['code' => $code]);
         if (!$image) {
-            $this->logger->error('Image not found for code', ['code' => $code]);
-            return new Response('Image not found', Response::HTTP_NOT_FOUND);
+            $errorMsg = sprintf(
+                'NARO Image not found for code: %s. Route: %s. Entity: %s. Payload: %s. GET: %s',
+                $code,
+                $request->attributes->get('_route'),
+                \App\Entity\Image::class,
+                json_encode($data),
+                json_encode($_GET)
+            );
+            $this->logger->error($errorMsg);
+            return new Response($errorMsg, Response::HTTP_NOT_FOUND);
         }
-        $image->resized = $data['media']['resized'] ?? null;
+
+        $image->addThumbData(
+            $data['liipCode'],
+            $data['url']
+        );
         //add thumbs via the media
         $this->entityManager->flush();
-
         // we could also pass back the payload, for debugging.
         return new Response(json_encode(['msg' => 'resized updated']));
-
     }
 
     private function getDummyProducts()
