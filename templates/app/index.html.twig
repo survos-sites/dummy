@@ -24,39 +24,63 @@
         |
     {% endfor %}
 
-    <table>
+    <table style="width: 100%;">
         <tbody>
-        {% for idx, product in products|default([]) %}
+
         <tr>
-
-            <td>
-                <img style="width: 100px" src="{{ product.thumbnail }}" title="{{ product.thumbnail }}" />
-                Thumb from dummyjson
-            </td>
-            <td>
-                <ul>
-                {% for image in product.images %}
-                    <li>
-                        {{ image|json_pretty }}
-                    </li>
-
-                {% endfor %}
-                </ul>
-            </td>
-            <td>
-                {{ product.title }}
-                <br />
-                <i>
-                    {{ translations[idx]??'~' }}
-                </i>
-
-            </td>
-
-
-
+            <th>Product Title</th>
+            <th>Original Image</th>
+            <th>Original Size (bytes)</th>
+            <th>Small</th>
+            <th>Medium</th>
+            <th>Large</th>
         </tr>
+        {% for product in products|default([]) %}
+            {% for image in product.images %}
+                <tr>
+                    <td>{{ product.title }}</td>
+                    <td>
+                        <a href="{{ image.originalUrl }}" target="_blank">
+                            <img src="{{ image.originalUrl }}" alt="Original" style="width: 100px;" />
+                        </a>
+                    </td>
+                    <td>
+                        {% if image.originalSize is defined and image.originalSize %}
+                            {{ image.originalSize }}
+                        {% else %}
+                            ---
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if image.resized is defined and image.resized.small is defined and image.resized.small %}
+                            <a href="{{ image.resized.small }}" target="_blank">
+                                <img src="{{ image.resized.small }}" alt="Small" style="width: 60px;" />
+                            </a>
+                        {% else %}
+                            Pending ...
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if image.resized is defined and image.resized.medium is defined and image.resized.medium %}
+                            <a href="{{ image.resized.medium }}" target="_blank">
+                                <img src="{{ image.resized.medium }}" alt="Medium" style="width: 80px;" />
+                            </a>
+                        {% else %}
+                            Pending ...
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if image.resized is defined and image.resized.large is defined and image.resized.large %}
+                            <a href="{{ image.resized.large }}" target="_blank">
+                                <img src="{{ image.resized.large }}" alt="Large" style="width: 100px;" />
+                            </a>
+                        {% else %}
+                            Pending ...
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
         {% endfor %}
-
         </tbody>
     </table>
 
