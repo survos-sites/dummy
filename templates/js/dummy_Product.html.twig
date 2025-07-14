@@ -31,8 +31,7 @@
         {% endif %}
 
         <button
-            data-action="survos--meili-bundle--json#modal"
-            {#            {{ stimulus_action(_sc_modal, 'modal', 'click') }}#}
+            {{ stimulus_action(_sc_modal, 'modal', 'click') }}
             data-hit-id="{{ hit.sku }}"
             class="float-end btn btn-sm btn-outline-primary">
             <span class="me-1 icon-wrapper">{{ icons.json|raw }}</span>
