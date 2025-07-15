@@ -41,14 +41,11 @@ class ImageWorkflow implements IImageWorkflow
         );
         $response = $this->saisClientService->dispatchProcess($payload);
 
-        // hack alert: just fail if the resized isn't there, then re-run
         // this won't be necessary after the webhook is working, but we _could_ update the data now since we know it's ready.
         $resized = $response[0]['resized']??[];
-        if (!count($resized)) {
-            $this->logger->warning("Not yet resized, rerun later to update " . $image->originalUrl);
+        if (count($resized)) {
+            $image->resized = $resized;
         }
-        $image->resized = $resized;
-
-
 	}
+
 }

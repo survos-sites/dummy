@@ -46,8 +46,14 @@ class LoadCommand
 		}
         if ($purge) {
             //$io show "Purging Products";
-            $io->writeln("Purging Products");
-            $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete();
+            $io->writeln("Purging Images and Products");
+            foreach ([Image::class, Product::class] as $className) {
+                $count = $this->entityManager->getRepository(Image::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();
+                $io->writeln("Purging $count $className");
+            }
+//            $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();
+//            assert($this->entityManager->getRepository(Image::class)->count() == 0, "didnt purge");
+//            $this->entityManager->flush();
         }
 
         try {

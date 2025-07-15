@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use App\Workflow\IImageWorkflow;
+use App\Workflow\ImageWorkflow;
 use Doctrine\ORM\EntityManagerInterface;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
 use Survos\SaisBundle\Model\AccountSetup;
@@ -11,6 +13,7 @@ use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\CacheItem;
+use Symfony\Component\DependencyInjection\Attribute\Target;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
@@ -18,6 +21,7 @@ use Symfony\Component\Notifier\Message\DesktopMessage;
 use Symfony\Component\Notifier\TexterInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -32,7 +36,10 @@ class AppController extends AbstractController
         private ImageRepository          $imageRepository,
         private EntityManagerInterface   $entityManager,
         private \Psr\Log\LoggerInterface $logger,
-        private TexterInterface          $texter, private readonly ProductRepository $productRepository,
+        private TexterInterface          $texter,
+        #[Target(ImageWorkflow::WORKFLOW_NAME)] private WorkflowInterface $imageWorkflow,
+        private readonly ProductRepository $productRepository,
+//        private readonly ImageWorkflow $imageWorkflow,
     )
     {
 
@@ -169,6 +176,9 @@ class AppController extends AbstractController
         );
         //add thumbs via the media
         $this->entityManager->flush();
+        if ($this->imageWorkflow->can($image, IImageWorkflow::TRANSITION_COMPLETE)) {
+            $this->imageWorkflow->apply($image, IImageWorkflow::TRANSITION_COMPLETE);
+        }
         // we could also pass back the payload, for debugging.
         return new Response(json_encode(['msg' => 'resized updated']));
     }

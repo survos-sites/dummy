@@ -41,7 +41,8 @@
                     <td>{{ product.title }}</td>
                     <td>
                         <a href="{{ image.originalUrl }}" target="_blank">
-                            <img src="{{ image.originalUrl }}" alt="Original" style="width: 100px;" />
+                            Show Original
+{#                            <img src="{{ image.originalUrl }}" alt="Original" style="width: 100px;" />#}
                         </a>
                         Code : {{ image.code }}
                     </td>
@@ -53,32 +54,38 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if image.resized is defined and image.resized.small is defined and image.resized.small %}
+                        <code>
+                            {{ image.marking }}
+                        </code>
+                        {{ image.resized|length ? dump(image.resized) }}
+                        {% for size, thumb in image.resized %}
+                            {{ size }}
+                            {{ thumb }}
+                            {% if size == 'small' %}
                             <a href="{{ image.resized.small }}" target="_blank">
-                                <img src="{{ image.resized.small }}" alt="Small" style="width: 60px;" />
+                                <img src="{{ thumb }}" alt="{{ size }}" style="width: 60px;" />
                             </a>
-                        {% else %}
-                            Pending ...
-                        {% endif %}
+                            {% endif %}
+                        {% endfor %}
                     </td>
-                    <td>
-                        {% if image.resized is defined and image.resized.medium is defined and image.resized.medium %}
-                            <a href="{{ image.resized.medium }}" target="_blank">
-                                <img src="{{ image.resized.medium }}" alt="Medium" style="width: 80px;" />
-                            </a>
-                        {% else %}
-                            Pending ...
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if image.resized is defined and image.resized.large is defined and image.resized.large %}
-                            <a href="{{ image.resized.large }}" target="_blank">
-                                <img src="{{ image.resized.large }}" alt="Large" style="width: 100px;" />
-                            </a>
-                        {% else %}
-                            Pending ...
-                        {% endif %}
-                    </td>
+{#                    <td>#}
+{#                        {% if image.resized is defined and image.resized.medium is defined and image.resized.medium %}#}
+{#                            <a href="{{ image.resized.medium }}" target="_blank">#}
+{#                                <img src="{{ image.resized.medium }}" alt="Medium" style="width: 80px;" />#}
+{#                            </a>#}
+{#                        {% else %}#}
+{#                            Pending ...#}
+{#                        {% endif %}#}
+{#                    </td>#}
+{#                    <td>#}
+{#                        {% if image.resized is defined and image.resized.large is defined and image.resized.large %}#}
+{#                            <a href="{{ image.resized.large }}" target="_blank">#}
+{#                                <img src="{{ image.resized.large }}" alt="Large" style="width: 100px;" />#}
+{#                            </a>#}
+{#                        {% else %}#}
+{#                            Pending ...#}
+{#                        {% endif %}#}
+{#                    </td>#}
                 </tr>
             {% endfor %}
         {% endfor %}

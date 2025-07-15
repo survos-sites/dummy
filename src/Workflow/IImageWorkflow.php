@@ -24,7 +24,9 @@ interface IImageWorkflow
 	#[Transition(from: [self::PLACE_NEW], to: self::PLACE_DISPATCHED)]
 	public const TRANSITION_DISPATCH = 'dispatch';
 
-	#[Transition(from: [self::PLACE_DISPATCHED], to: self::PLACE_READY)]
+	#[Transition(from: [self::PLACE_DISPATCHED], to: self::PLACE_READY,
+        info: "After thumb webhook has been received",
+        guard: "subject.hasThumbnails")]
 	public const TRANSITION_COMPLETE = 'complete';
 
 	#[Transition(from: [self::PLACE_READY], to: self::PLACE_FAILED)]

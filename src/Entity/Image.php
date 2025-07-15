@@ -55,6 +55,10 @@ class Image implements MarkingInterface
     #[ORM\Column(nullable: true)]
     public ?array $resized = null;
 
+    public bool $hasThumbnails {
+        get => $this->resized && count($this->resized) > 0;
+    }
+
     #[ORM\Column(nullable: true)]
     public ?int $originalSize = null;
 
