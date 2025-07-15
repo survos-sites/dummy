@@ -43,6 +43,7 @@
                         <a href="{{ image.originalUrl }}" target="_blank">
                             <img src="{{ image.originalUrl }}" alt="Original" style="width: 100px;" />
                         </a>
+                        Code : {{ image.code }}
                     </td>
                     <td>
                         {% if image.originalSize is defined and image.originalSize %}
