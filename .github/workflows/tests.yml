@@ -50,9 +50,11 @@ jobs:
     
     - name: Cache Composer packages
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: vendor
+        path: |
+          vendor
+          ~/.composer/cache
         key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-8.4-
