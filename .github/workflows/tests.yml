@@ -73,7 +73,7 @@ jobs:
       run: php bin/console app:load --limit 60
     
     - name: Run PHPUnit tests
-      run: php bin/phpunit --env=test
+      run: php bin/phpunit
     
     # - name: Run PHPStan analysis (if available)
     #   run: |
