@@ -70,7 +70,7 @@ jobs:
       run: php bin/console doctrine:schema:create --env=test
     
     - name: Load data
-      run: php bin/console app:load --limit 60 --env=test
+      run: php bin/console app:load --limit 60
     
     - name: Run PHPUnit tests
       run: php bin/phpunit --env=test
