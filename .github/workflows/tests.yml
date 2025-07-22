@@ -1,0 +1,84 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    environment: test
+    env:
+      INSPECTOR_INGESTION_KEY: ${{secrets.INSPECTOR_INGESTION_KEY}}
+      APP_ENV: test
+      DATABASE_URL: "sqlite:///%kernel.project_dir%/var/test.db"
+      # MEILI_PREFIX: dummy_test_
+      # MEILI_SERVER: ${{secrets.MEILI_SERVER}}
+      # MEILI_SEARCH_KEY: ${{secrets.MEILI_SEARCH_KEY}}
+      # MEILI_API_KEY: ${{secrets.MEILI_API_KEY}}
+      # OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+      # FLICKR_API_KEY: ${{secrets.FLICKR_API_KEY}}
+      # FLICKR_SECRET: ${{secrets.FLICKR_SECRET}}
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Check secret availability
+      run: |
+        # Check if secrets are available (without exposing their values)
+        if [ -z "$INSPECTOR_INGESTION_KEY" ]; then
+          echo "Warning: INSPECTOR_INGESTION_KEY is not set"
+        else
+          echo "INSPECTOR_INGESTION_KEY is set"
+        fi
+        
+        if [ -z "$MEILI_API_KEY" ]; then
+          echo "Warning: MEILI_API_KEY is not set"
+        else
+          echo "MEILI_API_KEY is set"
+        fi
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, curl
+        coverage: xdebug
+    
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-8.4-
+    
+    - name: Show environment variables
+      run: env | sort
+    
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+    
+    - name: Create var directory
+      run: mkdir -p var
+    
+    - name: Create database schema
+      run: php bin/console doctrine:schema:create --env=test
+    
+    - name: Load data
+      run: php bin/console app:load 60 --env=test
+    
+    - name: Run PHPUnit tests
+      run: php bin/phpunit --env=test
+    
+    # - name: Run PHPStan analysis (if available)
+    #   run: |
+    #     if [ -f "vendor/bin/phpstan" ]; then
+    #       vendor/bin/phpstan analyse src --level=1 || echo "PHPStan analysis completed with issues"
+    #     else
+    #       echo "PHPStan not available, skipping..."
+    #     fi

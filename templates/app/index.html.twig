@@ -38,7 +38,10 @@
         {% for product in products|default([]) %}
             {% for image in product.images %}
                 <tr>
-                    <td>{{ product.title }}</td>
+                    <td>
+                        {{ product.title }}
+                        SKU : <b>{{ product.sku }}</b>
+                    </td>
                     <td>
                         <a href="{{ image.originalUrl }}" target="_blank">
                             Show Original

@@ -159,7 +159,7 @@ class AppController extends AbstractController
         $image = $this->imageRepository->findOneBy(['code' => $code]);
         if (!$image) {
             $errorMsg = sprintf(
-                'NARO Image not found for code: %s. Route: %s. Entity: %s. Payload: %s. GET: %s',
+                'Image not found for code: %s. Route: %s. Entity: %s. Payload: %s. GET: %s',
                 $code,
                 $request->attributes->get('_route'),
                 \App\Entity\Image::class,

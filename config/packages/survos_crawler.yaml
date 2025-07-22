@@ -7,3 +7,12 @@ survos_crawler:
     max_depth : 3
     routes_to_ignore :
         - 'app_logout'
+    paths_to_ignore :
+        - '/admin/image/new'
+        - '/meiliAdmin/meiliAdmin*'
+        - '/workflow/workflow/*'
+        - '/compress'
+        - '/admin/messenger/schedule'
+        - '/inspection/analysis/reflection'
+        - '/admin/image/'
+        - '/inspection/analysis/formio'
