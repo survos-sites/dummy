@@ -69,7 +69,8 @@
         "symfony/web-link": "^7.1",
         "symfony/yaml": "^7.1",
         "twig/extra-bundle": "^3.0",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "zenstruck/messenger-monitor-bundle": "^0.5.4"
     },
     "config": {
         "allow-plugins": {
