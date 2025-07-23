@@ -48,30 +48,6 @@
             "foundOn": "@smoke",
             "memory": null
         },
-        "/admin": {
-            "path": "/admin",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "admin",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/image": {
-            "path": "/admin/image",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "admin_image_index",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
         "/js/routing": {
             "path": "/js/routing",
             "seen": true,
@@ -96,18 +72,6 @@
             "foundOn": "@smoke",
             "memory": null
         },
-        "/inspection/analysis/json-ld": {
-            "path": "/inspection/analysis/json-ld",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "inspection_analysis_jsonld",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
         "/workflow/": {
             "path": "/workflow/",
             "seen": true,
@@ -120,75 +84,39 @@
             "foundOn": "@smoke",
             "memory": null
         },
-        "/admin/messenger": {
-            "path": "/admin/messenger",
+        "/batch-translate": {
+            "path": "/batch-translate",
             "seen": true,
             "depth": 0,
             "linkStatus": null,
             "username": null,
-            "route": "zenstruck_messenger_monitor_dashboard",
+            "route": "app_batch_translate",
             "rp": null,
-            "statusCode": 200,
+            "statusCode": 500,
             "foundOn": "@smoke",
             "memory": null
         },
-        "/admin/messenger/transport": {
-            "path": "/admin/messenger/transport",
+        "/webhook/media": {
+            "path": "/webhook/media",
             "seen": true,
             "depth": 0,
             "linkStatus": null,
             "username": null,
-            "route": "zenstruck_messenger_monitor_transport",
+            "route": "app_media_webhook",
             "rp": null,
-            "statusCode": 200,
+            "statusCode": 400,
             "foundOn": "@smoke",
             "memory": null
         },
-        "/admin/messenger/_workers": {
-            "path": "/admin/messenger/_workers",
+        "/webhook/thumb": {
+            "path": "/webhook/thumb",
             "seen": true,
             "depth": 0,
             "linkStatus": null,
             "username": null,
-            "route": "zenstruck_messenger_monitor_workers_widget",
+            "route": "app_thumb_webhook",
             "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/messenger/_transports": {
-            "path": "/admin/messenger/_transports",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_transports_widget",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/messenger/_snapshot": {
-            "path": "/admin/messenger/_snapshot",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_snapshot_widget",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/messenger/_recent-messages": {
-            "path": "/admin/messenger/_recent-messages",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_recent_messages_widget",
-            "rp": null,
-            "statusCode": 200,
+            "statusCode": 404,
             "foundOn": "@smoke",
             "memory": null
         },
@@ -214,42 +142,6 @@
             "rp": null,
             "statusCode": 200,
             "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/image?page=1&sort%5Bcode%5D=DESC": {
-            "path": "/admin/image?page=1&sort%5Bcode%5D=DESC",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "admin_image_index",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin",
-            "memory": null
-        },
-        "/admin/image?page=1&sort%5BoriginalUrl%5D=DESC": {
-            "path": "/admin/image?page=1&sort%5BoriginalUrl%5D=DESC",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "admin_image_index",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin",
-            "memory": null
-        },
-        "/admin/image?page=1&sort%5Bmarking%5D=DESC": {
-            "path": "/admin/image?page=1&sort%5Bmarking%5D=DESC",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "admin_image_index",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin",
             "memory": null
         }
     }

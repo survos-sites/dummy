@@ -3,23 +3,16 @@ survos_crawler:
 #    base_url: 'https://my-project.wip/'
     user_class: App\Entity\User
     users:
-#        - user@user.com
+        # - user@user.com
     max_depth : 3
     routes_to_ignore :
         - 'app_logout'
     paths_to_ignore :
-        - '/admin/image/new'
-        - '/meiliAdmin/meiliAdmin*'
-        - '/workflow/workflow/*'
+        - '/admin'
+        - '/_profiler'
+        - '/_wdt'
+        - '/_error'
+        - '/meiliAdmin/*'
+        - '/workflow/workflow/ImageWorkflow'
         - '/compress'
-        - '/admin/messenger/schedule'
-        - '/inspection/analysis/reflection'
-        - '/admin/image/'
-        - '/inspection/analysis/formio'
-        #recheck
-        - 'batch-translate'
-        - '/webhook*'
-        - '/admin/messenger/transport/async'
-        - '/admin/messenger/transport/failed'
-        - '/admin/messenger/history*'
-        - '/admin/messenger/statistics*'
+        - '/inspection*'
