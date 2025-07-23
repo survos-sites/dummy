@@ -132,30 +132,6 @@
             "foundOn": "@smoke",
             "memory": null
         },
-        "/admin/messenger/statistics": {
-            "path": "/admin/messenger/statistics",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_statistics",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/admin/messenger/history": {
-            "path": "/admin/messenger/history",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_history",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
         "/admin/messenger/transport": {
             "path": "/admin/messenger/transport",
             "seen": true,
@@ -213,42 +189,6 @@
             "route": "zenstruck_messenger_monitor_recent_messages_widget",
             "rp": null,
             "statusCode": 200,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/batch-translate": {
-            "path": "/batch-translate",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "app_batch_translate",
-            "rp": null,
-            "statusCode": 500,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/webhook/media": {
-            "path": "/webhook/media",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "app_media_webhook",
-            "rp": null,
-            "statusCode": 400,
-            "foundOn": "@smoke",
-            "memory": null
-        },
-        "/webhook/thumb": {
-            "path": "/webhook/thumb",
-            "seen": true,
-            "depth": 0,
-            "linkStatus": null,
-            "username": null,
-            "route": "app_thumb_webhook",
-            "rp": null,
-            "statusCode": 404,
             "foundOn": "@smoke",
             "memory": null
         },
@@ -310,102 +250,6 @@
             "rp": null,
             "statusCode": 200,
             "foundOn": "/admin",
-            "memory": null
-        },
-        "/admin/messenger/transport/async": {
-            "path": "/admin/messenger/transport/async",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_transport",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger",
-            "memory": null
-        },
-        "/admin/messenger/transport/failed": {
-            "path": "/admin/messenger/transport/failed",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_transport",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger",
-            "memory": null
-        },
-        "/admin/messenger/history?transport=async": {
-            "path": "/admin/messenger/history?transport=async",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_history",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger",
-            "memory": null
-        },
-        "/admin/messenger/statistics?period=in-last-hour": {
-            "path": "/admin/messenger/statistics?period=in-last-hour",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_statistics",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger/statistics",
-            "memory": null
-        },
-        "/admin/messenger/statistics?period=in-last-week": {
-            "path": "/admin/messenger/statistics?period=in-last-week",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_statistics",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger/statistics",
-            "memory": null
-        },
-        "/admin/messenger/statistics?period=in-last-month": {
-            "path": "/admin/messenger/statistics?period=in-last-month",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_statistics",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger/statistics",
-            "memory": null
-        },
-        "/admin/messenger/history?period=in-last-hour": {
-            "path": "/admin/messenger/history?period=in-last-hour",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_history",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger/history",
-            "memory": null
-        },
-        "/admin/messenger/history?period=in-last-week": {
-            "path": "/admin/messenger/history?period=in-last-week",
-            "seen": true,
-            "depth": 1,
-            "linkStatus": null,
-            "username": null,
-            "route": "zenstruck_messenger_monitor_history",
-            "rp": null,
-            "statusCode": 200,
-            "foundOn": "/admin/messenger/history",
             "memory": null
         }
     }

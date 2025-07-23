@@ -16,3 +16,10 @@ survos_crawler:
         - '/inspection/analysis/reflection'
         - '/admin/image/'
         - '/inspection/analysis/formio'
+        #recheck
+        - 'batch-translate'
+        - '/webhook*'
+        - '/admin/messenger/transport/async'
+        - '/admin/messenger/transport/failed'
+        - '/admin/messenger/history*'
+        - '/admin/messenger/statistics*'
