@@ -9,13 +9,15 @@ interface IImageWorkflow
 {
 	public const WORKFLOW_NAME = 'ImageWorkflow';
 
-	#[Place(initial: true)]
+	#[Place(initial: true,
+        info: "persisted to database",
+        description: "Created during app:load")]
 	public const PLACE_NEW = 'new';
 
-	#[Place]
+	#[Place(info: 'dispatched to sais')]
 	public const PLACE_DISPATCHED = 'dispatched';
 
-	#[Place]
+	#[Place(info: 'has resized')]
 	public const PLACE_READY = 'ready';
 
 	#[Place]

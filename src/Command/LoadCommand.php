@@ -17,7 +17,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
-#[AsCommand('app:load', 'Load the data from dummyjson.com')]
+#[AsCommand('app:load', 'Load the Product and Image entities from dummyjson.com')]
 class LoadCommand
 {
 	public function __construct(
@@ -57,7 +57,9 @@ class LoadCommand
         }
 
         try {
-            $response = $this->saisClientService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
+            $response = $this->saisClientService->accountSetup(
+                new AccountSetup(AppController::SAIS_CLIENT_CODE, 500)
+            );
         } catch (\Exception $e) {
             // Log the exception or handle it as needed
             echo 'Error during account setup: ' . $e->getMessage();

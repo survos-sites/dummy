@@ -1,3 +1,5 @@
+import 'instantsearch.css/themes/algolia.min.css';
+
 import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
@@ -10,7 +12,7 @@ import './styles/app.css';
 import '@tabler/core';
 import '@tabler/core/dist/css/tabler.min.css';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import "@andypf/json-viewer"
 
 

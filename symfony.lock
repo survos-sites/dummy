@@ -200,9 +200,6 @@
             "config/routes/survos_crawler.yaml"
         ]
     },
-    "survos/deployment-bundle": {
-        "version": "1.5.529"
-    },
     "survos/doc-bundle": {
         "version": "1.5.529"
     },

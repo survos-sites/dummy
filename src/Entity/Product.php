@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,7 +48,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     arguments: [ "searchParameterName" => "facet_filter"]
 )]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
-
+#[MeiliIndex]
 class Product implements RouteParametersInterface
 {
     use RouteParametersTrait;

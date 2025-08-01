@@ -31,3 +31,6 @@
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+# fos js routing
+/public/js/fos_js_routes.js
