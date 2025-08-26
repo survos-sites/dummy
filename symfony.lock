@@ -178,6 +178,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "survos/babel-bundle": {
+        "version": "dev-main"
+    },
     "survos/bootstrap-bundle": {
         "version": "1.5.529"
     },

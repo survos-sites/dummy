@@ -23,11 +23,17 @@ interface IImageWorkflow
 	#[Place]
 	public const PLACE_FAILED = 'failed';
 
-	#[Transition(from: [self::PLACE_NEW], to: self::PLACE_DISPATCHED)]
+	#[Transition(from: [self::PLACE_NEW],
+        to: self::PLACE_DISPATCHED,
+        info: 'request resize',
+        description: "Send a resize request to sais"
+    )]
+
 	public const TRANSITION_DISPATCH = 'dispatch';
 
 	#[Transition(from: [self::PLACE_DISPATCHED], to: self::PLACE_READY,
-        info: "After thumb webhook has been received",
+        info: "if resized exist",
+        description: "After thumb webhook has been received",
         guard: "subject.hasThumbnails")]
 	public const TRANSITION_COMPLETE = 'complete';
 

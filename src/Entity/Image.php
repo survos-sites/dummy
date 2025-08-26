@@ -50,6 +50,11 @@ class Image implements MarkingInterface
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
 
+    public function getId(): string
+    {
+        return $this->code;
+    }
+
     public string $productSku {
         get => $this->product->sku;
     }

@@ -11,7 +11,7 @@ Markdown for ImageWorkflow
 ### dispatch.Transition
 
         onTransitionDispatch()
-        // 
+        // Send a resize request to sais
 ```php
 #[AsTransitionListener(self::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
 public function onTransitionDispatch(TransitionEvent $event): void

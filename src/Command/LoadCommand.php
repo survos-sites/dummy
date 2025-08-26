@@ -90,13 +90,9 @@ class LoadCommand
             }
 
         }
-
-        // $product = new Product();
-        // $manager->persist($product);
-
         $this->entityManager->flush();
 
-        $io->success(self::class . " success.");
+        $io->success(self::class . " success. " . $this->productRepository->count());
 		return Command::SUCCESS;
 	}
 }

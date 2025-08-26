@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e5a611aacc47a37ea8a59fa44e5f867",
+    "content-hash": "f42a74a668c5f0b108f80f868b820977",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -5705,6 +5705,70 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
             "time": "2024-09-11T13:17:53+00:00"
+        },
+        {
+            "name": "survos/babel-bundle",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/babel-bundle.git",
+                "reference": "eab3e96b8860a608a29209ecc1a378fc98dce5fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/babel-bundle/zipball/eab3e96b8860a608a29209ecc1a378fc98dce5fc",
+                "reference": "eab3e96b8860a608a29209ecc1a378fc98dce5fc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^2.15",
+                "doctrine/orm": "^3.5",
+                "doctrine/persistence": "^4",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "php": "^8.4",
+                "symfony/console": "^7.3",
+                "symfony/dependency-injection": "^7.3",
+                "symfony/http-kernel": "^7.3",
+                "symfony/property-access": "^7.3",
+                "symfony/translation": "^7.3"
+            },
+            "require-dev": {
+                "nette/php-generator": "^4",
+                "nikic/php-parser": "^5",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.3",
+                "survos/libre-translate-bundle": "^1.6",
+                "survos/translator-bundle": "dev-main"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Survos\\BabelBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight translation base (Str/StrTranslation) + Translatable attribute & subscriber",
+            "support": {
+                "issues": "https://github.com/survos/babel-bundle/issues",
+                "source": "https://github.com/survos/babel-bundle/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-25T01:52:06+00:00"
         },
         {
             "name": "survos/bootstrap-bundle",
@@ -16458,6 +16522,7 @@
     "aliases": [],
     "minimum-stability": "RC",
     "stability-flags": {
+        "survos/babel-bundle": 20,
         "survos/code-bundle": 20,
         "survos/crawler-bundle": 20,
         "survos/meili-bundle": 20,

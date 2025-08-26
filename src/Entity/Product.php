@@ -38,9 +38,10 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
 
-#[ApiFilter(OrderFilter::class, properties: ['title','price','stock','rating'])]
+#[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
 
-    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
+// @todo: sort/search on translatable properties
+//    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
 #[ApiFilter(FacetsFieldSearchFilter::class,
@@ -65,15 +66,17 @@ class Product implements RouteParametersInterface
             set(object|array $data) => $this->data = (object)$data;
         },
 
-        #[ORM\Column(length: 255)]
-        #[Groups(['product.details'])]
-        public ?string $title = null,
 
     )
     {
         $this->images = new ArrayCollection();
         $this->stock = $this->data->stock??0;
         $this->rating = round($this->data->rating??0);
+    }
+
+    public function getId(): string
+    {
+        return $this->sku;
     }
 
 
