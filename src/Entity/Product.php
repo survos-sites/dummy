@@ -22,6 +22,12 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+use Survos\BabelBundle\Entity\Traits\BabelHooksTrait;
+
+use Doctrine\ORM\Mapping\Column;
+
+use Survos\BabelBundle\Attribute\Translatable;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     operations: [
@@ -52,6 +58,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[MeiliIndex]
 class Product implements RouteParametersInterface
 {
+    use BabelHooksTrait;
+
     use RouteParametersTrait;
     public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
     public function __construct(
@@ -152,4 +160,15 @@ class Product implements RouteParametersInterface
         return $this;
     }
 
+
+        // <BABEL:TRANSLATABLE:START title>
+        #[Column(type: Types::TEXT, nullable: true)]
+        private ?string $titleBacking = null;
+
+        #[Translatable(context: NULL)]
+        public ?string $title {
+            get => $this->resolveTranslatable('title', $this->titleBacking, NULL);
+            set => $this->titleBacking = $value;
+        }
+        // <BABEL:TRANSLATABLE:END title>
 }
