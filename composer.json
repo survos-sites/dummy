@@ -23,6 +23,7 @@
         "jolicode/jolinotif": "^3.1.1",
         "jwage/phpamqplib-messenger": "^0.8.5",
         "meilisearch/meilisearch-php": "^1.15",
+        "mezcalito/imgproxy-bundle": "*",
         "nadar/php-composer-reader": "^2.1",
         "nelmio/cors-bundle": "^2.5",
         "nyholm/psr7": "^1.0",

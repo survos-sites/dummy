@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9fe76c397972e0d457ec039191d29a1",
+    "content-hash": "17992078c2cc15cb70681ba727ae306e",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -4207,6 +4207,56 @@
                 "source": "https://github.com/meilisearch/meilisearch-php/tree/v1.16.1"
             },
             "time": "2025-09-18T10:15:45+00:00"
+        },
+        {
+            "name": "mezcalito/imgproxy-bundle",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mezcalito/imgproxy-bundle.git",
+                "reference": "bcd39df1033707322c90c8770bdf64d3fdb6ed14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mezcalito/imgproxy-bundle/zipball/bcd39df1033707322c90c8770bdf64d3fdb6ed14",
+                "reference": "bcd39df1033707322c90c8770bdf64d3fdb6ed14",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
+                "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0",
+                "symfony/string": "^5.4 || ^6.0 || ^7.0",
+                "twig/twig": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.16",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mezcalito\\ImgproxyBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mezcalito",
+                    "email": "dev@mezcalito.fr",
+                    "homepage": "https://www.mezcalito.fr/"
+                }
+            ],
+            "homepage": "https://github.com/Mezcalito/imgproxy-bundle",
+            "support": {
+                "issues": "https://github.com/Mezcalito/imgproxy-bundle/issues",
+                "source": "https://github.com/Mezcalito/imgproxy-bundle/tree/0.4.0"
+            },
+            "time": "2025-04-08T09:42:23+00:00"
         },
         {
             "name": "monolog/monolog",

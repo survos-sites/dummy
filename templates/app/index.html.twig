@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
-
+{#{% extends 'base.html.twig' %}#}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 {% block title %}Hello AppController!{% endblock %}
 
-{% block body %}
+{% block page_content %}
 
     {% for indexName in ['dummy_Product', 'dummy_Image'] %}
         <a href="{{ path('meili_insta', {indexName: indexName}) }}">{{ indexName }}</a>
@@ -57,13 +57,11 @@
                         {% endif %}
                     </td>
                     <td>
-                        <code>
-                            {{ image.marking }}
-                        </code>
-                        {{ image.resized|length ? dump(image.resized) }}
+                        <code>{{ image.marking }}</code>
+{#                        {{ image.resized|length ? dump(image.resized) }}#}
                         {% for size, thumb in image.resized %}
-                            {{ size }}
-                            {{ thumb }}
+{#                            {{ size }}#}
+{#                            {{ thumb }}#}
                             {% if size == 'small' %}
                             <a href="{{ image.resized.small }}" target="_blank">
                                 <img src="{{ thumb }}" alt="{{ size }}" style="width: 60px;" />

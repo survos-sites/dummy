@@ -37,4 +37,5 @@ return [
     Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
     Survos\BabelBundle\SurvosBabelBundle::class => ['all' => true],
     Survos\StateBundle\SurvosStateBundle::class => ['all' => true],
+    Mezcalito\ImgproxyBundle\ImgproxyBundle::class => ['all' => true],
 ];

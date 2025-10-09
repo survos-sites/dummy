@@ -127,6 +127,9 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.6.0"
     },
+    "mezcalito/imgproxy-bundle": {
+        "version": "0.4.0"
+    },
     "nelmio/cors-bundle": {
         "version": "2.5",
         "recipe": {
