@@ -22,6 +22,12 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+use Survos\BabelBundle\Entity\Traits\BabelHooksTrait;
+
+use Doctrine\ORM\Mapping\Column;
+
+use Survos\BabelBundle\Attribute\Translatable;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     operations: [
@@ -38,9 +44,10 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
 
-#[ApiFilter(OrderFilter::class, properties: ['title','price','stock','rating'])]
+#[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
 
-    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
+// @todo: sort/search on translatable properties
+//    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
 #[ApiFilter(FacetsFieldSearchFilter::class,
@@ -51,6 +58,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[MeiliIndex]
 class Product implements RouteParametersInterface
 {
+    use BabelHooksTrait;
+
     use RouteParametersTrait;
     public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
     public function __construct(
@@ -62,13 +71,8 @@ class Product implements RouteParametersInterface
 
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
         #[Groups(['product.details'])]
-        private(set) array $data {
-            set(object|array $data) => $this->data = (array)$data;
-        },
+        private(set) array $data
 
-        #[ORM\Column(length: 255)]
-        #[Groups(['product.details'])]
-        public ?string $title = null,
 
     )
     {
@@ -77,6 +81,11 @@ class Product implements RouteParametersInterface
         $this->rating = round($this->data->rating??0);
     }
     public string $id { get => $this->sku; }
+
+    public function getId(): string
+    {
+        return $this->sku;
+    }
 
 
     // virtual property
@@ -151,4 +160,15 @@ class Product implements RouteParametersInterface
         return $this;
     }
 
+
+        // <BABEL:TRANSLATABLE:START title>
+        #[Column(type: Types::TEXT, nullable: true)]
+        private ?string $titleBacking = null;
+
+        #[Translatable(context: NULL)]
+        public ?string $title {
+            get => $this->resolveTranslatable('title', $this->titleBacking, NULL);
+            set => $this->titleBacking = $value;
+        }
+        // <BABEL:TRANSLATABLE:END title>
 }

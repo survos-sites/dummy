@@ -51,6 +51,11 @@ class Image implements MarkingInterface, \Stringable
     }
     public string $id { get => $this->code; }
 
+    public function getId(): string
+    {
+        return $this->code;
+    }
+
     public string $productSku {
         get => $this->product->sku;
     }

@@ -25,7 +25,7 @@ class ImageWorkflow
 	{
 	}
 
-	#[AsTransitionListener(WF::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
+	#[AsTransitionListener(WF::WORKFLOW_NAME, WF::TRANSITION_DISPATCH)]
 	public function onTransitionDispatch(TransitionEvent $event): void
 	{
 

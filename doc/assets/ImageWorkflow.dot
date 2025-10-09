@@ -7,8 +7,8 @@ digraph workflow {
   place_dispatched [label=<<B>dispatched</B><BR/><I>dispatched to sais</I>>, shape=oval fillcolor="lightgreen" style="filled" xlabel="Place dispatched: "];
   place_ready [label=<<B>ready</B><BR/><I>has resized</I>>, shape=oval fillcolor="lightgreen" style="filled" xlabel="Place ready: "];
   place_failed [label=<<B>failed</B>>, shape=oval fillcolor="lightgreen" style="filled" xlabel="Place failed: "];
-  transition_dispatch [label=<<B>dispatch</B>>, shape="box" regular="" xlabel="Transition dispatch: "];
-  transition_complete [label=<<B>complete</B><BR/><U>Thumbnails</U><BR/><I>After thumb webhook has been received</I>>, shape="box" regular="" xlabel="Transition complete: "];
+  transition_dispatch [label=<<B>dispatch</B><BR/><I>request resize</I>>, shape="box" regular="" xlabel="Transition dispatch: Send a resize request to sais"];
+  transition_complete [label=<<B>complete</B><BR/><U>Thumbnails</U><BR/><I>if resized exist</I>>, shape="box" regular="" xlabel="Transition complete: After thumb webhook has been received"];
   transition_fail [label=<<B>fail</B>>, shape="box" regular="" xlabel="Transition fail: "];
   place_new -> transition_dispatch [style="solid", comment="new"];
   transition_dispatch -> place_dispatched [style="solid"];

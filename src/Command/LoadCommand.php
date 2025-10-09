@@ -60,7 +60,7 @@ class LoadCommand
         foreach (json_decode(file_get_contents($url))->products as $idx => $data) {
             // object Mapper?
             if (!$product = $this->productRepository->findOneBy(['sku' => $data->sku])) {
-                $product = new Product(sku: $data->sku, title: $data->title, data: $data);
+                $product = new Product(sku: $data->sku, data: (array) $data);
                 $this->entityManager->persist($product);
             }
             $product->title = $data->title;
@@ -80,13 +80,9 @@ class LoadCommand
             }
 
         }
-
-        // $product = new Product();
-        // $manager->persist($product);
-
         $this->entityManager->flush();
 
-        $io->success(self::class . " success.");
+        $io->success(self::class . " success. " . $this->productRepository->count());
 		return Command::SUCCESS;
 	}
 }

@@ -127,6 +127,9 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.6.0"
     },
+    "mezcalito/imgproxy-bundle": {
+        "version": "0.4.0"
+    },
     "nelmio/cors-bundle": {
         "version": "2.5",
         "recipe": {
@@ -178,6 +181,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "survos/babel-bundle": {
+        "version": "dev-main"
+    },
     "survos/bootstrap-bundle": {
         "version": "1.5.529"
     },
@@ -213,7 +219,10 @@
         "version": "1.5.470"
     },
     "survos/state-bundle": {
-        "version": "1.5.600"
+        "version": "2.0.19"
+    },
+    "survos/workflow-helper-bundle": {
+        "version": "1.5.529"
     },
     "symfony/asset-mapper": {
         "version": "7.3",
@@ -551,7 +560,7 @@
         ]
     },
     "symfony/workflow": {
-        "version": "7.2",
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -15,8 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
-        private readonly ProductRepository $productRepository,
-    )
+        private EntityManagerInterface $entityManager,
+        private readonly ProductRepository $productRepository)
     {
     }
 
@@ -56,9 +57,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        foreach ([Image::class, Product::class] as $class) {
-            $shortName = new \ReflectionClass($class)->getShortName();
-            yield MenuItem::linkToCrud($shortName, 'fas fa-list', $class);
+        foreach ([Product::class, Image::class] as $entityClass) {
+            $label = new \ReflectionClass($entityClass)->getShortName();
+            yield MenuItem::linkToCrud($label, 'fas fa-list', $entityClass)
+                ->setBadge($this->entityManager->getRepository($entityClass)->count([]));
         }
     }
 }
