@@ -59,10 +59,11 @@ class Product implements RouteParametersInterface
         #[Groups(['product.read'])]
         public ?string $sku,
 
+
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
         #[Groups(['product.details'])]
-        public private(set) object|array $data {
-            set(object|array $data) => $this->data = (object)$data;
+        private(set) array $data {
+            set(object|array $data) => $this->data = (array)$data;
         },
 
         #[ORM\Column(length: 255)]
@@ -75,6 +76,7 @@ class Product implements RouteParametersInterface
         $this->stock = $this->data->stock??0;
         $this->rating = round($this->data->rating??0);
     }
+    public string $id { get => $this->sku; }
 
 
     // virtual property

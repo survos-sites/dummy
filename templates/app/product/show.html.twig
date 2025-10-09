@@ -1,0 +1,287 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block title %}{{ package.name }}{% endblock %}
+
+{% block content_header %}
+    <div class="content-header-title">
+        <h1 class="title">{{ product.title }}</h1>
+    </div>
+
+    <div class="page-actions">
+        <a href="{{ path('admin_product_index') }}" class="btn btn-secondary">
+            <i class="fa fa-arrow-left"></i> Back to list
+        </a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {% set product = product.data %}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    {% if product.images|length > 0 %}
+                        <img src="{{ product.images[0] }}"
+                             alt="{{ product.title }}"
+                             class="card-img-top product-image">
+                    {% else %}
+                        <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
+                            <i class="fas fa-image fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- QR Code & Barcode -->
+                {% if product.meta is defined %}
+                    <div class="row mt-3">
+                        {% if product.meta.qrCode is defined %}
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <img src="{{ product.meta.qrCode }}"
+                                             alt="QR Code" class="img-fluid" style="max-height: 100px;">
+                                        <small class="d-block text-muted mt-2">QR Code</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if product.meta.barcode is defined %}
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-barcode fa-3x text-dark"></i>
+                                        <small class="d-block text-muted mt-2">{{ product.meta.barcode }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-lg-6">
+                <!-- Header -->
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                        {% if product.category is defined %}
+                            <span class="badge bg-secondary me-2">{{ product.category }}</span>
+                        {% endif %}
+                        {% for tag in product.tags ?? [] %}
+                            <span class="badge bg-info me-2">{{ tag }}</span>
+                        {% endfor %}
+                        {% if product.discountPercentage is defined and product.discountPercentage > 0 %}
+                            <span class="discount-badge">{{ product.discountPercentage|number_format(2) }}% OFF</span>
+                        {% endif %}
+                    </div>
+                    <h1 class="display-5 fw-bold text-dark">{{ product.title }}</h1>
+                    {% if product.brand is defined %}
+                        <p class="text-muted mb-2">by <strong>{{ product.brand }}</strong></p>
+                    {% endif %}
+                    {% if product.sku is defined %}
+                        <p class="product-meta">SKU: {{ product.sku }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Rating -->
+                {% if product.rating is defined %}
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="rating-stars me-2">
+                            {% set fullStars = product.rating|round(0, 'floor') %}
+                            {% set hasHalfStar = (product.rating - fullStars) >= 0.5 %}
+
+                            {% for i in 1..5 %}
+                                {% if i <= fullStars %}
+                                    <i class="fas fa-star"></i>
+                                {% elseif i == (fullStars + 1) and hasHalfStar %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="fw-bold me-2">{{ product.rating|number_format(2) }}</span>
+                        {% if product.reviews is defined %}
+                            <span class="text-muted">({{ product.reviews|length }} reviews)</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- Price Section -->
+                <div class="price-section mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                {% if product.discountPercentage is defined and product.discountPercentage > 0 %}
+                                    {% set originalPrice = product.price / (1 - product.discountPercentage / 100) %}
+                                    <span class="text-decoration-line-through text-muted me-2">
+                                        ${{ originalPrice|number_format(2) }}
+                                    </span>
+                                {% endif %}
+                                <span class="display-6 fw-bold text-success">${{ product.price|number_format(2) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-end">
+                                {% if product.availabilityStatus is defined %}
+                                    {% set statusClass = product.availabilityStatus == 'In Stock' ? 'success' : 'warning' %}
+                                    <span class="badge bg-{{ statusClass }} fs-6">
+                                        <i class="fas fa-check-circle"></i>
+                                        {{ product.availabilityStatus }}
+                                        {% if product.stock is defined %}({{ product.stock }}){% endif %}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                {% if product.description is defined %}
+                    <div class="mb-4">
+                        <h5>Description</h5>
+                        <p class="text-muted">{{ product.description }}</p>
+                    </div>
+                {% endif %}
+
+                <!-- Product Details -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-box text-primary"></i> Product Info
+                                </h6>
+                                <ul class="list-unstyled mb-0">
+                                    {% if product.weight is defined %}
+                                        <li><strong>Weight:</strong> {{ product.weight }}g</li>
+                                    {% endif %}
+                                    {% if product.dimensions is defined %}
+                                        <li><strong>Dimensions:</strong>
+                                            {{ product.dimensions.width }}×{{ product.dimensions.depth }}×{{ product.dimensions.height }} cm
+                                        </li>
+                                    {% endif %}
+                                    {% if product.minimumOrderQuantity is defined %}
+                                        <li><strong>Min. Order:</strong> {{ product.minimumOrderQuantity }} units</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-shield-alt text-success"></i> Policies
+                                </h6>
+                                <ul class="list-unstyled mb-0">
+                                    {% if product.warrantyInformation is defined %}
+                                        <li><strong>Warranty:</strong> {{ product.warrantyInformation }}</li>
+                                    {% endif %}
+                                    {% if product.shippingInformation is defined %}
+                                        <li><strong>Shipping:</strong> {{ product.shippingInformation }}</li>
+                                    {% endif %}
+                                    {% if product.returnPolicy is defined %}
+                                        <li><strong>Returns:</strong> {{ product.returnPolicy }}</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4">
+                    <button class="btn btn-primary btn-lg me-md-2" type="button">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" type="button">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        {% if product.reviews is defined and product.reviews|length > 0 %}
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="mb-4">Customer Reviews</h3>
+
+                    <div class="row">
+                        {% for review in product.reviews %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card review-card h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="rating-stars me-2">
+                                                {% for i in 1..5 %}
+                                                    {% if i <= review.rating %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% else %}
+                                                        <i class="far fa-star"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <span class="fw-bold">{{ review.rating }}/5</span>
+                                        </div>
+                                        <blockquote class="blockquote mb-3">
+                                            <p class="mb-0">"{{ review.comment }}"</p>
+                                        </blockquote>
+                                        <div class="text-muted">
+                                            <small>
+                                                <strong>{{ review.reviewerName }}</strong><br>
+                                                {{ review.date|date('M j, Y') }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    <style>
+        .product-image {
+            max-height: 500px;
+            object-fit: cover;
+        }
+        .rating-stars {
+            color: #ffc107;
+        }
+        .tag {
+            font-size: 0.875rem;
+        }
+        .price-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        .review-card {
+            border-left: 4px solid #dee2e6;
+            transition: border-color 0.3s ease;
+        }
+        .review-card:hover {
+            border-left-color: #0d6efd;
+        }
+        .product-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .discount-badge {
+            background: linear-gradient(45deg, #dc3545, #fd7e14);
+            color: white;
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+    </style>
+{% endblock %}

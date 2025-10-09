@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
 use App\Workflow\IImageWorkflow;
 use App\Workflow\ImageWorkflow;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
 use Survos\SaisBundle\Model\AccountSetup;
 use Survos\SaisBundle\Service\SaisClientService;
@@ -37,7 +39,7 @@ class AppController extends AbstractController
         private EntityManagerInterface   $entityManager,
         private \Psr\Log\LoggerInterface $logger,
         private TexterInterface          $texter,
-        #[Target(ImageWorkflow::WORKFLOW_NAME)] private WorkflowInterface $imageWorkflow,
+        #[Target(IImageWorkflow::WORKFLOW_NAME)] private WorkflowInterface $imageWorkflow,
         private readonly ProductRepository $productRepository,
 //        private readonly ImageWorkflow $imageWorkflow,
     )
@@ -101,6 +103,15 @@ class AppController extends AbstractController
         return $this->render('app/index.html.twig', [
             'responses' => $responses,
         ]);
+    }
+
+    #[AdminRoute('/app/product/{productId}', name: 'app_product_show')]
+    #[Template('app/product/show.html.twig')]
+    public function showProduct(Product $product): Response|array
+    {
+        return [
+            'product' => $product,
+        ];
     }
 
     #[Route('/webhook/media', name: 'app_media_webhook')]
@@ -205,7 +216,7 @@ class AppController extends AbstractController
     }
 
 
-    #[Route('/{target}', name: 'app_homepage')]
+    #[Route('/landing/{target}', name: 'app_homepage')]
     public function home(
         HttpClientInterface $httpClient,
         ?LibreTranslate $libreTranslate=null,

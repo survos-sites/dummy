@@ -212,8 +212,8 @@
     "survos/sais-bundle": {
         "version": "1.5.470"
     },
-    "survos/workflow-helper-bundle": {
-        "version": "1.5.529"
+    "survos/state-bundle": {
+        "version": "1.5.600"
     },
     "symfony/asset-mapper": {
         "version": "7.3",

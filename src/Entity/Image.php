@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Survos\SaisBundle\Service\SaisClientService;
-use Survos\WorkflowBundle\Traits\MarkingInterface;
-use Survos\WorkflowBundle\Traits\MarkingTrait;
+use Survos\StateBundle\Traits\MarkingInterface;
+use Survos\StateBundle\Traits\MarkingTrait;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ApiResource(
@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Groups(['image.read'])]
 #[MeiliIndex]
-class Image implements MarkingInterface
+class Image implements MarkingInterface, \Stringable
 {
     use MarkingTrait;
     public function __construct(
@@ -49,6 +49,7 @@ class Image implements MarkingInterface
         }
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
+    public string $id { get => $this->code; }
 
     public string $productSku {
         get => $this->product->sku;
@@ -86,5 +87,10 @@ class Image implements MarkingInterface
     {
         $this->resized[$filter] = $url;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->originalUrl;
     }
 }

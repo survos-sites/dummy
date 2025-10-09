@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e5a611aacc47a37ea8a59fa44e5f867",
+    "content-hash": "ff4173ca7333945cd8348aaa346b951f",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -2731,16 +2731,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v4.24.9",
+            "version": "v4.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "1f1ab3a897107e5c62657a8cb04790e297b95a21"
+                "reference": "954e88c9cb004c3861b6ec6ae52241642995fb86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/1f1ab3a897107e5c62657a8cb04790e297b95a21",
-                "reference": "1f1ab3a897107e5c62657a8cb04790e297b95a21",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/954e88c9cb004c3861b6ec6ae52241642995fb86",
+                "reference": "954e88c9cb004c3861b6ec6ae52241642995fb86",
                 "shasum": ""
             },
             "require": {
@@ -2821,7 +2821,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.24.9"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.25.1"
             },
             "funding": [
                 {
@@ -2829,7 +2829,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-17T18:10:27+00:00"
+            "time": "2025-09-10T05:00:12+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -6378,23 +6378,23 @@
             "time": "2025-07-26T01:11:15+00:00"
         },
         {
-            "name": "survos/workflow-helper-bundle",
-            "version": "1.6.19",
+            "name": "survos/state-bundle",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/survos/SurvosWorkflowHelperBundle.git",
-                "reference": "53498f92ccae04cf0080ac7dcce921103280a9be"
+                "url": "https://github.com/survos/state-bundle.git",
+                "reference": "d22c04d926e9cc382fefaf64ed4bc1fec8a5aa81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosWorkflowHelperBundle/zipball/53498f92ccae04cf0080ac7dcce921103280a9be",
-                "reference": "53498f92ccae04cf0080ac7dcce921103280a9be",
+                "url": "https://api.github.com/repos/survos/state-bundle/zipball/d22c04d926e9cc382fefaf64ed4bc1fec8a5aa81",
+                "reference": "d22c04d926e9cc382fefaf64ed4bc1fec8a5aa81",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^3.5",
+                "doctrine/orm": "^2.12 || ^3.3",
                 "php": "^8.4",
-                "survos/core-bundle": "^1.6",
+                "survos/core-bundle": "^1.5",
                 "symfony/console": "^7.3",
                 "symfony/http-kernel": "^7.3",
                 "symfony/messenger": "^7.3",
@@ -6426,23 +6426,26 @@
                 "survos/wiki-bundle": "<1.2.57"
             },
             "require-dev": {
-                "nette/php-generator": "^4.1.8",
-                "phpstan/phpstan": "^2.1.17",
-                "phpunit/phpunit": "^12.2.6",
-                "psr/log": "^3.0.2",
-                "roave/better-reflection": "^6.59",
-                "survos/bootstrap-bundle": "^1.5.529",
+                "jwage/phpamqplib-messenger": "^0.8.5",
+                "nette/php-generator": "^4.1",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^12",
+                "psr/log": "^3.0",
+                "roave/better-reflection": "^6.0",
+                "survos/bootstrap-bundle": "^1.4",
                 "symfony/browser-kit": "^7.3",
                 "symfony/config": "^7.3",
                 "symfony/dependency-injection": "^7.3",
                 "symfony/form": "^7.3",
                 "symfony/framework-bundle": "^7.3",
-                "symfony/maker-bundle": "^1.64",
+                "symfony/maker-bundle": "^1.5",
                 "symfony/twig-bundle": "^7.3",
+                "symfony/ux-chartjs": "^2.21",
                 "symfony/var-dumper": "^7.3",
                 "zenstruck/class-metadata": "^1.1",
                 "zenstruck/messenger-monitor-bundle": "^0.5.4"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "symfony": {
@@ -6455,7 +6458,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Survos\\WorkflowBundle\\": "src/"
+                    "Survos\\StateBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6468,14 +6471,14 @@
                     "email": "tacman@gmail.com"
                 }
             ],
-            "description": "Add some tools for using the Symfony Workflow Component",
+            "description": "Add some tools managing state machines using the Symfony Workflow Component",
             "keywords": [
-                "symfony-ux",
+                "symfony",
                 "workflow"
             ],
             "support": {
-                "issues": "https://github.com/survos/SurvosWorkflowHelperBundle/issues",
-                "source": "https://github.com/survos/SurvosWorkflowHelperBundle/tree/1.6.19"
+                "issues": "https://github.com/survos/state-bundle/issues",
+                "source": "https://github.com/survos/state-bundle/tree/main"
             },
             "funding": [
                 {
@@ -6483,7 +6486,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-01T15:32:37+00:00"
+            "time": "2025-09-25T14:28:00+00:00"
         },
         {
             "name": "symfony/amqp-messenger",
@@ -16461,7 +16464,8 @@
         "survos/code-bundle": 20,
         "survos/crawler-bundle": 20,
         "survos/meili-bundle": 20,
-        "survos/sais-bundle": 20
+        "survos/sais-bundle": 20,
+        "survos/state-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

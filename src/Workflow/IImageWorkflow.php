@@ -2,10 +2,13 @@
 
 namespace App\Workflow;
 
-use Survos\WorkflowBundle\Attribute\Place;
-use Survos\WorkflowBundle\Attribute\Transition;
+use App\Entity\Image;
+use Survos\StateBundle\Attribute\Place;
+use Survos\StateBundle\Attribute\Transition;
+use Survos\StateBundle\Attribute\Workflow;
 
-interface IImageWorkflow
+#[Workflow(supports: [Image::class], name: self::WORKFLOW_NAME)]
+class IImageWorkflow
 {
 	public const WORKFLOW_NAME = 'ImageWorkflow';
 

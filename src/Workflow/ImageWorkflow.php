@@ -7,17 +7,15 @@ use App\Entity\Image;
 use Psr\Log\LoggerInterface;
 use Survos\SaisBundle\Model\ProcessPayload;
 use Survos\SaisBundle\Service\SaisClientService;
-use Survos\WorkflowBundle\Attribute\Workflow;
+use Survos\StateBundle\Attribute\Workflow;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Workflow\Attribute\AsGuardListener;
 use Symfony\Component\Workflow\Attribute\AsTransitionListener;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Event\TransitionEvent;
-
-#[Workflow(supports: [Image::class], name: self::WORKFLOW_NAME)]
-class ImageWorkflow implements IImageWorkflow
+use App\Workflow\IImageWorkflow as WF;
+class ImageWorkflow
 {
-	public const WORKFLOW_NAME = 'ImageWorkflow';
 
 	public function __construct(
         private SaisClientService $saisClientService,
@@ -27,7 +25,7 @@ class ImageWorkflow implements IImageWorkflow
 	{
 	}
 
-	#[AsTransitionListener(self::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
+	#[AsTransitionListener(WF::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
 	public function onTransitionDispatch(TransitionEvent $event): void
 	{
 

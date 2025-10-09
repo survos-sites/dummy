@@ -56,16 +56,6 @@ class LoadCommand
 //            $this->entityManager->flush();
         }
 
-        try {
-            $response = $this->saisClientService->accountSetup(
-                new AccountSetup(AppController::SAIS_CLIENT_CODE, 500)
-            );
-        } catch (\Exception $e) {
-            // Log the exception or handle it as needed
-            echo 'Error during account setup: ' . $e->getMessage();
-        }
-
-
         // wget https://dummyjson.com/products -O data/products.json
         foreach (json_decode(file_get_contents($url))->products as $idx => $data) {
             // object Mapper?
