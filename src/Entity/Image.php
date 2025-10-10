@@ -26,7 +26,9 @@ use Symfony\Component\Serializer\Attribute\Groups;
 )]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Groups(['image.read'])]
-#[MeiliIndex]
+#[MeiliIndex(
+    groups: ['image.read'],
+)]
 class Image implements MarkingInterface, \Stringable
 {
     use MarkingTrait;

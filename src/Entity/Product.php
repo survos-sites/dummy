@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\Facet;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,7 +56,15 @@ use Survos\BabelBundle\Attribute\Translatable;
     arguments: [ "searchParameterName" => "facet_filter"]
 )]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
-#[MeiliIndex]
+#[MeiliIndex(
+    primaryKey: 'sku',
+    displayed: ['*'],
+    // serialization groups
+    groups: ['product.read', 'product.details'],
+    filterable:
+        ['category', 'tags', 'rating', 'stock', 'price'],
+
+)]
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
@@ -90,6 +99,7 @@ class Product implements RouteParametersInterface
 
     // virtual property
     #[Groups(['product.read'])]
+    #[Facet(label: 'Category', showMoreThreshold: 12, )]
     #[ApiProperty("category from extra, virtual but needs index")]
     public ?string $category {
         get => $this->data['category']??null;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "884adaab910a85b06c8c6e88d7045761",
+    "content-hash": "f2343348e6d17c8bf3c5d5fef149998d",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -6350,6 +6350,59 @@
                 }
             ],
             "time": "2025-07-14T14:06:29+00:00"
+        },
+        {
+            "name": "survos/jsonl-bundle",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/jsonl-bundle.git",
+                "reference": "6c2dbbdb06dacbe9bfe81e09a7b7b017a3896bac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/jsonl-bundle/zipball/6c2dbbdb06dacbe9bfe81e09a7b7b017a3896bac",
+                "reference": "6c2dbbdb06dacbe9bfe81e09a7b7b017a3896bac",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zlib": "*",
+                "php": "^8.4",
+                "psr/log": "^3.0",
+                "symfony/console": "^7.0",
+                "symfony/http-client": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Survos\\JsonlBundle\\SurvosJsonlBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Survos\\JsonlBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Fast, concurrent, resumable, strictly-ordered JSONL ingestion utilities for Symfony 7.3 / PHP 8.4",
+            "support": {
+                "issues": "https://github.com/survos/jsonl-bundle/issues",
+                "source": "https://github.com/survos/jsonl-bundle/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-09T21:26:15+00:00"
         },
         {
             "name": "survos/meili-bundle",
@@ -16223,6 +16276,73 @@
             "time": "2025-09-28T14:31:45+00:00"
         },
         {
+            "name": "survos/command-bundle",
+            "version": "2.0.19",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/command-bundle.git",
+                "reference": "799fd5ca81909832cfa2af9c5ce9aa391cf41d21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/command-bundle/zipball/799fd5ca81909832cfa2af9c5ce9aa391cf41d21",
+                "reference": "799fd5ca81909832cfa2af9c5ce9aa391cf41d21",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "symfony/config": "^7.3",
+                "symfony/console": "^7.3",
+                "symfony/dependency-injection": "^7.3",
+                "symfony/form": "^7.3",
+                "symfony/framework-bundle": "^7.3",
+                "symfony/http-kernel": "^7.3",
+                "twig/twig": "^3.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^12",
+                "rector/rector": "^2.0",
+                "symfony/messenger": "^7.3",
+                "symfony/test-pack": "^1.0",
+                "symfony/yaml": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\CommandBundle\\": "src/",
+                    "Survos\\CommandBundle\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tac Tacelosky",
+                    "email": "tacman@gmail.com"
+                }
+            ],
+            "description": "Run Symfony console commands from a web interface",
+            "keywords": [
+                "cli",
+                "dev",
+                "symfony-console"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/command-bundle/issues",
+                "source": "https://github.com/survos/command-bundle/tree/2.0.19"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-09-28T16:44:54+00:00"
+        },
+        {
             "name": "symfony/debug-bundle",
             "version": "v7.3.4",
             "source": {
@@ -16625,6 +16745,7 @@
         "survos/babel-bundle": 20,
         "survos/code-bundle": 20,
         "survos/crawler-bundle": 20,
+        "survos/jsonl-bundle": 20,
         "survos/meili-bundle": 20,
         "survos/sais-bundle": 20,
         "survos/state-bundle": 20
