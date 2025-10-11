@@ -19,6 +19,8 @@ use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\MeiliBundle\Metadata\Facet;
+use Survos\MeiliBundle\Metadata\Fields;
+use Survos\MeiliBundle\Metadata\FieldSet;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -57,14 +59,32 @@ use Survos\BabelBundle\Attribute\Translatable;
 )]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
 #[MeiliIndex(
+    // serialization groups for the JSON sent to the index
     primaryKey: 'sku',
+    persisted: new Fields(
+        fields: ['sku', 'stock', 'price', 'title'],
+//        groups: ['product.read', 'product.details']
+    ),
+//    groups: ['product.read', 'product.details'],
     displayed: ['*'],
-    // serialization groups
-    groups: ['product.read', 'product.details'],
-    filterable:
-        ['category', 'tags', 'rating', 'stock', 'price'],
-
+    filterable: new Fields(
+        fields: ['category','tags','rating','stock','price'],
+        groups: ['product.read','product.details']
+    ),
+    sortable: ['price', 'stock', 'rating'],
+    searchable: new Fields(groups: ['product.searchable']),
 )]
+
+/*
+*   #[MeiliIndex(
+ *       name: 'product',
+ *       display:   new FieldSet(['*']),
+ *       filterable:['columns'=>['category','tags','rating','stock','price'], 'groups'=>['product.read','product.details']],
+ *       sortable:  ['title','price'],
+ *       searchable:['title','description'],
+ *   )]
+ *
+ */
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
@@ -173,9 +193,10 @@ class Product implements RouteParametersInterface
 
         // <BABEL:TRANSLATABLE:START title>
         #[Column(type: Types::TEXT, nullable: true)]
-        private ?string $titleBacking = null;
+        private(set) ?string $titleBacking = null;
 
         #[Translatable(context: NULL)]
+        #[Groups(['product.read', 'product.searchable'])]
         public ?string $title {
             get => $this->resolveTranslatable('title', $this->titleBacking, NULL);
             set => $this->titleBacking = $value;
