@@ -63,7 +63,7 @@ use Survos\BabelBundle\Attribute\Translatable;
     primaryKey: 'sku',
     persisted: new Fields(
         fields: ['sku', 'stock', 'price', 'title'],
-//        groups: ['product.read', 'product.details']
+        groups: ['product.read', 'product.details']
     ),
 //    groups: ['product.read', 'product.details'],
     displayed: ['*'],

@@ -33,7 +33,6 @@
         "survos/bootstrap-bundle": "^2.0",
         "survos/crawler-bundle": "dev-main",
         "survos/doc-bundle": "^2.0",
-        "survos/jsonl-bundle": "dev-main",
         "survos/meili-bundle": "dev-main",
         "survos/sais-bundle": "dev-main",
         "survos/state-bundle": "dev-main",
@@ -108,7 +107,7 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "fos:js-routing:dump --format=js --target=public/js/fos_js_routes.js --callback=\"export default  \"": "symfony-cmd",
-            "assets:install %PUBLIC_DIR% --symlink": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
@@ -135,7 +134,6 @@
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.1",
         "survos/code-bundle": "dev-main",
-        "survos/command-bundle": "^2.0",
         "symfony/browser-kit": "^7.1",
         "symfony/css-selector": "^7.1",
         "symfony/debug-bundle": "^7.1",

@@ -1,9 +1,20 @@
-{% set hit = hit|merge(hit.data) %}
+
+{# Defensive copies so merge never sees undefined #}
+{#{% set hit = hit ?? {} %}#}
+{#{% set data = hit.data ?? {} %}#}
+{#{% set hl = hit._highlightResult ?? {} %}#}
+{#{% set hld = hl.data ?? {} %}#}
+
+{# If you still want flattened keys, only merge when data is non-empty #}
+{#{% if data is iterable %}#}
+{#    {% set hit = hit|merge(data) %}#}
+{#{% endif %}#}
 
 <div class="card h-100">
     <div class="card-header d-flex justify-content-between align-items-center gap-2">
-        <span class="fs-5 fw-semibold">{{ hit._highlightResult.data.title.value }}</span>
-        <span class="fs-6">{{ hit._highlightResult.data.brand.value }}</span>
+        <span class="fs-5 fw-semibold">{{ hit._highlightResult.title.value }}</span>
+        <span class="fs-6">{{ hit._highlightResult.brand.value }}</span>
+        <span class="fs-6">{{ hit.category }}</span>
     </div>
 
     <div class="card-body">
@@ -15,10 +26,12 @@
     </div>
 
     <div class="card-footer clearfix d-flex gap-2 align-items-center flex-wrap">
-        {# <code>{{ hit.marking }}</code> #}
+         <code>{{ hit.marking }}</code>
         <div class="flex-shrink-0 badge bg-success">
             In Stock: {{ hit.stock }}
         </div>
+
+        Price: ${{ hit.price|number_format(0) }}
 
         <div class="badge bg-warning me-auto">
             Rating: {{ hit.rating }}
