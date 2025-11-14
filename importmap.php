@@ -240,4 +240,10 @@ return [
     'has-property-descriptors' => [
         'version' => '1.0.2',
     ],
+    'debug' => [
+        'version' => '4.4.3',
+    ],
+    'ms' => [
+        'version' => '2.1.3',
+    ],
 ];

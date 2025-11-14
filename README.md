@@ -9,6 +9,10 @@ echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data_test.db" > .env.test
 composer install
 curl "https://dummyjson.com/products?limit=200" -o data/products.json
 bin/console doctrine:schema:update --force
+
+bin/console app:load
+bin/console meili:index
+
 symfony server:start -d
 symfony open:local
 ```
