@@ -1,0 +1,18 @@
+{# templates/admin/layout.html.twig #}
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+
+{% block header_custom_menu %}
+    {# Add your custom menu items here #}
+    <div class="navbar-custom-menu">
+        <a href="{{ path('app_homepage') }}" class="btn btn-sm btn-primary me-2">
+            <i class="fa fa-plus"></i> Custom Link
+        </a>
+        <a href="https://example.com" target="_blank" class="btn btn-sm btn-secondary me-2">
+            <i class="fa fa-external-link"></i> External Link
+        </a>
+    </div>
+
+    {# Keep the parent content (user menu, settings, etc) #}
+    {{ parent() }}
+{% endblock %}

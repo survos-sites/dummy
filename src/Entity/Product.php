@@ -18,7 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\Embedder;
 use Survos\MeiliBundle\Metadata\Facet;
+use Survos\MeiliBundle\Metadata\FacetWidget;
 use Survos\MeiliBundle\Metadata\Fields;
 use Survos\MeiliBundle\Metadata\FieldSet;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
@@ -62,17 +64,21 @@ use Survos\BabelBundle\Attribute\Translatable;
     // serialization groups for the JSON sent to the index
     primaryKey: 'sku',
     persisted: new Fields(
-        fields: ['sku', 'stock', 'price', 'title'],
-        groups: ['product.read', 'product.details']
+        fields: ['sku', 'stock', 'price', 'title','brand'],
+        groups: ['product.read', 'product.details', 'product.searchable']
     ),
 //    groups: ['product.read', 'product.details'],
     displayed: ['*'],
     filterable: new Fields(
-        fields: ['category','tags','rating','stock','price'],
-        groups: ['product.read','product.details']
+        fields: ['category','tags','rating','price','brand'],
+//        groups: ['product.read','product.details']
     ),
-    sortable: ['price', 'stock', 'rating'],
-    searchable: new Fields(groups: ['product.searchable']),
+    sortable: ['price', 'rating'],
+    searchable: new Fields(
+//        fields: ['title', 'description'],
+        groups: ['product.searchable']
+    ),
+    embedders: ['best','small_product']
 )]
 
 /*
@@ -99,7 +105,7 @@ class Product implements RouteParametersInterface
 
 
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
-        #[Groups(['product.details'])]
+//        #[Groups(['product.details'])]
         private(set) array $data
 
 
@@ -119,11 +125,15 @@ class Product implements RouteParametersInterface
 
     // virtual property
     #[Groups(['product.read'])]
-    #[Facet(label: 'Category', showMoreThreshold: 12, )]
+    #[ORM\Column(nullable: true)]
+    #[Facet(label: 'Category', showMoreThreshold: 12)]
     #[ApiProperty("category from extra, virtual but needs index")]
-    public ?string $category {
-        get => $this->data['category']??null;
-    }
+    public ?string $category;
+
+    #[Groups(['product.read'])]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Facet(showMoreThreshold: 12)]
+    public ?string $brand;
 
     #[Groups(['product.read'])]
     #[ApiProperty("thumbnail from data (not sais)")]
@@ -145,18 +155,20 @@ class Product implements RouteParametersInterface
         min: 0,
         max: 5
     )]
+    #[Facet(widget: FacetWidget::RangeSlider)]
     public int $rating;
 
     #[Groups(['product.read'])]
     #[ApiProperty("rounded rating, for range slider")]
     #[ORM\Column(type: Types::INTEGER)]
+    #[Facet()]
     public int $stock;
 
     #[Groups(['product.read'])]
+    #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
     #[ApiProperty("array of tags")]
-    public array $tags {
-        get => $this->data['tags']??[];
-    }
+    #[Facet()]
+    public array $tags;
 
     /**
      * @var Collection<int, Image>
@@ -202,4 +214,17 @@ class Product implements RouteParametersInterface
             set => $this->titleBacking = $value;
         }
         // <BABEL:TRANSLATABLE:END title>
+
+        // <BABEL:TRANSLATABLE:START description>
+        #[Column(type: Types::TEXT, nullable: true)]
+        private ?string $descriptionBacking = null;
+
+        #[Translatable(context: NULL)]
+        #[Groups(['product.read', 'product.searchable'])]
+        public ?string $description {
+            get => $this->resolveTranslatable('description', $this->descriptionBacking, NULL);
+            set => $this->descriptionBacking = $value;
+        }
+        public ?string $snippet { get => mb_substr($this->description, 0, 40); }
+        // <BABEL:TRANSLATABLE:END description>
 }

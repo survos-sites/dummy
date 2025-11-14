@@ -113,7 +113,6 @@ class AppController extends AbstractController
             'product' => $product,
         ];
     }
-
     #[Route('/webhook/media', name: 'app_media_webhook')]
     public function mediaWebhook(Request $request): Response
     {

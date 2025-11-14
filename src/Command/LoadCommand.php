@@ -64,6 +64,10 @@ class LoadCommand
                 $this->entityManager->persist($product);
             }
             $product->title = $data->title;
+            $product->description = $data->description;
+            $product->brand = $data->brand??null;
+            $product->tags = $data->tags??null;
+            $product->category = $data->category;
 
             foreach ($data->images as $imageUrl) {
                 if (!$image = $this->imageRepository->findOneBy([

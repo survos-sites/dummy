@@ -26,6 +26,7 @@ class ProductCrudController extends BaseCrudController
 //        yield AvatarField::new('thumbnailUrl')->setHeight(36);  // Visual thumbnail first
 
 //        dd($this->generateUrl('admin_app_product_show', ['productId' => 1]));
+        yield TextField::new('snippet')->onlyOnIndex();
         yield TextField::new('title')
             ->formatValue(function ($value, Product $entity) {
                 return sprintf(

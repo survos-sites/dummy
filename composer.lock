@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "884adaab910a85b06c8c6e88d7045761",
+    "content-hash": "4863a6b06cd1840cb0828a59f0fbb735",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -3989,6 +3989,75 @@
             "time": "2025-06-14T11:37:33+00:00"
         },
         {
+            "name": "liquid/liquid",
+            "version": "1.4.44",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kalimatas/php-liquid.git",
+                "reference": "1b74ad64001d21f27223849624f7aab0c379815a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kalimatas/php-liquid/zipball/1b74ad64001d21f27223849624f7aab0c379815a",
+                "reference": "1b74ad64001d21f27223849624f7aab0c379815a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": ">=2.47",
+                "friendsofphp/php-cs-fixer": "^3.75",
+                "infection/infection": ">=0.17.6",
+                "php-coveralls/php-coveralls": "^2.8",
+                "phpunit/phpunit": "^9.6.23"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Liquid\\": "src/Liquid"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guz Alexander",
+                    "email": "kalimatas@gmail.com",
+                    "homepage": "http://guzalexander.com"
+                },
+                {
+                    "name": "Harald Hanek"
+                },
+                {
+                    "name": "Mateo Murphy"
+                },
+                {
+                    "name": "Alexey Kopytko",
+                    "email": "alexey@kopytko.com",
+                    "homepage": "https://www.alexeykopytko.com/"
+                }
+            ],
+            "description": "Liquid template engine for PHP",
+            "homepage": "https://github.com/kalimatas/php-liquid",
+            "keywords": [
+                "liquid",
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/kalimatas/php-liquid/issues",
+                "source": "https://github.com/kalimatas/php-liquid/tree/1.4.44"
+            },
+            "time": "2025-05-31T10:45:02+00:00"
+        },
+        {
             "name": "marc-mabe/php-enum",
             "version": "v4.7.2",
             "source": {
@@ -6350,6 +6419,59 @@
                 }
             ],
             "time": "2025-07-14T14:06:29+00:00"
+        },
+        {
+            "name": "survos/jsonl-bundle",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/jsonl-bundle.git",
+                "reference": "604ce9c1616193de9ecad8c4cd6e250de5e862fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/jsonl-bundle/zipball/604ce9c1616193de9ecad8c4cd6e250de5e862fe",
+                "reference": "604ce9c1616193de9ecad8c4cd6e250de5e862fe",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zlib": "*",
+                "php": "^8.4",
+                "psr/log": "^3.0",
+                "symfony/console": "^7.0",
+                "symfony/http-client": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Survos\\JsonlBundle\\SurvosJsonlBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Survos\\JsonlBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Fast, concurrent, resumable, strictly-ordered JSONL ingestion utilities for Symfony 7.3 / PHP 8.4",
+            "support": {
+                "issues": "https://github.com/survos/jsonl-bundle/issues",
+                "source": "https://github.com/survos/jsonl-bundle/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-13T12:18:35+00:00"
         },
         {
             "name": "survos/meili-bundle",
@@ -13748,6 +13870,60 @@
             "time": "2022-01-30T20:08:53+00:00"
         },
         {
+            "name": "yethee/tiktoken",
+            "version": "0.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yethee/tiktoken-php.git",
+                "reference": "ea497a67e60fe3804e2e2294cb5984427655d859"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yethee/tiktoken-php/zipball/ea497a67e60fe3804e2e2294cb5984427655d859",
+                "reference": "ea497a67e60fe3804e2e2294cb5984427655d859",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "symfony/service-contracts": "^2.5 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^13",
+                "mikey179/vfsstream": "^1.6.11",
+                "phpbench/phpbench": "^1.2",
+                "phpunit/phpunit": "^10.5.45",
+                "psalm/plugin-phpunit": "^0.19.2",
+                "vimeo/psalm": "6.10.0"
+            },
+            "suggest": {
+                "ext-ffi": "To allow use LibEncoder"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yethee\\Tiktoken\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP version of tiktoken",
+            "keywords": [
+                "bpe",
+                "decode",
+                "encode",
+                "openai",
+                "tiktoken",
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/yethee/tiktoken-php/issues",
+                "source": "https://github.com/yethee/tiktoken-php/tree/0.11.1"
+            },
+            "time": "2025-08-12T16:02:00+00:00"
+        },
+        {
             "name": "zenstruck/assert",
             "version": "v1.5.1",
             "source": {
@@ -16223,6 +16399,73 @@
             "time": "2025-09-28T14:31:45+00:00"
         },
         {
+            "name": "survos/command-bundle",
+            "version": "2.0.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/command-bundle.git",
+                "reference": "799fd5ca81909832cfa2af9c5ce9aa391cf41d21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/command-bundle/zipball/799fd5ca81909832cfa2af9c5ce9aa391cf41d21",
+                "reference": "799fd5ca81909832cfa2af9c5ce9aa391cf41d21",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "symfony/config": "^7.3",
+                "symfony/console": "^7.3",
+                "symfony/dependency-injection": "^7.3",
+                "symfony/form": "^7.3",
+                "symfony/framework-bundle": "^7.3",
+                "symfony/http-kernel": "^7.3",
+                "twig/twig": "^3.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^12",
+                "rector/rector": "^2.0",
+                "symfony/messenger": "^7.3",
+                "symfony/test-pack": "^1.0",
+                "symfony/yaml": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\CommandBundle\\": "src/",
+                    "Survos\\CommandBundle\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tac Tacelosky",
+                    "email": "tacman@gmail.com"
+                }
+            ],
+            "description": "Run Symfony console commands from a web interface",
+            "keywords": [
+                "cli",
+                "dev",
+                "symfony-console"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/command-bundle/issues",
+                "source": "https://github.com/survos/command-bundle/tree/2.0.25"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-09-28T16:44:54+00:00"
+        },
+        {
             "name": "symfony/debug-bundle",
             "version": "v7.3.4",
             "source": {
@@ -16625,6 +16868,7 @@
         "survos/babel-bundle": 20,
         "survos/code-bundle": 20,
         "survos/crawler-bundle": 20,
+        "survos/jsonl-bundle": 20,
         "survos/meili-bundle": 20,
         "survos/sais-bundle": 20,
         "survos/state-bundle": 20

@@ -20,7 +20,7 @@
     <div class="card-body">
         <img src="{{ hit.thumbnail }}" alt="image" class="mx-auto d-block img-fluid" />
         <div class="blockquote text-muted fs-6">
-            {{ hit._highlightResult.data.description.value }}
+            {{ hit._highlightResult.description.value }}
         </div>
 
     </div>
@@ -37,14 +37,16 @@
             Rating: {{ hit.rating }}
         </div>
 
+        <code>SCORE: {{ (_score * 100)|round }}</code>
         {% if hit._rankingScore != 1 %}
             <span class="m-4">
                         score: {{ hit._rankingScore|number_format(2) }}
                 </span>
+            {{ _scoreDetails|json_encode }}
         {% endif %}
 
         <button
-            {{ stimulus_action(_sc_modal, 'modal', 'click') }}
+            {{ stimulus_action(globals._sc_modal, 'modal', 'click') }}
             data-hit-id="{{ hit.sku }}"
             class="float-end btn btn-sm btn-outline-primary">
             <span class="me-1 icon-wrapper">{{ icons.json|raw }}</span>

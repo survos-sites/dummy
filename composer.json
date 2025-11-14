@@ -22,6 +22,7 @@
         "inspector-apm/inspector-symfony": "^1.8",
         "jolicode/jolinotif": "^3.1.1",
         "jwage/phpamqplib-messenger": "^0.8.5",
+        "liquid/liquid": "^1.4",
         "meilisearch/meilisearch-php": "^1.15",
         "mezcalito/imgproxy-bundle": "*",
         "nadar/php-composer-reader": "^2.1",
@@ -33,6 +34,7 @@
         "survos/bootstrap-bundle": "^2.0",
         "survos/crawler-bundle": "dev-main",
         "survos/doc-bundle": "^2.0",
+        "survos/jsonl-bundle": "dev-main",
         "survos/meili-bundle": "dev-main",
         "survos/sais-bundle": "dev-main",
         "survos/state-bundle": "dev-main",
@@ -72,6 +74,7 @@
         "symfony/yaml": "^7.1",
         "twig/extra-bundle": "^3.0",
         "twig/twig": "^3.0",
+        "yethee/tiktoken": "^0.11.1",
         "zenstruck/messenger-monitor-bundle": "^0.5.4"
     },
     "config": {
@@ -134,6 +137,7 @@
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.1",
         "survos/code-bundle": "dev-main",
+        "survos/command-bundle": "*",
         "symfony/browser-kit": "^7.1",
         "symfony/css-selector": "^7.1",
         "symfony/debug-bundle": "^7.1",
