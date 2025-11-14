@@ -7,6 +7,7 @@ use App\Entity\Image;
 use App\Entity\Product;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use Castor\Attribute\AsSymfonyTask;
 use Doctrine\ORM\EntityManagerInterface;
 use Survos\SaisBundle\Model\AccountSetup;
 use Survos\SaisBundle\Service\SaisClientService;
@@ -18,6 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 #[AsCommand('app:load', 'Load the Product and Image entities from dummyjson.com')]
+#[AsSymfonyTask('load')]
 class LoadCommand
 {
 	public function __construct(

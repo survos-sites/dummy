@@ -13,6 +13,9 @@ survos_meili:
             model: 'text-embedding-3-small' # 2 cents/million tokens
             apiKey: '%env(OPENAI_API_KEY)%'
             template: 'templates/liquid/product.liquid'
+            examples:
+                - cool gifts for a tech executive
+                - things to decorate an apartment
 
         best: # for production if budget allows
             source: 'openAi'

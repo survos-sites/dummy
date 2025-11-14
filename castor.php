@@ -2,13 +2,22 @@
 
 use Castor\Attribute\AsTask;
 
-use function Castor\io;
-use function Castor\capture;
+use function Castor\{io,import,capture,run};
 
-#[AsTask(description: 'Welcome to Castor!')]
-function hello(): void
+import('src/Command/LoadCommand.php');
+#[AsTask(description: 'install!')]
+function build(): void
 {
-    $currentUser = capture('whoami');
+    io()->title("Installing the application data");
 
-    io()->title(sprintf('Hello %s!', $currentUser));
+    run('bin/console meili:settings:update --force');
+    run('bin/console app:load');
+}
+
+#[AsTask(description: 'start the server')]
+function start(): void
+{
+    io()->title("Installing the application data");
+    run('symfony server:start -d');
+    run('symfony open:local');
 }
