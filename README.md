@@ -7,14 +7,15 @@ git clone git@github.com:survos-sites/dummy dummy && cd dummy
 echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db" > .env.local
 echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data_test.db" > .env.test
 composer install
+make -p data
 curl "https://dummyjson.com/products?limit=200" -o data/products.json
 bin/console doctrine:schema:update --force
 
 bin/console app:load
 bin/console meili:index
-
+symfony proxy:domain:attach dummy
 symfony server:start -d
-symfony open:local
+symfony open:local --path=/meili
 ```
 
 
