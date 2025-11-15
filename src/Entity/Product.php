@@ -133,6 +133,7 @@ class Product implements RouteParametersInterface
     #[Groups(['product.read'])]
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Facet(showMoreThreshold: 12)]
+    #[ApiProperty("the registered brand name")]
     public ?string $brand;
 
     #[Groups(['product.read'])]

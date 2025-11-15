@@ -10,6 +10,53 @@
 {#    {% set hit = hit|merge(data) %}#}
 {#{% endif %}#}
 
+
+{#
+@var hit array{
+  id: int,
+  title: string,
+  description: string,
+  category: string,
+  price: float,
+  discountPercentage: float,
+  rating: float,
+  stock: int,
+  tags: string[],
+  brand: string,
+  sku: string,
+  weight: int,
+  dimensions: array{
+    width: float,
+    height: float,
+    depth: float
+  },
+  warrantyInformation: string,
+  shippingInformation: string,
+  availabilityStatus: string,
+  returnPolicy: string,
+  minimumOrderQuantity: int,
+  meta: array{
+    createdAt: string,
+    updatedAt: string,
+    barcode: string,
+    qrCode: string
+  },
+  images: string[],
+  thumbnail: string,
+
+  _highlightResult: array{
+    title: array{ value: string },
+    brand: array{ value: string },
+    description: array{ value: string }
+  },
+  _rankingScore: float
+}
+
+@var _score float
+@var _scoreDetails array
+@var _config array{ primaryKey: string }
+#}
+
 <div class="card h-100">
     <div class="card-header d-flex justify-content-between align-items-center gap-2">
         <span class="fs-5 fw-semibold">{{ hit._highlightResult.title.value }}</span>
@@ -42,7 +89,6 @@
             <span class="m-4">
                         score: {{ hit._rankingScore|number_format(2) }}
                 </span>
-            {{ _scoreDetails|json_encode }}
         {% endif %}
 
         <button
