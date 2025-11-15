@@ -219,9 +219,6 @@
     "survos/doc-bundle": {
         "version": "1.5.529"
     },
-    "survos/inspection-bundle": {
-        "version": "1.5.600"
-    },
     "survos/jsonl-bundle": {
         "version": "dev-main"
     },

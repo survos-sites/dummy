@@ -24,7 +24,6 @@ return [
     Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
     Bizkit\VersioningBundle\BizkitVersioningBundle::class => ['all' => true],
     Inspector\Symfony\Bundle\InspectorBundle::class => ['all' => true],
-    Survos\InspectionBundle\SurvosInspectionBundle::class => ['all' => true],
     Survos\MeiliBundle\SurvosMeiliBundle::class => ['all' => true],
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
