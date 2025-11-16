@@ -8,8 +8,8 @@
     "repository": "https://github.com/survos-sites/dummy",
     "scripts": {
         "dokku": {
-            "predeploy": "bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force && bin/console doctrine:migrations:migrate -n --allow-no-migration",
-            "postdeploy": "bin/console about"
+            "predeploy": "cat .env && bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force && bin/console doctrine:migrations:migrate -n --allow-no-migration",
+            "postdeploy": "cat .env"
         }
     },
     "cron": [
