@@ -36,6 +36,6 @@ return [
     Survos\BabelBundle\SurvosBabelBundle::class => ['all' => true],
     Survos\StateBundle\SurvosStateBundle::class => ['all' => true],
     Mezcalito\ImgproxyBundle\ImgproxyBundle::class => ['all' => true],
-    Survos\CommandBundle\SurvosCommandBundle::class => ['all' => true],
+    Survos\CommandBundle\SurvosCommandBundle::class => ['dev' => true],
     Survos\JsonlBundle\SurvosJsonlBundle::class => ['all' => true],
 ];
