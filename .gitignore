@@ -36,3 +36,7 @@ phpstan.neon
 /public/js/fos_js_routes.js
 
 .castor.stub.php
+
+/tests/cache
+/tests/project-dir/var
+/.phpunit.cache
