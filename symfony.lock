@@ -13,9 +13,6 @@
             "src/ApiResource/.gitignore"
         ]
     },
-    "ayaou/command-logger-bundle": {
-        "version": "v1.4.0"
-    },
     "bizkit/versioning-bundle": {
         "version": "1.2",
         "recipe": {

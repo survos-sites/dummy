@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97bd7904bff0928cabf3d56a1241cfc0",
+    "content-hash": "cc4b12b89b497f954278facfe0610716",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1208,70 +1208,6 @@
             "time": "2025-11-13T15:51:59+00:00"
         },
         {
-            "name": "ayaou/command-logger-bundle",
-            "version": "v1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ayaou/command-logger-bundle.git",
-                "reference": "ed8faa19b241f1fab92b6af294a0f27227d99774"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ayaou/command-logger-bundle/zipball/ed8faa19b241f1fab92b6af294a0f27227d99774",
-                "reference": "ed8faa19b241f1fab92b6af294a0f27227d99774",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-bundle": "^2.7",
-                "doctrine/orm": "^2|^3",
-                "php": ">=8.1",
-                "symfony/console": "^6.4|^7.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
-                "symfony/event-dispatcher": "^6.4|^7.0",
-                "symfony/uid": "^6.4|^7.0",
-                "symfony/yaml": "^6.4|^7.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "*",
-                "phpstan/phpstan-symfony": "*",
-                "phpunit/phpunit": "^10",
-                "rector/rector": "*",
-                "roave/security-advisories": "dev-latest",
-                "symfony/framework-bundle": "^6.4|^7.0",
-                "symfony/phpunit-bridge": "^6.4|^7.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Ayaou\\CommandLoggerBundle\\": "src/",
-                    "Ayaou\\CommandLoggerBundle\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mohamed AYAOU",
-                    "email": "ayaou.mohammed@gmail.com"
-                }
-            ],
-            "description": "This bundle logs all commands executed with console, along with their execution time and errors if applied.",
-            "homepage": "https://github.com/ayaou/command-logger-bundle",
-            "keywords": [
-                "command",
-                "log",
-                "logger",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/ayaou/command-logger-bundle/issues",
-                "source": "https://github.com/ayaou/command-logger-bundle/tree/v1.5.1"
-            },
-            "time": "2025-06-01T10:13:11+00:00"
-        },
-        {
             "name": "behat/mink",
             "version": "v1.12.0",
             "source": {
@@ -1874,50 +1810,45 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.18.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "b769877014de053da0e5cbbb63d0ea2f3b2fea76"
+                "reference": "112091bc3ed6b2b57b20a3d07b5d2a79d32017b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/b769877014de053da0e5cbbb63d0ea2f3b2fea76",
-                "reference": "b769877014de053da0e5cbbb63d0ea2f3b2fea76",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/112091bc3ed6b2b57b20a3d07b5d2a79d32017b9",
+                "reference": "112091bc3ed6b2b57b20a3d07b5d2a79d32017b9",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "^3.7.0 || ^4.0",
+                "doctrine/dbal": "^4.0",
                 "doctrine/deprecations": "^1.0",
-                "doctrine/persistence": "^3.1 || ^4",
+                "doctrine/persistence": "^4",
                 "doctrine/sql-formatter": "^1.0.1",
-                "php": "^8.1",
+                "php": "^8.4",
                 "symfony/cache": "^6.4 || ^7.0",
                 "symfony/config": "^6.4 || ^7.0",
                 "symfony/console": "^6.4 || ^7.0",
                 "symfony/dependency-injection": "^6.4 || ^7.0",
                 "symfony/doctrine-bridge": "^6.4.3 || ^7.0.3",
                 "symfony/framework-bundle": "^6.4 || ^7.0",
-                "symfony/service-contracts": "^2.5 || ^3"
+                "symfony/service-contracts": "^3"
             },
             "conflict": {
-                "doctrine/annotations": ">=3.0",
-                "doctrine/cache": "< 1.11",
-                "doctrine/orm": "<2.17 || >=4.0",
+                "doctrine/orm": "<3.0 || >=4.0",
                 "symfony/var-exporter": "< 6.4.1 || 7.0.0",
-                "twig/twig": "<2.13 || >=3.0 <3.0.4"
+                "twig/twig": "<3.0.4"
             },
             "require-dev": {
-                "doctrine/annotations": "^1 || ^2",
-                "doctrine/cache": "^1.11 || ^2.0",
                 "doctrine/coding-standard": "^14",
-                "doctrine/orm": "^2.17 || ^3.1",
-                "friendsofphp/proxy-manager-lts": "^1.0",
+                "doctrine/orm": "^3.4.4",
                 "phpstan/phpstan": "2.1.1",
                 "phpstan/phpstan-phpunit": "2.0.3",
                 "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "^10.5.53 || ^12.3.10",
-                "psr/log": "^1.1.4 || ^2.0 || ^3.0",
+                "phpunit/phpunit": "^12.3.10",
+                "psr/log": "^3.0",
                 "symfony/doctrine-messenger": "^6.4 || ^7.0",
                 "symfony/expression-language": "^6.4 || ^7.0",
                 "symfony/messenger": "^6.4 || ^7.0",
@@ -1930,7 +1861,7 @@
                 "symfony/var-exporter": "^6.4.1 || ^7.0.1",
                 "symfony/web-profiler-bundle": "^6.4 || ^7.0",
                 "symfony/yaml": "^6.4 || ^7.0",
-                "twig/twig": "^2.14.7 || ^3.0.4"
+                "twig/twig": "^3.21.1"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
@@ -1975,7 +1906,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.18.1"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/3.0.0"
             },
             "funding": [
                 {
@@ -1991,20 +1922,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-05T14:42:10+00:00"
+            "time": "2025-10-11T10:48:07+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "49ecc564568d7da101779112579e78b677fbc94a"
+                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/49ecc564568d7da101779112579e78b677fbc94a",
-                "reference": "49ecc564568d7da101779112579e78b677fbc94a",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/1e380c6dd8ac8488217f39cff6b77e367f1a644b",
+                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b",
                 "shasum": ""
             },
             "require": {
@@ -2060,7 +1991,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.6.0"
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.7.0"
             },
             "funding": [
                 {
@@ -2076,7 +2007,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-07T19:40:03+00:00"
+            "time": "2025-11-15T19:02:59+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -6066,12 +5997,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/meili-bundle.git",
-                "reference": "e743d6d8d546993736b4b75cac479aaf5115b7a8"
+                "reference": "2f794b1303c59cc701f3569ed411a06092b8cba4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/e743d6d8d546993736b4b75cac479aaf5115b7a8",
-                "reference": "e743d6d8d546993736b4b75cac479aaf5115b7a8",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/2f794b1303c59cc701f3569ed411a06092b8cba4",
+                "reference": "2f794b1303c59cc701f3569ed411a06092b8cba4",
                 "shasum": ""
             },
             "require": {
@@ -6140,7 +6071,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-15T14:15:05+00:00"
+            "time": "2025-11-15T15:15:15+00:00"
         },
         {
             "name": "survos/sais-bundle",
@@ -7974,16 +7905,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "94b37978c9982dc41c5b6a4147892d2d3d1b9ce6"
+                "reference": "9cd384775973eabbf6e8b05784dda279fc67c28d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/94b37978c9982dc41c5b6a4147892d2d3d1b9ce6",
-                "reference": "94b37978c9982dc41c5b6a4147892d2d3d1b9ce6",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/9cd384775973eabbf6e8b05784dda279fc67c28d",
+                "reference": "9cd384775973eabbf6e8b05784dda279fc67c28d",
                 "shasum": ""
             },
             "require": {
@@ -7991,7 +7922,8 @@
                 "php": ">=8.1"
             },
             "conflict": {
-                "composer/semver": "<1.7.2"
+                "composer/semver": "<1.7.2",
+                "symfony/dotenv": "<5.4"
             },
             "require-dev": {
                 "composer/composer": "^2.1",
@@ -8022,7 +7954,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v2.9.0"
+                "source": "https://github.com/symfony/flex/tree/v2.10.0"
             },
             "funding": [
                 {
@@ -8042,7 +7974,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-31T15:22:50+00:00"
+            "time": "2025-11-16T09:38:19+00:00"
         },
         {
             "name": "symfony/form",

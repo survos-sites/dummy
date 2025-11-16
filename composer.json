@@ -12,9 +12,8 @@
         "ext-iconv": "*",
         "api-platform/doctrine-orm": "*",
         "api-platform/symfony": "*",
-        "ayaou/command-logger-bundle": "^1.4",
         "bizkit/versioning-bundle": "*",
-        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/doctrine-bundle": "^2.0|^3.0",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^3.5",
         "easycorp/easyadmin-bundle": "^4.25",
@@ -72,7 +71,7 @@
         "symfony/yaml": "^7.1",
         "twig/extra-bundle": "^3.0",
         "twig/twig": "^3.0",
-        "yethee/tiktoken": "^0.11.1",
+        "yethee/tiktoken": "^0.12.0",
         "zenstruck/messenger-monitor-bundle": "^0.5.4"
     },
     "config": {
