@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\SectionMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -19,10 +20,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UrlGeneratorInterface $urlGenerator,
+        private EntityManagerInterface     $entityManager,
+        private UrlGeneratorInterface      $urlGenerator,
+        private KernelInterface            $kernel,
         private readonly ProductRepository $productRepository)
     {
+    }
+
+    private bool $isProduction {
+        get => $this->kernel->getEnvironment() === 'prod';
     }
 
     #[Route(name: 'app_homepage')]
@@ -48,9 +54,9 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-         return $this->render('app/index.html.twig', [
-             'products' => $this->productRepository->findBy([], [], 10),
-         ]);
+        return $this->render('app/index.html.twig', [
+            'products' => $this->productRepository->findBy([], [], 10),
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -67,16 +73,17 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud($label, 'fas fa-list', $entityClass)
                 ->setBadge($this->entityManager->getRepository($entityClass)->count([]));
         }
-        foreach (['meili:schema:validate', 'meili:schema:update', 'meili:index'] as $commandName) {
-            yield MenuItem::linkToUrl($commandName, 'fas fa-list', $this->urlGenerator->generate('survos_command', ['commandName' => $commandName]))
-                ->setLinkTarget('_blank');
-            ;
-        }
-        yield MenuItem::linkToUrl('Commands', 'fas fa-list', $this->urlGenerator->generate('survos_commands'))
-            ->setLinkTarget('_blank');
-        ;
-        yield MenuItem::linkToRoute('meili-admin', null, 'meili_admin');
+        if (!$this->isProduction)
+        {
 
+            foreach (['meili:schema:validate', 'meili:schema:update', 'meili:index'] as $commandName) {
+                yield MenuItem::linkToUrl($commandName, 'fas fa-list', $this->urlGenerator->generate('survos_command', ['commandName' => $commandName]))
+                    ->setLinkTarget('_blank');;
+            }
+            yield MenuItem::linkToUrl('Commands', 'fas fa-list', $this->urlGenerator->generate('survos_commands'))
+                ->setLinkTarget('_blank');;
+        }
+        yield MenuItem::linkToRoute('meili-admin', null, 'meili_admin');
 
 
     }
