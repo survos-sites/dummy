@@ -9,6 +9,7 @@
         "php": "^8.4",
         "ext-ctype": "*",
         "ext-curl": "*",
+        "ext-exif": "*",
         "ext-iconv": "*",
         "ext-imagick": "*",
         "api-platform/doctrine-orm": "*",
