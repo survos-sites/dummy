@@ -4,6 +4,13 @@ use Castor\Attribute\AsTask;
 
 use function Castor\{io,import,capture,run};
 
+try {
+    import('.castor/vendor/tacman/castor-tools/castor.php');
+} catch (Throwable $e) {
+    io()->error("castor composer install");
+    io()->error($e->getMessage());
+}
+
 import('src/Command/LoadCommand.php');
 #[AsTask(description: 'install!')]
 function build(): void

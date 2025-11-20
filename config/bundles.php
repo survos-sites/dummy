@@ -36,4 +36,7 @@ return [
     Mezcalito\ImgproxyBundle\ImgproxyBundle::class => ['all' => true],
     Survos\CommandBundle\SurvosCommandBundle::class => ['dev' => true],
     Survos\JsonlBundle\SurvosJsonlBundle::class => ['all' => true],
+    JoliCode\MediaBundle\JoliMediaBundle::class => ['all' => true],
+    JoliCode\MediaBundle\Bridge\EasyAdmin\JoliMediaEasyAdminBundle::class => ['all' => true],
+    League\FlysystemBundle\FlysystemBundle::class => ['all' => true],
 ];

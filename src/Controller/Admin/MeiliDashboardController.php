@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Survos\MeiliBundle\Bridge\EasyAdmin\MeiliEasyAdminMenuFactory;
 use Survos\MeiliBundle\Service\MeiliService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -21,12 +22,19 @@ class MeiliDashboardController extends AbstractDashboardController
         private readonly EntityManagerInterface $em,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly MeiliService $meiliService,
+        private readonly MeiliEasyAdminMenuFactory $meiliMenuFactory,
     ) {
     }
 
     public function index(): Response
     {
-        return $this->render("@SurvosMeili/ez/dashboard.html.twig", ["settings" => $this->meiliService->settings]);
+        foreach ($this->meiliMenuFactory->createIndexMenus() as $x) {
+            $dto = $x->getAsDto();
+//            dd($x, get_class_methods($dto), $x->getAsDto());
+        }
+        return $this->render("@SurvosMeili/ez/dashboard.html.twig", [
+            "menuItems" => iterator_to_array($this->meiliMenuFactory->createIndexMenus()),
+            "settings" => $this->meiliService->settings]);
     }
 
     public function configureDashboard(): Dashboard
@@ -41,7 +49,9 @@ class MeiliDashboardController extends AbstractDashboardController
         //        yield MenuItem::linkToRoute('Examples', 'fa fa-lightbulb', 'admin_examples');
 
                 yield MenuItem::section('Content Management', 'fas fa-folder-open');
-                ;
+
+                yield from $this->meiliMenuFactory->createIndexMenus();
+                return;
 
                 // Group each entity with its search options
                 foreach ($this->meiliService->settings as $indexName => $meiliSetting) {
@@ -58,6 +68,12 @@ class MeiliDashboardController extends AbstractDashboardController
                             MenuItem::linkToCrud('Browse All', 'fas fa-table', $class)
         //                        ->setBadge($count, 'info')
                             ,
+
+                            MenuItem::linkToUrl('Facet Details', 'fas fa-search',
+                                $this->urlGenerator->generate('meili_admin_meili_show_index',
+                                    ['indexName' => $indexName]
+                                )
+                            ),
 
                             // Divider before searches
                             MenuItem::section('Search Options'),

@@ -1,0 +1,12 @@
+# config/packages/flysystem.yaml
+flysystem:
+    storages:
+        filesystem.original.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/public/media/original'
+
+        filesystem.cache.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/public/media/cache'

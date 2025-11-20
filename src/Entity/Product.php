@@ -15,6 +15,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JoliCode\MediaBundle\DeleteBehavior\Attribute\MediaDeleteBehavior;
+use JoliCode\MediaBundle\DeleteBehavior\Strategy;
+use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
+use JoliCode\MediaBundle\Model\Media;
+use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
@@ -121,6 +126,12 @@ class Product implements RouteParametersInterface
     {
         return $this->sku;
     }
+
+    #[MediaConstraint(allowedTypes: ['image', 'video'])]
+    #[MediaDeleteBehavior(strategy: Strategy::SET_NULL)]
+    #[ORM\Column(type: MediaTypes::MEDIA_LONG, nullable: true)]
+    public ?Media $thumb = null;
+
 
 
     // virtual property

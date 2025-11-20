@@ -1790,6 +1790,344 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     subdomain_variable?: scalar|null, // Default: "subdomain"
  *     namespaces?: list<scalar|null>,
  * }
+ * @psalm-type SurvosJsonlConfig = array<mixed>
+ * @psalm-type JoliMediaConfig = array{
+ *     default_library?: scalar|null, // Default: null
+ *     libraries?: array<string, array{ // Default: []
+ *         original?: array{
+ *             flysystem: scalar|null, // The Flysystem service id for the original storage.
+ *             enable_serve_using_php?: bool, // If true, the original files may be served using PHP if the web server cannot serve it. This might be useful for private files. // Default: false
+ *             trash_path?: scalar|null, // Path to the trash directory where deleted files are moved. This path is relative to the original storage root and is hidden when listing files using the bridges. // Default: ".trash"
+ *             url_generator?: array{
+ *                 path?: scalar|null, // Default: "/media/original"
+ *                 strategy?: scalar|null, // Default: "folder"
+ *             },
+ *         },
+ *         cache?: array{
+ *             flysystem: scalar|null, // The Flysystem service id for the cache storage.
+ *             must_store_when_generating_url?: bool, // If true, variation files will be generated, if missing, when their URL is generated. // Default: false
+ *             url_generator?: array{
+ *                 path?: scalar|null, // Default: "/media/cache"
+ *                 strategy?: scalar|null, // Default: "folder"
+ *             },
+ *         },
+ *         enable_auto_webp?: bool, // If true, enables automatic generation of WebP variations for the media: the configured variations will all be duplicated in WebP format, in addition to the original format. // Default: false
+ *         pixel_ratios?: list<float>,
+ *         variations?: array<string, array{ // Default: []
+ *             format?: scalar|null,
+ *             enable_auto_webp?: bool, // If true and the format config attribute is not set or different from "webp", enables an additionnal webp version of the variation.
+ *             pixel_ratios?: list<float>,
+ *             transformers?: list<array{ // Default: []
+ *                 type?: scalar|null, // Default: null
+ *                 allow_downscale?: bool, // Default: true
+ *                 allow_upscale?: bool, // Default: true
+ *                 background_color?: scalar|null,
+ *                 crop_position?: scalar|null, // Default: null
+ *                 height?: scalar|null,
+ *                 width?: scalar|null,
+ *                 mode?: scalar|null,
+ *                 position_x?: scalar|null,
+ *                 position_y?: scalar|null,
+ *                 start_x?: scalar|null,
+ *                 start_y?: scalar|null,
+ *             }>,
+ *             post_processors?: array{
+ *                 gifsicle?: array{
+ *                     enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                     optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                     lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                     colors?: int, // Reduce the number of colors to N // Default: 256
+ *                 },
+ *                 jpegoptim?: array{
+ *                     enabled?: bool, // Enable the jpegoptim post-processor // Default: true
+ *                     strip_all?: bool, // Strip all (Comment & Exif) markers from output file // Default: true
+ *                     progressive?: bool, // Force all output files to be progressive // Default: true
+ *                     max_quality?: int, // Sets the maximum image quality factor // Default: 80
+ *                 },
+ *                 mozjpeg?: array{
+ *                     enabled?: bool, // Enable the mozjpeg post-processor // Default: true
+ *                     optimize?: bool, // Optimize Huffman table // Default: false
+ *                     progressive?: bool, // Create progressive JPEG file // Default: false
+ *                     quality?: int, // Compression quality // Default: 80
+ *                 },
+ *                 oxipng?: array{
+ *                     enabled?: bool, // Enable the oxipng post-processor // Default: true
+ *                     optimization?: int, // Optimization level. A higher level means slower, but better compression // Default: 4
+ *                     strip?: list<"safe"|"all">,
+ *                     zopfli?: bool, // Use the slower but better compressing Zopfli algorithm // Default: false
+ *                 },
+ *                 pngquant?: array{
+ *                     enabled?: bool, // Enable the pngquant post-processor // Default: true
+ *                     quality?: scalar|null, // Don't save below min, use fewer colors below max // Default: "75-85"
+ *                     speed?: int, // Speed/quality trade-off. 1=slow, 4=default, 11=fast & rough // Default: 4
+ *                 },
+ *             },
+ *             pre_processors?: list<scalar|null>,
+ *             processors?: array{
+ *                 cwebp?: array{
+ *                     enabled?: bool, // Enable the cwebp post-processor // Default: true
+ *                     near_lossless?: array{
+ *                         quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 40
+ *                         method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                         metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                         near_lossless?: int, // Specify the level of near-lossless image preprocessing // Default: 0
+ *                     },
+ *                     lossy?: array{
+ *                         quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 75
+ *                         method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                         af?: bool, // Turns auto-filter on. This algorithm will spend additional time optimizing the filtering strength to reach a well-balanced quality // Default: true
+ *                         metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                         pass?: int, // Set a maximum number of passes to use during the dichotomy used by options -size or -psnr // Default: 10
+ *                     },
+ *                 },
+ *                 gif2webp?: array{
+ *                     enabled?: bool, // Enable the gif2webp post-processor // Default: true
+ *                     lossy?: bool, // Encode the image using lossy compression // Default: true
+ *                     min_size?: bool, // Encode image to achieve smallest size. This disables key frame insertion and picks the dispose method resulting in the smallest output for each frame // Default: true
+ *                     metadata?: list<"none"|"all"|"icc"|"xmp">,
+ *                 },
+ *                 gifsicle?: array{
+ *                     enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                     optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                     lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                     colors?: int, // Reduce the number of colors to N // Default: 256
+ *                 },
+ *                 imagine?: array{
+ *                     enabled?: bool, // Enable the imagine post-processor // Default: true
+ *                     quality?: int, // Sets the default image compression quality // Default: 80
+ *                     jpeg_quality?: int, // Sets the image compression quality for JPEG images // Default: 80
+ *                     png_quality?: int, // Sets the image compression quality for PNG images // Default: 80
+ *                 },
+ *             },
+ *             voters?: list<array{ // Default: []
+ *                 type: scalar|null,
+ *                 format?: scalar|null,
+ *                 path?: scalar|null,
+ *                 mime_type?: scalar|null,
+ *                 max?: scalar|null,
+ *                 min?: scalar|null,
+ *                 voters?: list<array{ // Default: []
+ *                     type: scalar|null,
+ *                     format?: scalar|null,
+ *                     path?: scalar|null,
+ *                     mime_type?: scalar|null,
+ *                     max?: scalar|null,
+ *                     min?: scalar|null,
+ *                     voters?: list<array{ // Default: []
+ *                         type: scalar|null,
+ *                         format?: scalar|null,
+ *                         path?: scalar|null,
+ *                         mime_type?: scalar|null,
+ *                         max?: scalar|null,
+ *                         min?: scalar|null,
+ *                         voters?: array<mixed>,
+ *                     }>,
+ *                 }>,
+ *             }>,
+ *         }>,
+ *         post_processors?: array{
+ *             gifsicle?: array{
+ *                 enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                 optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                 lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                 colors?: int, // Reduce the number of colors to N // Default: 256
+ *             },
+ *             jpegoptim?: array{
+ *                 enabled?: bool, // Enable the jpegoptim post-processor // Default: true
+ *                 strip_all?: bool, // Strip all (Comment & Exif) markers from output file // Default: true
+ *                 progressive?: bool, // Force all output files to be progressive // Default: true
+ *                 max_quality?: int, // Sets the maximum image quality factor // Default: 80
+ *             },
+ *             mozjpeg?: array{
+ *                 enabled?: bool, // Enable the mozjpeg post-processor // Default: true
+ *                 optimize?: bool, // Optimize Huffman table // Default: false
+ *                 progressive?: bool, // Create progressive JPEG file // Default: false
+ *                 quality?: int, // Compression quality // Default: 80
+ *             },
+ *             oxipng?: array{
+ *                 enabled?: bool, // Enable the oxipng post-processor // Default: true
+ *                 optimization?: int, // Optimization level. A higher level means slower, but better compression // Default: 4
+ *                 strip?: list<"safe"|"all">,
+ *                 zopfli?: bool, // Use the slower but better compressing Zopfli algorithm // Default: false
+ *             },
+ *             pngquant?: array{
+ *                 enabled?: bool, // Enable the pngquant post-processor // Default: true
+ *                 quality?: scalar|null, // Don't save below min, use fewer colors below max // Default: "75-85"
+ *                 speed?: int, // Speed/quality trade-off. 1=slow, 4=default, 11=fast & rough // Default: 4
+ *             },
+ *         },
+ *         processors?: array{
+ *             cwebp?: array{
+ *                 enabled?: bool, // Enable the cwebp post-processor // Default: true
+ *                 near_lossless?: array{
+ *                     quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 40
+ *                     method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                     metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                     near_lossless?: int, // Specify the level of near-lossless image preprocessing // Default: 0
+ *                 },
+ *                 lossy?: array{
+ *                     quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 75
+ *                     method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                     af?: bool, // Turns auto-filter on. This algorithm will spend additional time optimizing the filtering strength to reach a well-balanced quality // Default: true
+ *                     metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                     pass?: int, // Set a maximum number of passes to use during the dichotomy used by options -size or -psnr // Default: 10
+ *                 },
+ *             },
+ *             gif2webp?: array{
+ *                 enabled?: bool, // Enable the gif2webp post-processor // Default: true
+ *                 lossy?: bool, // Encode the image using lossy compression // Default: true
+ *                 min_size?: bool, // Encode image to achieve smallest size. This disables key frame insertion and picks the dispose method resulting in the smallest output for each frame // Default: true
+ *                 metadata?: list<"none"|"all"|"icc"|"xmp">,
+ *             },
+ *             gifsicle?: array{
+ *                 enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                 optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                 lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                 colors?: int, // Reduce the number of colors to N // Default: 256
+ *             },
+ *             imagine?: array{
+ *                 enabled?: bool, // Enable the imagine post-processor // Default: true
+ *                 quality?: int, // Sets the default image compression quality // Default: 80
+ *                 jpeg_quality?: int, // Sets the image compression quality for JPEG images // Default: 80
+ *                 png_quality?: int, // Sets the image compression quality for PNG images // Default: 80
+ *             },
+ *         },
+ *     }>,
+ *     pre_processors?: list<scalar|null>,
+ *     processors?: array{
+ *         cwebp?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.cwebp%"
+ *             identify_binary?: scalar|null, // Default: "%joli_media.binary.identify%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the cwebp post-processor // Default: true
+ *                 near_lossless?: array{
+ *                     quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 40
+ *                     method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                     metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                     near_lossless?: int, // Specify the level of near-lossless image preprocessing // Default: 0
+ *                 },
+ *                 lossy?: array{
+ *                     quality?: int, // Specify the compression factor for RGB channels between 0 and 100 // Default: 75
+ *                     method?: int, // Specify the compression method to use. This parameter controls the trade off between encoding speed and the compressed file size and quality // Default: 6
+ *                     af?: bool, // Turns auto-filter on. This algorithm will spend additional time optimizing the filtering strength to reach a well-balanced quality // Default: true
+ *                     metadata?: list<"none"|"all"|"icc"|"exif"|"xmp">,
+ *                     pass?: int, // Set a maximum number of passes to use during the dichotomy used by options -size or -psnr // Default: 10
+ *                 },
+ *             },
+ *         },
+ *         gif2webp?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.gif2webp%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the gif2webp post-processor // Default: true
+ *                 lossy?: bool, // Encode the image using lossy compression // Default: true
+ *                 min_size?: bool, // Encode image to achieve smallest size. This disables key frame insertion and picks the dispose method resulting in the smallest output for each frame // Default: true
+ *                 metadata?: list<"none"|"all"|"icc"|"xmp">,
+ *             },
+ *         },
+ *         gifsicle?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.gifsicle%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                 optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                 lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                 colors?: int, // Reduce the number of colors to N // Default: 256
+ *             },
+ *         },
+ *         imagine?: array{
+ *             driver?: "gd"|"gmagick"|"imagick", // The Imagine driver to use for image processing. Available options: "gd", "gmagick", "imagick". // Default: "imagick"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the imagine post-processor // Default: true
+ *                 quality?: int, // Sets the default image compression quality // Default: 80
+ *                 jpeg_quality?: int, // Sets the image compression quality for JPEG images // Default: 80
+ *                 png_quality?: int, // Sets the image compression quality for PNG images // Default: 80
+ *             },
+ *         },
+ *         imagick?: array{ // Deprecated: The "imagick" processor is deprecated, use the "imagine" processor with the "imagick" driver instead.
+ *             options?: array{
+ *                 enabled?: bool, // Enable the imagine post-processor // Default: true
+ *                 quality?: int, // Sets the default image compression quality // Default: 80
+ *                 jpeg_quality?: int, // Sets the image compression quality for JPEG images // Default: 80
+ *                 png_quality?: int, // Sets the image compression quality for PNG images // Default: 80
+ *             },
+ *         },
+ *     },
+ *     post_processors?: array{
+ *         gifsicle?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.gifsicle%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the gifsicle post-processor // Default: true
+ *                 optimize?: int, // Attempt to shrink the file sizes of GIF animations. Level determines how much optimization is done; higher levels take longer, but may have better results // Default: 3
+ *                 lossy?: int, // Alter image colors to shrink output file size at the cost of artifacts and noise. Lossiness determines how many artifacts are allowed; higher values can result in smaller file sizes, but cause more artifacts // Default: 20
+ *                 colors?: int, // Reduce the number of colors to N // Default: 256
+ *             },
+ *         },
+ *         jpegoptim?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.jpegoptim%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the jpegoptim post-processor // Default: true
+ *                 strip_all?: bool, // Strip all (Comment & Exif) markers from output file // Default: true
+ *                 progressive?: bool, // Force all output files to be progressive // Default: true
+ *                 max_quality?: int, // Sets the maximum image quality factor // Default: 80
+ *             },
+ *         },
+ *         mozjpeg?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.mozjpeg%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the mozjpeg post-processor // Default: true
+ *                 optimize?: bool, // Optimize Huffman table // Default: false
+ *                 progressive?: bool, // Create progressive JPEG file // Default: false
+ *                 quality?: int, // Compression quality // Default: 80
+ *             },
+ *         },
+ *         oxipng?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.oxipng%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the oxipng post-processor // Default: true
+ *                 optimization?: int, // Optimization level. A higher level means slower, but better compression // Default: 4
+ *                 strip?: list<"safe"|"all">,
+ *                 zopfli?: bool, // Use the slower but better compressing Zopfli algorithm // Default: false
+ *             },
+ *         },
+ *         pngquant?: array{
+ *             binary?: scalar|null, // Default: "%joli_media.binary.pngquant%"
+ *             options?: array{
+ *                 enabled?: bool, // Enable the pngquant post-processor // Default: true
+ *                 quality?: scalar|null, // Don't save below min, use fewer colors below max // Default: "75-85"
+ *                 speed?: int, // Speed/quality trade-off. 1=slow, 4=default, 11=fast & rough // Default: 4
+ *             },
+ *         },
+ *     },
+ * }
+ * @psalm-type JoliMediaEasyAdminConfig = array{
+ *     upload?: array{
+ *         max_files?: int, // Maximum number of files that can be uploaded at once. // Default: null
+ *         max_file_size?: int, // Maximum file size for uploads, in Megabytes. // Default: 20
+ *         accepted_files?: list<scalar|null>,
+ *     },
+ *     visibility?: array{
+ *         show_markdown_code?: bool, // If true, shows the media Markdown code on the media show page. // Default: false
+ *         show_html_code?: bool, // If true, shows the media HTML code on the media show page. // Default: false
+ *         show_variations_action_regenerate?: bool, // If true, shows the action to regenerate variations on the media show page. // Default: false
+ *         show_variations_list?: bool, // If true, shows the list of variations in a dedicated tab on the media show page. // Default: true
+ *         show_variations_list_admin_variations?: bool, // If true, shows the variations defined in by the admin bridge in the variations list tab. // Default: false
+ *         show_variations_stored?: bool, // If true, shows wether a variation is already stored in the media library or not. // Default: false
+ *     },
+ * }
+ * @psalm-type FlysystemConfig = array{
+ *     storages?: array<string, array{ // Default: []
+ *         adapter: scalar|null,
+ *         options?: list<mixed>,
+ *         visibility?: scalar|null, // Default: null
+ *         directory_visibility?: scalar|null, // Default: null
+ *         case_sensitive?: bool, // Default: true
+ *         disable_asserts?: bool, // Default: false
+ *         public_url?: list<scalar|null>,
+ *         path_normalizer?: scalar|null, // Default: null
+ *         public_url_generator?: scalar|null, // Default: null
+ *         temporary_url_generator?: scalar|null, // Default: null
+ *         read_only?: bool, // Default: false
+ *     }>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1821,6 +2159,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     survos_babel?: SurvosBabelConfig,
  *     survos_state?: SurvosStateConfig,
  *     imgproxy?: ImgproxyConfig,
+ *     survos_jsonl?: SurvosJsonlConfig,
+ *     joli_media?: JoliMediaConfig,
+ *     joli_media_easy_admin?: JoliMediaEasyAdminConfig,
+ *     flysystem?: FlysystemConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1858,6 +2200,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         imgproxy?: ImgproxyConfig,
  *         survos_command?: SurvosCommandConfig,
+ *         survos_jsonl?: SurvosJsonlConfig,
+ *         joli_media?: JoliMediaConfig,
+ *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
+ *         flysystem?: FlysystemConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1890,6 +2236,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_babel?: SurvosBabelConfig,
  *         survos_state?: SurvosStateConfig,
  *         imgproxy?: ImgproxyConfig,
+ *         survos_jsonl?: SurvosJsonlConfig,
+ *         joli_media?: JoliMediaConfig,
+ *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
+ *         flysystem?: FlysystemConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1925,6 +2275,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_babel?: SurvosBabelConfig,
  *         survos_state?: SurvosStateConfig,
  *         imgproxy?: ImgproxyConfig,
+ *         survos_jsonl?: SurvosJsonlConfig,
+ *         joli_media?: JoliMediaConfig,
+ *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
+ *         flysystem?: FlysystemConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
