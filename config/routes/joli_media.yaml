@@ -1,0 +1,7 @@
+_joli_media:
+    resource: "@JoliMediaBundle/config/routes.php"
+
+_joli_media_easy_admin:
+    resource: "@JoliMediaEasyAdminBundle/src/Controller/"
+    prefix: /easyadmin-admin/media
+
