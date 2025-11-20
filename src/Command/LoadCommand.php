@@ -89,15 +89,14 @@ class LoadCommand
                 $media = $this->resolver->resolve($thumbPath);
                 $product->thumb = $media;
             }
-            if (0)
             foreach ($data->images as $imageUrl) {
+
                 $code = hash('xxh3', $imageUrl);
                 $ext = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-                $thumb = "images/$code.$ext";
+                $imagePath = "images/$code.$ext";
 
-                $tempFile = $this->downloadImage($imageUrl, $thumb);
-                $media = $this->resolver->resolve($thumb);
-                $product->thumb = $media;
+                $this->downloadImage($imageUrl, $imagePath);
+                $media = $this->resolver->resolve($imagePath);
 
                 if (!$image = $this->imageRepository->findOneBy([
                     'product' => $product,
@@ -106,6 +105,7 @@ class LoadCommand
                     $image = new Image($product, $imageUrl);
                     $this->entityManager->persist($image);
                 }
+                $image->media = $media;
             }
 
             if ($limit && ($idx >= $limit - 1)) {

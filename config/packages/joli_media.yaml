@@ -9,7 +9,7 @@ joli_media:
                     path: /media/original/
             cache:
                 flysystem: "filesystem.cache.storage"
-                must_store_when_generating_url: false
+                must_store_when_generating_url: true
                 url_generator:
                     strategy: folder
                     path: /media/cache/
@@ -25,7 +25,16 @@ joli_media:
                             height: 30
                             allow_upscale: true
 
+                product_show_thumbnail:
+                    format: webp
+                    transformers:
+                        thumbnail:
+                            width: 100
+                            height: 110
+                            allow_upscale: true
+
                 blog_show:
+                    format: webp
                     transformers:
                         thumbnail:
                             width: 800
@@ -41,6 +50,7 @@ joli_media:
                             height: 50%
 
                 transform_thumbnail:
+                    format: webp
                     enable_auto_webp: false
                     transformers:
                         thumbnail:
@@ -97,6 +107,6 @@ joli_media:
                             height: 100
 
     pre_processors:
-        - JoliCode\MediaBundle\PreProcessor\ExifRemovalPreProcessor
+#        - JoliCode\MediaBundle\PreProcessor\ExifRemovalPreProcessor
 
     processors: ~

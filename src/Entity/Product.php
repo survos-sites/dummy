@@ -78,7 +78,7 @@ use Survos\BabelBundle\Attribute\Translatable;
         fields: ['category','tags','rating','price','brand'],
 //        groups: ['product.read','product.details']
     ),
-    sortable: ['price', 'rating'],
+    sortable: ['price', 'rating','imageCount'],
     searchable: new Fields(
 //        fields: ['title', 'description'],
         groups: ['product.searchable']
@@ -132,6 +132,9 @@ class Product implements RouteParametersInterface
     #[ORM\Column(type: MediaTypes::MEDIA_LONG, nullable: true)]
     public ?Media $thumb = null;
 
+    #[Facet()]
+    #[Groups(['product.read'])]
+    public int $imageCount { get => $this->images->count(); }
 
 
     // virtual property

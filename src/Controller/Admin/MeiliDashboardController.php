@@ -49,6 +49,7 @@ class MeiliDashboardController extends AbstractDashboardController
         //        yield MenuItem::linkToRoute('Examples', 'fa fa-lightbulb', 'admin_examples');
 
                 yield MenuItem::section('Content Management', 'fas fa-folder-open');
+                yield MenuItem::linkToRoute('Media Management', 'fas fa-folder-open', 'joli_media_easy_admin_explore');
 
                 yield from $this->meiliMenuFactory->createIndexMenus();
                 return;

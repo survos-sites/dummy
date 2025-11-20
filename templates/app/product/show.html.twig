@@ -15,21 +15,34 @@
 {% endblock %}
 
 {% block main %}
+{#    {{ dump(product.thumb) }}#}
+{#    {{ dump(product.thumb.url) }}#}
+{#    {{ dump(product.thumb.url|joli_media_absolute_url) }}#}
+    {% set thumb = product.thumb %}
+    {% set original = product %}
     {% set product = product.data %}
+
     <div class="container-fluid">
         <div class="row">
             <!-- Product Image -->
             <div class="col-lg-6 mb-4">
                 <div class="card shadow-sm">
-                    {% if product.images|length > 0 %}
-                        <img src="{{ product.images[0] }}"
-                             alt="{{ product.title }}"
-                             class="card-img-top product-image">
-                    {% else %}
-                        <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
-                            <i class="fas fa-image fa-3x text-muted"></i>
-                        </div>
-                    {% endif %}
+
+                    <twig:joli:Img
+                        :path="original.thumb.url"
+                    />
+
+
+{#                    {% if product.images|length > 0 %}#}
+{#                        <img src="{{ product.images[0] }}"#}
+{#                             alt="{{ product.title }}"#}
+{#                             class="card-img-top product-image">#}
+{#                    {% else %}#}
+{#                        <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 300px;">#}
+{#                            <i class="fas fa-image fa-3x text-muted"></i>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+
                 </div>
 
                 <!-- QR Code & Barcode -->
@@ -42,8 +55,10 @@
                                         <img src="{{ product.meta.qrCode }}"
                                              alt="QR Code" class="img-fluid" style="max-height: 100px;">
                                         <small class="d-block text-muted mt-2">QR Code</small>
+{#                                        variation="variation_name"#}
                                     </div>
                                 </div>
+
                             </div>
                         {% endif %}
                         {% if product.meta.barcode is defined %}
@@ -243,6 +258,23 @@
                 </div>
             </div>
         {% endif %}
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">All Images</h3>
+                <div>
+            {% for image in original.images %}
+                <twig:joli:Img
+                    :path="image.media.url"
+                    variation="product_show_thumbnail"
+                    :title="image.media|joli_media_absolute_url"
+                    :alt="image.media.url"
+                />
+            {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
 

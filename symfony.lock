@@ -220,6 +220,9 @@
     "survos/doc-bundle": {
         "version": "2.0.51"
     },
+    "survos/ez-bundle": {
+        "version": "2.0.61"
+    },
     "survos/jsonl-bundle": {
         "version": "dev-main"
     },

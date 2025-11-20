@@ -10,6 +10,11 @@ use App\Repository\ImageRepository;
 use App\Workflow\IImageWorkflow;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JoliCode\MediaBundle\DeleteBehavior\Attribute\MediaDeleteBehavior;
+use JoliCode\MediaBundle\DeleteBehavior\Strategy;
+use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
+use JoliCode\MediaBundle\Model\Media;
+use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\MeiliBundle\Metadata\Fields;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
@@ -54,6 +59,12 @@ class Image implements MarkingInterface, \Stringable
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
     public string $id { get => $this->code; }
+
+    #[MediaConstraint(allowedTypes: ['image'])]
+    #[MediaDeleteBehavior(strategy: Strategy::SET_NULL)]
+    #[ORM\Column(type: MediaTypes::MEDIA_LONG, nullable: true)]
+    public ?Media $media = null;
+
 
     public function getId(): string
     {

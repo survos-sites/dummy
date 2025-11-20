@@ -2129,6 +2129,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         read_only?: bool, // Default: false
  *     }>,
  * }
+ * @psalm-type SurvosEzConfig = array{
+ *     enabled?: bool, // Default: true
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2164,6 +2167,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     joli_media?: JoliMediaConfig,
  *     joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *     flysystem?: FlysystemConfig,
+ *     survos_ez?: SurvosEzConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2205,6 +2209,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media?: JoliMediaConfig,
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
+ *         survos_ez?: SurvosEzConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2241,6 +2246,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media?: JoliMediaConfig,
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
+ *         survos_ez?: SurvosEzConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2280,6 +2286,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media?: JoliMediaConfig,
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
+ *         survos_ez?: SurvosEzConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

@@ -39,6 +39,7 @@
         "survos/bootstrap-bundle": "^2.0",
         "survos/crawler-bundle": "^2.0",
         "survos/doc-bundle": "^2.0",
+        "survos/ez-bundle": "^2.0",
         "survos/jsonl-bundle": "^2.0",
         "survos/meili-bundle": "^2.0",
         "survos/sais-bundle": "^2.0",
