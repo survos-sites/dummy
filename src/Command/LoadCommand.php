@@ -88,9 +88,7 @@ class LoadCommand
                 $this->downloadImage($thumbUrl, $thumbPath);
                 $media = $this->resolver->resolve($thumbPath);
                 $product->thumb = $media;
-
             }
-
             if (0)
             foreach ($data->images as $imageUrl) {
                 $code = hash('xxh3', $imageUrl);

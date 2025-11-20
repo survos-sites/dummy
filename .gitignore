@@ -40,3 +40,5 @@ phpstan.neon
 /tests/cache
 /tests/project-dir/var
 /.phpunit.cache
+
+public/media
