@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-iconv": "*",
+        "ext-imagick": "*",
         "api-platform/doctrine-orm": "*",
         "api-platform/symfony": "*",
         "bizkit/versioning-bundle": "*",
