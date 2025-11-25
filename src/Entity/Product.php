@@ -69,10 +69,9 @@ use Survos\BabelBundle\Attribute\Translatable;
     // serialization groups for the JSON sent to the index
     primaryKey: 'sku',
     persisted: new Fields(
-        fields: ['sku', 'stock', 'price', 'title','brand'],
+        fields: ['sku', 'stock', 'price', 'title','brand', 'tags'],
         groups: ['product.read', 'product.details', 'product.searchable']
     ),
-//    groups: ['product.read', 'product.details'],
     displayed: ['*'],
     filterable: new Fields(
         fields: ['category','tags','rating','price','brand'],

@@ -28,10 +28,6 @@ class MeiliDashboardController extends AbstractDashboardController
 
     public function index(): Response
     {
-        foreach ($this->meiliMenuFactory->createIndexMenus() as $x) {
-            $dto = $x->getAsDto();
-//            dd($x, get_class_methods($dto), $x->getAsDto());
-        }
         return $this->render("@SurvosMeili/ez/dashboard.html.twig", [
             "menuItems" => iterator_to_array($this->meiliMenuFactory->createIndexMenus()),
             "settings" => $this->meiliService->settings]);
@@ -48,8 +44,8 @@ class MeiliDashboardController extends AbstractDashboardController
                 yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         //        yield MenuItem::linkToRoute('Examples', 'fa fa-lightbulb', 'admin_examples');
 
-                yield MenuItem::section('Content Management', 'fas fa-folder-open');
-                yield MenuItem::linkToRoute('Media Management', 'fas fa-folder-open', 'joli_media_easy_admin_explore');
+                yield MenuItem::section('Meilisearch', 'fas fa-folder-open');
+//                yield MenuItem::linkToRoute('Media Management', 'fas fa-folder-open', 'joli_media_easy_admin_explore');
 
                 yield from $this->meiliMenuFactory->createIndexMenus();
                 return;
