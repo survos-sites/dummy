@@ -74,10 +74,10 @@ use Survos\BabelBundle\Attribute\Translatable;
     ),
     displayed: ['*'],
     filterable: new Fields(
-        fields: ['category','tags','rating','price','brand'],
+        fields: ['category','tags','price','brand'],
 //        groups: ['product.read','product.details']
     ),
-    sortable: ['price', 'rating','imageCount'],
+    sortable: ['price', 'imageCount'],
     searchable: new Fields(
 //        fields: ['title', 'description'],
         groups: ['product.searchable']
@@ -85,16 +85,6 @@ use Survos\BabelBundle\Attribute\Translatable;
     embedders: ['best','small_product']
 )]
 
-/*
-*   #[MeiliIndex(
- *       name: 'product',
- *       display:   new FieldSet(['*']),
- *       filterable:['columns'=>['category','tags','rating','stock','price'], 'groups'=>['product.read','product.details']],
- *       sortable:  ['title','price'],
- *       searchable:['title','description'],
- *   )]
- *
- */
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
