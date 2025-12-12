@@ -12,7 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use JoliCode\MediaBundle\Bridge\EasyAdmin\Field\MediaChoiceField;
-use Survos\CoreBundle\Controller\BaseCrudController;
+use Survos\EzBundle\Controller\BaseCrudController;
 
 class ProductCrudController extends BaseCrudController
 {
@@ -46,5 +46,29 @@ class ProductCrudController extends BaseCrudController
             });
 
         yield TextField::new('marking');                     // Status/workflow state
+
+
     }
+
+
+    public function SemiAutomaticConfigureFields(string $pageName): iterable
+    {
+        $thumb = MediaChoiceField::new('thumb')
+            ->setRequired(false)
+            ->setHelp('Attach an image to this post')
+            ->setFolder('articles');
+        yield $thumb;
+        foreach (parent::configureFields($pageName) as $field) {
+            $dto = $field->getAsDto();
+            $field = match ($dto->getProperty()) {
+                'thumb' => null,
+                default => $field,
+            };
+            if ($field) {
+                yield $field;
+            }
+        }
+    }
+
+
 }
