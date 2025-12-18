@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c29136e587aa7ab146781da68b80036e",
+    "content-hash": "aa16d3beac0025d559255622e186e05f",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -152,7 +152,7 @@
         },
         {
             "name": "api-platform/doctrine-orm",
-            "version": "v4.2.9",
+            "version": "v4.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-orm.git",
@@ -233,7 +233,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.9"
+                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.10"
             },
             "time": "2025-12-04T14:20:26+00:00"
         },
@@ -1008,16 +1008,16 @@
         },
         {
             "name": "api-platform/symfony",
-            "version": "v4.2.9",
+            "version": "v4.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/symfony.git",
-                "reference": "a5f7792da555461e2adaf4bb92d8441c3ce83241"
+                "reference": "a9b88c9cde1dcbedc52177eccb918a5a62d3eb76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/symfony/zipball/a5f7792da555461e2adaf4bb92d8441c3ce83241",
-                "reference": "a5f7792da555461e2adaf4bb92d8441c3ce83241",
+                "url": "https://api.github.com/repos/api-platform/symfony/zipball/a9b88c9cde1dcbedc52177eccb918a5a62d3eb76",
+                "reference": "a9b88c9cde1dcbedc52177eccb918a5a62d3eb76",
                 "shasum": ""
             },
             "require": {
@@ -1128,9 +1128,9 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/api-platform/symfony/tree/v4.2.9"
+                "source": "https://github.com/api-platform/symfony/tree/v4.2.10"
             },
-            "time": "2025-12-05T14:44:12+00:00"
+            "time": "2025-12-11T16:36:37+00:00"
         },
         {
             "name": "api-platform/validator",
@@ -1264,16 +1264,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.367.1",
+            "version": "3.368.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4155279437f17a51604f05f8373b685c058bc278"
+                "reference": "f7916ea27b5214fa1b4b6ecfa0c3f549b388a70c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4155279437f17a51604f05f8373b685c058bc278",
-                "reference": "4155279437f17a51604f05f8373b685c058bc278",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f7916ea27b5214fa1b4b6ecfa0c3f549b388a70c",
+                "reference": "f7916ea27b5214fa1b4b6ecfa0c3f549b388a70c",
                 "shasum": ""
             },
             "require": {
@@ -1355,9 +1355,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.367.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.368.1"
             },
-            "time": "2025-12-11T19:13:06+00:00"
+            "time": "2025-12-17T19:06:44+00:00"
         },
         {
             "name": "bizkit/versioning-bundle",
@@ -1415,75 +1415,6 @@
                 "source": "https://github.com/HypeMC/versioning-bundle/tree/v2.0.0"
             },
             "time": "2025-12-07T16:02:51+00:00"
-        },
-        {
-            "name": "cebe/php-openapi",
-            "version": "1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cebe/php-openapi.git",
-                "reference": "893ab104be1f5dfe5a39766703f583584e43c6e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cebe/php-openapi/zipball/893ab104be1f5dfe5a39766703f583584e43c6e1",
-                "reference": "893ab104be1f5dfe5a39766703f583584e43c6e1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "justinrainbow/json-schema": "^5.2 || ^6.0",
-                "php": ">=7.1.0",
-                "symfony/yaml": "^3.4 || ^4 || ^5 || ^6 || ^7.0"
-            },
-            "conflict": {
-                "symfony/yaml": "3.4.0 - 3.4.4 || 4.0.0 - 4.4.17 || 5.0.0 - 5.1.9 || 5.2.0"
-            },
-            "require-dev": {
-                "apis-guru/openapi-directory": "1.0.0",
-                "cebe/indent": "*",
-                "mermade/openapi3-examples": "1.0.0",
-                "nexmo/api-specification": "1.0.0",
-                "oai/openapi-specification": "3.0.3",
-                "phpstan/phpstan": "^0.12.0 || ^1.9",
-                "phpunit/phpunit": "^6.5 || ^7.5 || ^8.5 || ^9.4"
-            },
-            "bin": [
-                "bin/php-openapi"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "cebe\\openapi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Carsten Brandt",
-                    "email": "mail@cebe.cc",
-                    "homepage": "https://cebe.cc/",
-                    "role": "Creator"
-                }
-            ],
-            "description": "Read and write OpenAPI yaml/json files and make the content accessable in PHP objects.",
-            "homepage": "https://github.com/cebe/php-openapi#readme",
-            "keywords": [
-                "openapi"
-            ],
-            "support": {
-                "issues": "https://github.com/cebe/php-openapi/issues",
-                "source": "https://github.com/cebe/php-openapi"
-            },
-            "time": "2025-05-07T08:44:12+00:00"
         },
         {
             "name": "composer/semver",
@@ -4253,81 +4184,6 @@
             "time": "2025-10-11T13:02:06+00:00"
         },
         {
-            "name": "justinrainbow/json-schema",
-            "version": "6.6.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "134e98916fa2f663afa623970af345cd788e8967"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/134e98916fa2f663afa623970af345cd788e8967",
-                "reference": "134e98916fa2f663afa623970af345cd788e8967",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "marc-mabe/php-enum": "^4.4",
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "3.3.0",
-                "json-schema/json-schema-test-suite": "^23.2",
-                "marc-mabe/php-enum-phpstan": "^2.0",
-                "phpspec/prophecy": "^1.19",
-                "phpstan/phpstan": "^1.12",
-                "phpunit/phpunit": "^8.5"
-            },
-            "bin": [
-                "bin/validate-json"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JsonSchema\\": "src/JsonSchema/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bruno Prieto Reis",
-                    "email": "bruno.p.reis@gmail.com"
-                },
-                {
-                    "name": "Justin Rainbow",
-                    "email": "justin.rainbow@gmail.com"
-                },
-                {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch"
-                },
-                {
-                    "name": "Robert Schönthal",
-                    "email": "seroscho@googlemail.com"
-                }
-            ],
-            "description": "A library to validate a json schema.",
-            "homepage": "https://github.com/jsonrainbow/json-schema",
-            "keywords": [
-                "json",
-                "schema"
-            ],
-            "support": {
-                "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.3"
-            },
-            "time": "2025-12-02T10:21:33+00:00"
-        },
-        {
             "name": "knplabs/knp-menu",
             "version": "v3.8.0",
             "source": {
@@ -4898,96 +4754,23 @@
             "time": "2025-05-31T10:45:02+00:00"
         },
         {
-            "name": "marc-mabe/php-enum",
-            "version": "v4.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/marc-mabe/php-enum.git",
-                "reference": "bb426fcdd65c60fb3638ef741e8782508fda7eef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/bb426fcdd65c60fb3638ef741e8782508fda7eef",
-                "reference": "bb426fcdd65c60fb3638ef741e8782508fda7eef",
-                "shasum": ""
-            },
-            "require": {
-                "ext-reflection": "*",
-                "php": "^7.1 | ^8.0"
-            },
-            "require-dev": {
-                "phpbench/phpbench": "^0.16.10 || ^1.0.4",
-                "phpstan/phpstan": "^1.3.1",
-                "phpunit/phpunit": "^7.5.20 | ^8.5.22 | ^9.5.11",
-                "vimeo/psalm": "^4.17.0 | ^5.26.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.2-dev",
-                    "dev-master": "4.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MabeEnum\\": "src/"
-                },
-                "classmap": [
-                    "stubs/Stringable.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Marc Bennewitz",
-                    "email": "dev@mabe.berlin",
-                    "homepage": "https://mabe.berlin/",
-                    "role": "Lead"
-                }
-            ],
-            "description": "Simple and fast implementation of enumerations with native PHP",
-            "homepage": "https://github.com/marc-mabe/php-enum",
-            "keywords": [
-                "enum",
-                "enum-map",
-                "enum-set",
-                "enumeration",
-                "enumerator",
-                "enummap",
-                "enumset",
-                "map",
-                "set",
-                "type",
-                "type-hint",
-                "typehint"
-            ],
-            "support": {
-                "issues": "https://github.com/marc-mabe/php-enum/issues",
-                "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.2"
-            },
-            "time": "2025-09-14T11:18:39+00:00"
-        },
-        {
             "name": "meilisearch/meilisearch-php",
-            "version": "v1.16.1",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/meilisearch/meilisearch-php.git",
-                "reference": "f9f63e0e7d12ffaae54f7317fa8f4f4dfa8ae7b6"
+                "reference": "511f381748a2e290a30d6d134194ba2f86d892a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/f9f63e0e7d12ffaae54f7317fa8f4f4dfa8ae7b6",
-                "reference": "f9f63e0e7d12ffaae54f7317fa8f4f4dfa8ae7b6",
+                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/511f381748a2e290a30d6d134194ba2f86d892a9",
+                "reference": "511f381748a2e290a30d6d134194ba2f86d892a9",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4 || ^8.0",
-                "php-http/discovery": "^1.7",
+                "php": "^8.1",
+                "php-http/discovery": "^1.19",
                 "psr/http-client": "^1.0",
                 "symfony/polyfill-php81": "^1.33"
             },
@@ -4998,18 +4781,21 @@
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
-                "phpunit/phpunit": "^9.5 || ^10.5",
-                "symfony/http-client": "^5.4|^6.0|^7.0"
+                "phpunit/phpunit": "^10.5",
+                "symfony/http-client": "^5.4|^6.0|^7.0|^8.0"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Use Guzzle ^7 as HTTP client",
                 "http-interop/http-factory-guzzle": "Factory for guzzlehttp/guzzle",
                 "symfony/http-client": "Use Symfony Http client"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
                 "psr-4": {
-                    "MeiliSearch\\": "src/",
                     "Meilisearch\\": "src/"
                 }
             },
@@ -5046,9 +4832,9 @@
             ],
             "support": {
                 "issues": "https://github.com/meilisearch/meilisearch-php/issues",
-                "source": "https://github.com/meilisearch/meilisearch-php/tree/v1.16.1"
+                "source": "https://github.com/meilisearch/meilisearch-php/tree/main"
             },
-            "time": "2025-09-18T10:15:45+00:00"
+            "time": "2025-12-13T04:09:46+00:00"
         },
         {
             "name": "mezcalito/imgproxy-bundle",
@@ -6329,16 +6115,16 @@
         },
         {
             "name": "survos/babel-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/babel-bundle.git",
-                "reference": "bff082488ac0ba11de3864f8871ce091d1f20f61"
+                "reference": "914af9735ac27313bc0dba4ea2f2b07cee3d85d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/babel-bundle/zipball/bff082488ac0ba11de3864f8871ce091d1f20f61",
-                "reference": "bff082488ac0ba11de3864f8871ce091d1f20f61",
+                "url": "https://api.github.com/repos/survos/babel-bundle/zipball/914af9735ac27313bc0dba4ea2f2b07cee3d85d4",
+                "reference": "914af9735ac27313bc0dba4ea2f2b07cee3d85d4",
                 "shasum": ""
             },
             "require": {
@@ -6348,6 +6134,8 @@
                 "ext-intl": "*",
                 "ext-mbstring": "*",
                 "php": "^8.4",
+                "survos/lingua-contracts": "dev-main",
+                "survos/lingua-core": "dev-main",
                 "symfony/console": "^7.3||^8.0",
                 "symfony/dependency-injection": "^7.3||^8.0",
                 "symfony/http-kernel": "^7.3||^8.0",
@@ -6381,7 +6169,7 @@
             "description": "Lightweight translation base (Str/StrTranslation) + Translatable attribute & subscriber",
             "support": {
                 "issues": "https://github.com/survos/babel-bundle/issues",
-                "source": "https://github.com/survos/babel-bundle/tree/2.0.83"
+                "source": "https://github.com/survos/babel-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6389,11 +6177,11 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-09T03:16:37+00:00"
+            "time": "2025-12-17T19:32:38+00:00"
         },
         {
             "name": "survos/bootstrap-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/bootstrap-bundle.git",
@@ -6459,7 +6247,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/bootstrap-bundle/issues",
-                "source": "https://github.com/survos/bootstrap-bundle/tree/2.0.83"
+                "source": "https://github.com/survos/bootstrap-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6471,7 +6259,7 @@
         },
         {
             "name": "survos/core-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/core-bundle.git",
@@ -6565,7 +6353,7 @@
         },
         {
             "name": "survos/doc-bundle",
-            "version": "2.0.82",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/doc-bundle.git",
@@ -6619,7 +6407,7 @@
             "description": "Build Sphinx documentation for a Symfony project, using Twig templates",
             "support": {
                 "issues": "https://github.com/survos/doc-bundle/issues",
-                "source": "https://github.com/survos/doc-bundle/tree/2.0.82"
+                "source": "https://github.com/survos/doc-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6631,7 +6419,7 @@
         },
         {
             "name": "survos/ez-bundle",
-            "version": "2.0.82",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/ez-bundle.git",
@@ -6681,7 +6469,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/ez-bundle/issues",
-                "source": "https://github.com/survos/ez-bundle/tree/2.0.82"
+                "source": "https://github.com/survos/ez-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6757,16 +6545,16 @@
         },
         {
             "name": "survos/jsonl-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/jsonl-bundle.git",
-                "reference": "6c2be5efb0627a765e6d6113d9ab3f666f813f7d"
+                "reference": "ea216b7fb0430d2d4c9ef278465e2c43ee295699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/jsonl-bundle/zipball/6c2be5efb0627a765e6d6113d9ab3f666f813f7d",
-                "reference": "6c2be5efb0627a765e6d6113d9ab3f666f813f7d",
+                "url": "https://api.github.com/repos/survos/jsonl-bundle/zipball/ea216b7fb0430d2d4c9ef278465e2c43ee295699",
+                "reference": "ea216b7fb0430d2d4c9ef278465e2c43ee295699",
                 "shasum": ""
             },
             "require": {
@@ -6806,7 +6594,7 @@
             "description": "Fast, concurrent, resumable, strictly-ordered JSONL ingestion utilities for Symfony 7.3 / PHP 8.4",
             "support": {
                 "issues": "https://github.com/survos/jsonl-bundle/issues",
-                "source": "https://github.com/survos/jsonl-bundle/tree/2.0.83"
+                "source": "https://github.com/survos/jsonl-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6814,46 +6602,134 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-09T03:16:53+00:00"
+            "time": "2025-12-17T19:32:48+00:00"
         },
         {
-            "name": "survos/meili-bundle",
-            "version": "2.0.71",
+            "name": "survos/lingua-contracts",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/survos/meili-bundle.git",
-                "reference": "b4dff7fc7a03196e2f799add35ca060d5b56b236"
+                "url": "https://github.com/survos/lingua-contracts.git",
+                "reference": "d5ab03e66ed5387d29939aa8f3affd8186fd91b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/b4dff7fc7a03196e2f799add35ca060d5b56b236",
-                "reference": "b4dff7fc7a03196e2f799add35ca060d5b56b236",
+                "url": "https://api.github.com/repos/survos/lingua-contracts/zipball/d5ab03e66ed5387d29939aa8f3affd8186fd91b6",
+                "reference": "d5ab03e66ed5387d29939aa8f3affd8186fd91b6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.5",
+                "symplify/easy-coding-standard": "^13.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\Lingua\\Contracts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Shared DTOs and API surface (routes/headers) for Survos Lingua client/server interoperability.",
+            "support": {
+                "issues": "https://github.com/survos/lingua-contracts/issues",
+                "source": "https://github.com/survos/lingua-contracts/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-14T09:09:59+00:00"
+        },
+        {
+            "name": "survos/lingua-core",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/lingua-core.git",
+                "reference": "225237028623a3865dcd6ad44149a3ed77c5011c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/lingua-core/zipball/225237028623a3865dcd6ad44149a3ed77c5011c",
+                "reference": "225237028623a3865dcd6ad44149a3ed77c5011c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.5",
+                "symplify/easy-coding-standard": "^13.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\Lingua\\Core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Core identity utilities (hash/key calculation and canonicalization) shared across Survos Lingua, Babel, and server implementations.",
+            "support": {
+                "issues": "https://github.com/survos/lingua-core/issues",
+                "source": "https://github.com/survos/lingua-core/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-15T11:32:57+00:00"
+        },
+        {
+            "name": "survos/meili-bundle",
+            "version": "2.0.85",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/meili-bundle.git",
+                "reference": "49bfd725e0e01d86ca0a4010679e9f540001ee71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/49bfd725e0e01d86ca0a4010679e9f540001ee71",
+                "reference": "49bfd725e0e01d86ca0a4010679e9f540001ee71",
                 "shasum": ""
             },
             "require": {
                 "adbario/php-dot-notation": "^3.3",
-                "cebe/php-openapi": "^1.8",
                 "ext-pdo": "*",
-                "meilisearch/meilisearch-php": "*",
+                "meilisearch/meilisearch-php": "dev-main",
                 "nyholm/psr7": "^1.8",
                 "php": "^8.4",
                 "survos/core-bundle": "^2.0",
                 "survos/jsonl-bundle": "^2.0",
-                "symfony/config": "^7.3||^8.0",
-                "symfony/console": "^7.3||^8.0",
-                "symfony/dependency-injection": "^7.3||^8.0",
-                "symfony/http-kernel": "^7.3||^8.0",
-                "symfony/property-access": "^7.3||^8.0",
-                "symfony/stopwatch": "^7.3||^8.0",
-                "symfony/string": "^7.3||^8.0",
+                "symfony/config": "^7.4||^8.0",
+                "symfony/console": "^7.4||^8.0",
+                "symfony/dependency-injection": "^7.4||^8.0",
+                "symfony/http-kernel": "^7.4||^8.0",
+                "symfony/property-access": "^7.4||^8.0",
+                "symfony/stopwatch": "^7.4||^8.0",
+                "symfony/string": "^7.4||^8.0",
                 "twig/twig": "^3.4",
                 "zenstruck/bytes": "^1.0"
             },
             "require-dev": {
-                "api-platform/doctrine-orm": "^4.1",
-                "doctrine/doctrine-bundle": "^2.7|^3.0",
+                "doctrine/doctrine-bundle": "^3.0",
                 "easycorp/easyadmin-bundle": "^4.26",
-                "jwage/phpamqplib-messenger": "^0.8.5",
                 "liquid/liquid": "^1.4",
                 "phpstan/phpstan": "^2.0",
                 "rector/rector": "^2.0",
@@ -6861,17 +6737,24 @@
                 "survos/babel-bundle": "^2.0",
                 "survos/inspection-bundle": "^2.0",
                 "survos/js-twig-bundle": "^2.0",
-                "symfony/browser-kit": "^7.3||^8.0",
-                "symfony/framework-bundle": "^7.3||^8.0",
-                "symfony/http-client": "^7.3||^8.0",
-                "symfony/intl": "^7.3",
-                "symfony/messenger": "^7.3||^8.0",
-                "symfony/phpunit-bridge": "^7.3||^8.0",
-                "symfony/twig-bundle": "^7.3||^8.0",
+                "symfony/browser-kit": "^7.4||^8.0",
+                "symfony/framework-bundle": "^7.4||^8.0",
+                "symfony/http-client": "^7.4||^8.0",
+                "symfony/intl": "^7.4||^8.0",
+                "symfony/messenger": "^7.4||^8.0",
+                "symfony/phpunit-bridge": "^7.4||^8.0",
+                "symfony/twig-bundle": "^7.4||^8.0",
                 "symfony/ux-chartjs": "^2.21",
                 "symfony/ux-twig-component": "^2.8",
-                "symfony/var-dumper": "^7.3||^8.0",
-                "yethee/tiktoken": "^0.11.1"
+                "symfony/var-dumper": "^7.4||^8.0",
+                "twig/extra-bundle": "^3.22",
+                "twig/intl-extra": "^3.22",
+                "yethee/tiktoken": "^1.0"
+            },
+            "suggest": {
+                "api-platform/core": "Required for admin dashboard integration",
+                "api-platform/doctrine-orm": "Leverage doctrine in api-platform",
+                "cebe/php-openapi": "For reading open api specs"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -6889,7 +6772,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/meili-bundle/issues",
-                "source": "https://github.com/survos/meili-bundle/tree/2.0.71"
+                "source": "https://github.com/survos/meili-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -6897,11 +6780,11 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-23T12:43:32+00:00"
+            "time": "2025-12-17T19:32:40+00:00"
         },
         {
             "name": "survos/sais-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/sais-bundle.git",
@@ -6967,16 +6850,16 @@
         },
         {
             "name": "survos/state-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/state-bundle.git",
-                "reference": "6a01fc0584761c684aa7938d0be21218d55d6925"
+                "reference": "0634e7cb080e79d02dd5f026f32d45b608539787"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/state-bundle/zipball/6a01fc0584761c684aa7938d0be21218d55d6925",
-                "reference": "6a01fc0584761c684aa7938d0be21218d55d6925",
+                "url": "https://api.github.com/repos/survos/state-bundle/zipball/0634e7cb080e79d02dd5f026f32d45b608539787",
+                "reference": "0634e7cb080e79d02dd5f026f32d45b608539787",
                 "shasum": ""
             },
             "require": {
@@ -7042,7 +6925,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/state-bundle/issues",
-                "source": "https://github.com/survos/state-bundle/tree/2.0.83"
+                "source": "https://github.com/survos/state-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -7050,7 +6933,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-05T13:53:44+00:00"
+            "time": "2025-12-17T19:32:39+00:00"
         },
         {
             "name": "symfony/asset",
@@ -13133,28 +13016,27 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.4.1",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "24dd4de28d2e3988b311751ac49e684d783e2345"
+                "reference": "7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/24dd4de28d2e3988b311751ac49e684d783e2345",
-                "reference": "24dd4de28d2e3988b311751ac49e684d783e2345",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14",
+                "reference": "7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3",
+                "php": ">=8.4",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
-                "symfony/console": "<6.4"
+                "symfony/console": "<7.4"
             },
             "require-dev": {
-                "symfony/console": "^6.4|^7.0|^8.0"
+                "symfony/console": "^7.4|^8.0"
             },
             "bin": [
                 "Resources/bin/yaml-lint"
@@ -13185,7 +13067,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.1"
+                "source": "https://github.com/symfony/yaml/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -13205,20 +13087,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-04T18:11:45+00:00"
+            "time": "2025-12-04T18:17:06+00:00"
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.22.1",
+            "version": "v3.22.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "b6534bc925bec930004facca92fccebd0c809247"
+                "reference": "09de9be7f6c0d19ede7b5a1dbfcfb2e9d1e0ea9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/b6534bc925bec930004facca92fccebd0c809247",
-                "reference": "b6534bc925bec930004facca92fccebd0c809247",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/09de9be7f6c0d19ede7b5a1dbfcfb2e9d1e0ea9e",
+                "reference": "09de9be7f6c0d19ede7b5a1dbfcfb2e9d1e0ea9e",
                 "shasum": ""
             },
             "require": {
@@ -13267,7 +13149,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.22.1"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.22.2"
             },
             "funding": [
                 {
@@ -13279,7 +13161,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-02T11:00:49+00:00"
+            "time": "2025-12-05T08:51:53+00:00"
         },
         {
             "name": "twig/html-extra",
@@ -13482,16 +13364,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.22.1",
+            "version": "v3.22.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "1de2ec1fc43ab58a4b7e80b214b96bfc895750f3"
+                "reference": "946ddeafa3c9f4ce279d1f34051af041db0e16f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1de2ec1fc43ab58a4b7e80b214b96bfc895750f3",
-                "reference": "1de2ec1fc43ab58a4b7e80b214b96bfc895750f3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/946ddeafa3c9f4ce279d1f34051af041db0e16f2",
+                "reference": "946ddeafa3c9f4ce279d1f34051af041db0e16f2",
                 "shasum": ""
             },
             "require": {
@@ -13545,7 +13427,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.22.1"
+                "source": "https://github.com/twigphp/Twig/tree/v3.22.2"
             },
             "funding": [
                 {
@@ -13557,7 +13439,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-16T16:01:12+00:00"
+            "time": "2025-12-14T11:28:47+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -13718,16 +13600,16 @@
         },
         {
             "name": "yethee/tiktoken",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yethee/tiktoken-php.git",
-                "reference": "077c23684ec7544d19bc7ff918f5ebc22f0aae97"
+                "reference": "d2b3bcf9c1437c0134da85e02482fc53c80bc37a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yethee/tiktoken-php/zipball/077c23684ec7544d19bc7ff918f5ebc22f0aae97",
-                "reference": "077c23684ec7544d19bc7ff918f5ebc22f0aae97",
+                "url": "https://api.github.com/repos/yethee/tiktoken-php/zipball/d2b3bcf9c1437c0134da85e02482fc53c80bc37a",
+                "reference": "d2b3bcf9c1437c0134da85e02482fc53c80bc37a",
                 "shasum": ""
             },
             "require": {
@@ -13740,7 +13622,7 @@
                 "phpbench/phpbench": "^1.2",
                 "phpunit/phpunit": "^10.5.45",
                 "psalm/plugin-phpunit": "^0.19.2",
-                "vimeo/psalm": "6.13.1"
+                "vimeo/psalm": "6.14.2"
             },
             "suggest": {
                 "ext-ffi": "To allow use LibEncoder"
@@ -13766,9 +13648,9 @@
             ],
             "support": {
                 "issues": "https://github.com/yethee/tiktoken-php/issues",
-                "source": "https://github.com/yethee/tiktoken-php/tree/1.0.0"
+                "source": "https://github.com/yethee/tiktoken-php/tree/1.1.0"
             },
-            "time": "2025-11-18T16:36:39+00:00"
+            "time": "2025-12-13T18:55:17+00:00"
         },
         {
             "name": "zenstruck/bytes",
@@ -14868,16 +14750,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.3",
+            "version": "12.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6dc2e076d09960efbb0c1272aa9bc156fc80955e"
+                "reference": "4ba0e923f9d3fc655de22f9547c01d15a41fc93a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6dc2e076d09960efbb0c1272aa9bc156fc80955e",
-                "reference": "6dc2e076d09960efbb0c1272aa9bc156fc80955e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4ba0e923f9d3fc655de22f9547c01d15a41fc93a",
+                "reference": "4ba0e923f9d3fc655de22f9547c01d15a41fc93a",
                 "shasum": ""
             },
             "require": {
@@ -14945,7 +14827,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.4"
             },
             "funding": [
                 {
@@ -14969,7 +14851,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-11T08:52:59+00:00"
+            "time": "2025-12-15T06:05:34+00:00"
         },
         {
             "name": "roave/better-reflection",
@@ -15046,12 +14928,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "415fded4fc00cd3df267d36e384e3e7454b39c40"
+                "reference": "e5034c4df32edeafb119b2c1e2b58876d0286ea8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/415fded4fc00cd3df267d36e384e3e7454b39c40",
-                "reference": "415fded4fc00cd3df267d36e384e3e7454b39c40",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/e5034c4df32edeafb119b2c1e2b58876d0286ea8",
+                "reference": "e5034c4df32edeafb119b2c1e2b58876d0286ea8",
                 "shasum": ""
             },
             "conflict": {
@@ -15073,6 +14955,7 @@
                 "alextselegidis/easyappointments": "<1.5.2.0-beta1",
                 "alexusmai/laravel-file-manager": "<=3.3.1",
                 "alt-design/alt-redirect": "<1.6.4",
+                "altcha-org/altcha": "<1.3.1",
                 "alterphp/easyadmin-extension-bundle": ">=1.2,<1.2.11|>=1.3,<1.3.1",
                 "amazing/media2click": ">=1,<1.3.3",
                 "ameos/ameos_tarteaucitron": "<1.2.23",
@@ -15096,10 +14979,10 @@
                 "athlon1600/php-proxy-app": "<=3",
                 "athlon1600/youtube-downloader": "<=4",
                 "austintoddj/canvas": "<=3.4.2",
-                "auth0/auth0-php": ">=3.3,<=8.16",
-                "auth0/login": "<=7.18",
-                "auth0/symfony": "<=5.4.1",
-                "auth0/wordpress": "<=5.3",
+                "auth0/auth0-php": ">=3.3,<8.18",
+                "auth0/login": "<7.20",
+                "auth0/symfony": "<=5.5",
+                "auth0/wordpress": "<=5.4",
                 "automad/automad": "<2.0.0.0-alpha5",
                 "automattic/jetpack": "<9.8",
                 "awesome-support/awesome-support": "<=6.0.7",
@@ -15322,6 +15205,7 @@
                 "floriangaerber/magnesium": "<0.3.1",
                 "fluidtypo3/vhs": "<5.1.1",
                 "fof/byobu": ">=0.3.0.0-beta2,<1.1.7",
+                "fof/pretty-mail": "<=1.1.2",
                 "fof/upload": "<1.2.3",
                 "foodcoopshop/foodcoopshop": ">=3.2,<3.6.1",
                 "fooman/tcpdf": "<6.2.22",
@@ -15522,6 +15406,7 @@
                 "microsoft/microsoft-graph-core": "<2.0.2",
                 "microweber/microweber": "<=2.0.19",
                 "mikehaertl/php-shellcommand": "<1.6.1",
+                "mineadmin/mineadmin": "<=3.0.9",
                 "miniorange/miniorange-saml": "<1.4.3",
                 "mittwald/typo3_forum": "<1.2.1",
                 "mobiledetect/mobiledetectlib": "<2.8.32",
@@ -16040,7 +15925,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-11T17:09:09+00:00"
+            "time": "2025-12-17T21:06:23+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -16993,16 +16878,16 @@
         },
         {
             "name": "survos/code-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/code-bundle.git",
-                "reference": "46030b99b9145f89b7209b75d6d4c1d42469f8e5"
+                "reference": "f88346c98c86e0d5edf7874cce94b2e65984199b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/code-bundle/zipball/46030b99b9145f89b7209b75d6d4c1d42469f8e5",
-                "reference": "46030b99b9145f89b7209b75d6d4c1d42469f8e5",
+                "url": "https://api.github.com/repos/survos/code-bundle/zipball/f88346c98c86e0d5edf7874cce94b2e65984199b",
+                "reference": "f88346c98c86e0d5edf7874cce94b2e65984199b",
                 "shasum": ""
             },
             "require": {
@@ -17058,7 +16943,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/code-bundle/issues",
-                "source": "https://github.com/survos/code-bundle/tree/2.0.83"
+                "source": "https://github.com/survos/code-bundle/tree/2.0.85"
             },
             "funding": [
                 {
@@ -17066,11 +16951,11 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-30T13:22:00+00:00"
+            "time": "2025-12-17T19:32:41+00:00"
         },
         {
             "name": "survos/command-bundle",
-            "version": "2.0.83",
+            "version": "2.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/command-bundle.git",
@@ -17744,6 +17629,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "jolicode/media-bundle": 20,
+        "meilisearch/meilisearch-php": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
