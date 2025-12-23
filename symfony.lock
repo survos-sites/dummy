@@ -213,6 +213,9 @@
     "survos/jsonl-bundle": {
         "version": "dev-main"
     },
+    "survos/lingua-bundle": {
+        "version": "2.0.85"
+    },
     "survos/meili-bundle": {
         "version": "dev-main"
     },

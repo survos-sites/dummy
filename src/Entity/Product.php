@@ -20,6 +20,10 @@ use JoliCode\MediaBundle\DeleteBehavior\Strategy;
 use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
 use JoliCode\MediaBundle\Model\Media;
 use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
+use Survos\BabelBundle\Attribute\BabelLocale;
+use Survos\BabelBundle\Attribute\BabelStorage;
+use Survos\BabelBundle\Attribute\BabelTerm;
+use Survos\BabelBundle\Contract\BabelHooksInterface;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
@@ -53,7 +57,6 @@ use Survos\BabelBundle\Attribute\Translatable;
         )],
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
-
 #[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
 
 // @todo: sort/search on translatable properties
@@ -84,15 +87,16 @@ use Survos\BabelBundle\Attribute\Translatable;
     ),
     embedders: ['best','small_product']
 )]
-
-class Product implements RouteParametersInterface
+#[BabelStorage()]
+#[BabelLocale(locale: 'en', targetLocales: ['es'])]
+class Product implements RouteParametersInterface, BabelHooksInterface
 {
     use BabelHooksTrait;
 
     use RouteParametersTrait;
     public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
     public function __construct(
-        #[ORM\Column(type: 'string', length: 255)]
+        #[ORM\Column(type: Types::STRING, length: 255)]
         #[ORM\Id]
         #[Groups(['product.read'])]
         public ?string $sku,
@@ -101,8 +105,6 @@ class Product implements RouteParametersInterface
         #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
 //        #[Groups(['product.details'])]
         private(set) array $data
-
-
     )
     {
         $this->images = new ArrayCollection();
@@ -126,12 +128,47 @@ class Product implements RouteParametersInterface
     public int $imageCount { get => $this->images->count(); }
 
 
-    // virtual property
+// App\Entity\Product.php — replace just the Category + Tags section with this (and add the use statement)
+// add: use Survos\BabelBundle\Attribute\BabelTerm;
+
+    // TERM-BACKED: Category (stored as term code)
+    #[ORM\Column(type: Types::STRING, length: 64, nullable: true)]
+    private(set) ?string $categoryCode = null;
+
+    #[BabelTerm(set: 'category')]
     #[Groups(['product.read'])]
-    #[ORM\Column(nullable: true)]
     #[Facet(label: 'Category', showMoreThreshold: 12)]
-    #[ApiProperty("category from extra, virtual but needs index")]
-    public ?string $category;
+    #[ApiProperty('Category term code (TermSet=category)')]
+    public ?string $category {
+        get => $this->categoryCode;
+        set => $this->categoryCode = $value;
+    }
+
+    // TERM-BACKED: Tags (stored as array of term codes)
+    #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
+    private(set) array $tagCodes = [];
+
+    #[BabelTerm(set: 'tag', multiple: true)]
+    #[Groups(['product.read'])]
+    #[Facet()]
+    #[ApiProperty('Tag term codes (TermSet=tag)')]
+    public array $tags {
+        get => $this->tagCodes;
+        set => $this->tagCodes = $value;
+    }
+
+    #[Groups(['product.read'])]
+    #[ApiProperty('Localized category label (resolved via Babel term hydration).')]
+    public ?string $categoryLabel {
+        get => $this->getResolvedTerm('category') ?? null;
+    }
+
+    #[Groups(['product.read'])]
+    #[ApiProperty('Localized tag labels (resolved via Babel term hydration).')]
+    public array $tagLabels {
+        get => $this->getResolvedTerm('tags') ?? [];
+    }
+
 
     #[Groups(['product.read'])]
     #[ORM\Column(type: Types::STRING, nullable: true)]
@@ -167,12 +204,6 @@ class Product implements RouteParametersInterface
     #[ORM\Column(type: Types::INTEGER)]
     #[Facet()]
     public int $stock;
-
-    #[Groups(['product.read'])]
-    #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
-    #[ApiProperty("array of tags")]
-    #[Facet()]
-    public array $tags;
 
     /**
      * @var Collection<int, Image>

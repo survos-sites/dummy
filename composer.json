@@ -40,6 +40,8 @@
         "survos/doc-bundle": "^2.0",
         "survos/ez-bundle": "^2.0",
         "survos/jsonl-bundle": "^2.0",
+        "survos/lingua-bundle": "^2.0",
+        "survos/lingua-contracts": "dev-main",
         "survos/meili-bundle": "^2.0",
         "survos/sais-bundle": "^2.0",
         "survos/state-bundle": "^2.0",

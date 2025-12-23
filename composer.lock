@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa16d3beac0025d559255622e186e05f",
+    "content-hash": "6101e619023cc04dfedefbf21c2cf4b6",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -2465,16 +2465,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.5.8",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "78dd074266e8b47a83bcf60ab5fe06c91a639168"
+                "reference": "d4e9276e79602b1eb4c4029c6c999b0d93478e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/78dd074266e8b47a83bcf60ab5fe06c91a639168",
-                "reference": "78dd074266e8b47a83bcf60ab5fe06c91a639168",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d4e9276e79602b1eb4c4029c6c999b0d93478e2f",
+                "reference": "d4e9276e79602b1eb4c4029c6c999b0d93478e2f",
                 "shasum": ""
             },
             "require": {
@@ -2547,9 +2547,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.5.8"
+                "source": "https://github.com/doctrine/orm/tree/3.6.0"
             },
-            "time": "2025-11-29T23:11:02+00:00"
+            "time": "2025-12-19T20:36:14+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -6603,6 +6603,70 @@
                 }
             ],
             "time": "2025-12-17T19:32:48+00:00"
+        },
+        {
+            "name": "survos/lingua-bundle",
+            "version": "2.0.85",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/lingua-bundle.git",
+                "reference": "7966b6c2f187b410f3e0d3078e1d2d9ee915c8b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/lingua-bundle/zipball/7966b6c2f187b410f3e0d3078e1d2d9ee915c8b1",
+                "reference": "7966b6c2f187b410f3e0d3078e1d2d9ee915c8b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "survos/lingua-contracts": "dev-main",
+                "survos/lingua-core": "dev-main",
+                "symfony/config": "^7.4||^8.0",
+                "symfony/console": "^7.4||^8.0",
+                "symfony/dependency-injection": "^7.4||^8.0",
+                "symfony/framework-bundle": "^7.4||^8.0",
+                "symfony/http-client": "^7.4||^8.0",
+                "symfony/http-kernel": "^7.4||^8.0",
+                "symfony/routing": "^7.4||^8.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^3.5",
+                "symfony/phpunit-bridge": "^7.4||^8.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\LinguaBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tac Tacelosky",
+                    "email": "tacman@gmail.com"
+                }
+            ],
+            "description": "interact with Survos Lingua Server (aka translation server).  Does not translate directly",
+            "keywords": [
+                "survos",
+                "symfony",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/lingua-bundle/issues",
+                "source": "https://github.com/survos/lingua-bundle/tree/2.0.85"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-17T19:32:40+00:00"
         },
         {
             "name": "survos/lingua-contracts",
@@ -17630,7 +17694,8 @@
     "stability-flags": {
         "jolicode/media-bundle": 20,
         "meilisearch/meilisearch-php": 20,
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "survos/lingua-contracts": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

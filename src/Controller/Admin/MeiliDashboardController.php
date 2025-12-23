@@ -1,4 +1,5 @@
 <?php
+// in the dummy project
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
@@ -37,6 +38,7 @@ final class MeiliDashboardController extends AbstractDashboardController
     {
         return $this->dashboardHelper
             ->configureDashboard(Dashboard::new())
+            ->setTitle('DummyJson admin')
             ;
     }
 

@@ -24,6 +24,14 @@ class ProductCrudController extends BaseCrudController
     public function configureFields(string $pageName): iterable
     {
 
+        yield TextField::new('sku')
+            ->setHelp(sprintf(
+                'Request locale=%s, default=%s',
+                $this->getContext()?->getRequest()?->getLocale() ?? 'n/a',
+                $this->getContext()?->getRequest()?->getDefaultLocale() ?? 'n/a',
+            ));
+
+
         yield MediaChoiceField::new('thumb')
             ->setRequired(false)
             ->setHelp('Thumbnail image')
@@ -36,6 +44,8 @@ class ProductCrudController extends BaseCrudController
 //        dd($this->generateUrl('admin_app_product_show', ['productId' => 1]));
         yield TextField::new('snippet')->onlyOnIndex();
         yield IntegerField::new('rating');
+
+        yield TextField::new('title');
         yield TextField::new('title')
             ->formatValue(function ($value, Product $entity) {
                 return sprintf(

@@ -5,7 +5,7 @@ survos_meili:
     apiKey: '%env(default::MEILI_API_KEY)%'
     searchKey: '%env(default::MEILI_SEARCH_KEY)%'
     meiliPrefix: '%env(default::MEILI_PREFIX)%'
-    passLocale: false
+    multiLingual: true
     maxValuesPerFacet: 1200
     embedders:
         small_product: # for testing, as cheap as possible
@@ -22,3 +22,4 @@ survos_meili:
             model: 'text-embedding-3-large' # 13 cents/million tokens
             apiKey: '%env(OPENAI_API_KEY)%'
             template: 'templates/liquid/product.liquid'
+

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Command;
 
@@ -11,7 +12,7 @@ use Castor\Attribute\AsSymfonyTask;
 use Doctrine\ORM\EntityManagerInterface;
 use JoliCode\MediaBundle\Resolver\Resolver;
 use League\Flysystem\FilesystemOperator;
-use Survos\SaisBundle\Model\AccountSetup;
+use Survos\BabelBundle\Service\TermRegistry;
 use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -24,118 +25,104 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsCommand('app:load', 'Load the Product and Image entities from dummyjson.com')]
 #[AsSymfonyTask('load')]
-class LoadCommand
+final class LoadCommand
 {
-	public function __construct(
+    public function __construct(
         #[Autowire('%kernel.project_dir%/data/products.json')] private string $filename,
         private readonly EntityManagerInterface $entityManager,
         private readonly ProductRepository $productRepository,
         private readonly ImageRepository $imageRepository,
-        private SaisClientService $saisClientService,
+        private readonly SaisClientService $saisClientService,
         private readonly Resolver $resolver,
+        private readonly TermRegistry $termRegistry,
         #[Target('filesystem.original.storage')]
-        private FilesystemOperator $originalFilesystem,
-
+        private readonly FilesystemOperator $originalFilesystem,
         #[Target('filesystem.cache.storage')]
-        private FilesystemOperator $cacheFilesystem,
-        private HttpClientInterface $httpClient,
-    )
-	{
-	}
+        private readonly FilesystemOperator $cacheFilesystem,
+        private readonly HttpClientInterface $httpClient,
+    ) {}
 
-
-	public function __invoke(
-		SymfonyStyle $io,
+    public function __invoke(
+        SymfonyStyle $io,
         #[Argument('url')] ?string $url = null,
-
-		#[Option('max number of records to import')] ?int $limit = null,
-		#[Option('purge Products')] ?bool $purge = null,
-	): int
-	{
+        #[Option('max number of records to import')] ?int $limit = null,
+        #[Option('purge Products')] ?bool $purge = null,
+    ): int {
         $url ??= $this->filename;
-		if ($limit) {
-		    $io->writeln("Option limit: $limit");
-		}
+
         if ($purge) {
-            //$io show "Purging Products";
-            $io->writeln("Purging Images and Products");
+            $io->writeln('Purging Images and Products');
             foreach ([Image::class, Product::class] as $className) {
-                $count = $this->entityManager->getRepository(Image::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();
-                $io->writeln("Purging $count $className");
+                $count = $this->entityManager->getRepository($className)->createQueryBuilder('qb')->delete()->getQuery()->execute();
+                $io->writeln("Purged $count $className");
             }
-//            $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();
-//            assert($this->entityManager->getRepository(Image::class)->count() == 0, "didnt purge");
-//            $this->entityManager->flush();
         }
 
-        // wget https://dummyjson.com/products -O data/products.json
-        foreach (json_decode(file_get_contents($url))->products as $idx => $data) {
-            // object Mapper?
+        // Ensure baseline sets exist (labels are source-locale; Lingua can fill later if you add stubs)
+        $this->termRegistry->ensureTermSet('category', 'Category');
+        $this->termRegistry->ensureTermSet('tag', 'Tag');
+
+        $payload = json_decode((string) file_get_contents($url), false, 512, JSON_THROW_ON_ERROR);
+
+        foreach ($payload->products as $idx => $data) {
             if (!$product = $this->productRepository->findOneBy(['sku' => $data->sku])) {
                 $product = new Product(sku: $data->sku, data: (array) $data);
                 $this->entityManager->persist($product);
             }
-            $product->title = $data->title;
-            $product->description = $data->description;
-            $product->brand = $data->brand??null;
-            $product->tags = $data->tags??null;
-            $product->category = $data->category;
-            if ($thumbUrl = $data->thumbnail) {
-                $code = hash('xxh3', $thumbUrl);
-                $ext = pathinfo(parse_url($thumbUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-                $thumbPath = "thumbs/$code.$ext";
-                // this downloads to the flysystem storage, e.g. s3, by way of a temporary file
-                $this->downloadImage($thumbUrl, $thumbPath);
-                $media = $this->resolver->resolve($thumbPath);
-                $product->thumb = $media;
+
+            $product->title = $data->title ?? null;
+            $product->description = $data->description ?? null;
+            $product->brand = $data->brand ?? null;
+
+            // TERM-BACKED: category + tags (store codes; ensure terms exist)
+            $categoryCode = (string) ($data->category ?? '');
+            $product->category = $categoryCode !== '' ? $categoryCode : null;
+            if ($categoryCode !== '') {
+                $this->termRegistry->ensureTerm('category', $categoryCode, $categoryCode);
             }
 
-            if (0)
-            foreach ($data->images as $imageUrl) {
-
-                $code = hash('xxh3', $imageUrl);
-                $ext = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-                $imagePath = "images/$code.$ext";
-
-                $this->downloadImage($imageUrl, $imagePath);
-                $media = $this->resolver->resolve($imagePath);
-
-                if (!$image = $this->imageRepository->findOneBy([
-                    'product' => $product,
-                    'code' => SaisClientService::calculateCode($imageUrl, AppController::SAIS_CLIENT_CODE),
-                ])) {
-                    $image = new Image($product, $imageUrl);
-                    $this->entityManager->persist($image);
+            $tagCodes = [];
+            foreach (($data->tags ?? []) as $tag) {
+                $tag = (string) $tag;
+                if ($tag === '') {
+                    continue;
                 }
-                $image->media = $media;
+                $tagCodes[] = $tag;
+                $this->termRegistry->ensureTerm('tag', $tag, $tag);
+            }
+            $product->tags = $tagCodes;
+
+            if ($thumbUrl = ($data->thumbnail ?? null)) {
+                $code = hash('xxh3', (string) $thumbUrl);
+                $ext = pathinfo((string) parse_url((string) $thumbUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+                $thumbPath = "thumbs/$code.$ext";
+
+                $this->downloadImage((string) $thumbUrl, $thumbPath);
+                $product->thumb = $this->resolver->resolve($thumbPath);
             }
 
             if ($limit && ($idx >= $limit - 1)) {
                 break;
             }
-
         }
+
         $this->entityManager->flush();
 
-        $io->success(self::class . " success. " . $this->productRepository->count());
-		return Command::SUCCESS;
-	}
+        $io->success(self::class . ' success. ' . $this->productRepository->count());
+        return Command::SUCCESS;
+    }
 
     public function downloadImage(string $imageUrl, string $path): string
     {
-
         if (!$this->originalFilesystem->fileExists($path)) {
-            // Download to temp file
             $tempFile = tempnam(sys_get_temp_dir(), 'img_');
             $response = $this->httpClient->request('GET', $imageUrl);
             file_put_contents($tempFile, $response->getContent());
 
-            // Upload to Flysystem (works with local or S3)
             $stream = fopen($tempFile, 'rb');
             $this->originalFilesystem->writeStream($path, $stream);
             fclose($stream);
 
-            // Clean up temp file
             unlink($tempFile);
         }
 

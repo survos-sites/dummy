@@ -66,28 +66,28 @@ return [
         'type' => 'css',
     ],
     'instantsearch.js' => [
-        'version' => '4.79.1',
+        'version' => '4.85.2',
     ],
     '@algolia/events' => [
         'version' => '4.0.1',
     ],
     'algoliasearch-helper' => [
-        'version' => '3.26.0',
+        'version' => '3.26.1',
     ],
     'qs' => [
         'version' => '6.14.0',
     ],
     'algoliasearch-helper/types/algoliasearch.js' => [
-        'version' => '3.26.0',
+        'version' => '3.26.1',
     ],
     'instantsearch.js/es/widgets' => [
-        'version' => '4.79.1',
+        'version' => '4.85.2',
     ],
     'instantsearch-ui-components' => [
-        'version' => '0.11.2',
+        'version' => '0.15.2',
     ],
     'preact' => [
-        'version' => '10.26.9',
+        'version' => '10.28.0',
     ],
     'hogan.js' => [
         'version' => '3.0.2',
@@ -96,25 +96,25 @@ return [
         'version' => '3.1.1',
     ],
     'preact/hooks' => [
-        'version' => '10.26.9',
+        'version' => '10.28.0',
     ],
     '@babel/runtime/helpers/extends' => [
-        'version' => '7.27.6',
+        'version' => '7.28.4',
     ],
     '@babel/runtime/helpers/defineProperty' => [
-        'version' => '7.27.6',
+        'version' => '7.28.4',
     ],
     '@babel/runtime/helpers/objectWithoutProperties' => [
-        'version' => '7.27.6',
+        'version' => '7.28.4',
     ],
     'htm' => [
         'version' => '3.1.1',
     ],
     '@meilisearch/instant-meilisearch' => [
-        'version' => '0.27.0',
+        'version' => '0.29.0',
     ],
     'meilisearch' => [
-        'version' => '0.51.0',
+        'version' => '0.54.0',
     ],
     '@stimulus-components/dialog' => [
         'version' => '1.0.1',
@@ -123,17 +123,17 @@ return [
         'version' => '3.2.2',
     ],
     'pretty-print-json' => [
-        'version' => '3.0.5',
+        'version' => '3.0.6',
     ],
     'pretty-print-json/dist/css/pretty-print-json.min.css' => [
-        'version' => '3.0.5',
+        'version' => '3.0.6',
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.13',
+        'version' => '8.0.20',
     ],
     'instantsearch.css/themes/algolia.min.css' => [
-        'version' => '8.5.1',
+        'version' => '8.9.0',
         'type' => 'css',
     ],
     '@andypf/json-viewer' => [
@@ -147,13 +147,13 @@ return [
         'type' => 'css',
     ],
     'bootstrap' => [
-        'version' => '5.3.7',
+        'version' => '5.3.8',
     ],
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
-        'version' => '5.3.7',
+        'version' => '5.3.8',
         'type' => 'css',
     ],
     'side-channel' => [
@@ -163,7 +163,7 @@ return [
         'version' => '1.3.0',
     ],
     'object-inspect' => [
-        'version' => '1.13.3',
+        'version' => '1.13.4',
     ],
     'side-channel-list' => [
         'version' => '1.0.0',
@@ -175,10 +175,10 @@ return [
         'version' => '1.0.2',
     ],
     'get-intrinsic' => [
-        'version' => '1.2.5',
+        'version' => '1.3.0',
     ],
     'call-bound' => [
-        'version' => '1.0.2',
+        'version' => '1.0.4',
     ],
     'es-errors' => [
         'version' => '1.3.0',
@@ -208,13 +208,13 @@ return [
         'version' => '1.1.0',
     ],
     'dunder-proto/get' => [
-        'version' => '1.0.0',
+        'version' => '1.0.1',
     ],
     'call-bind-apply-helpers/functionApply' => [
-        'version' => '1.0.0',
+        'version' => '1.0.2',
     ],
     'call-bind-apply-helpers/functionCall' => [
-        'version' => '1.0.0',
+        'version' => '1.0.2',
     ],
     'function-bind' => [
         'version' => '1.1.2',
@@ -226,13 +226,13 @@ return [
         'version' => '1.0.8',
     ],
     'call-bind-apply-helpers' => [
-        'version' => '1.0.0',
+        'version' => '1.0.2',
     ],
     'set-function-length' => [
         'version' => '1.2.2',
     ],
     'call-bind-apply-helpers/applyBind' => [
-        'version' => '1.0.0',
+        'version' => '1.0.2',
     ],
     'define-data-property' => [
         'version' => '1.1.4',
@@ -245,5 +245,83 @@ return [
     ],
     'ms' => [
         'version' => '2.1.3',
+    ],
+    'ai' => [
+        'version' => '5.0.115',
+    ],
+    '@babel/runtime/helpers/typeof' => [
+        'version' => '7.28.4',
+    ],
+    '@babel/runtime/helpers/slicedToArray' => [
+        'version' => '7.28.4',
+    ],
+    '@babel/runtime/helpers/toConsumableArray' => [
+        'version' => '7.28.4',
+    ],
+    'markdown-to-jsx' => [
+        'version' => '9.4.2',
+    ],
+    'es-object-atoms' => [
+        'version' => '1.1.1',
+    ],
+    'math-intrinsics/abs' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/floor' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/max' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/min' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/pow' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/round' => [
+        'version' => '1.1.0',
+    ],
+    'math-intrinsics/sign' => [
+        'version' => '1.1.0',
+    ],
+    'get-proto' => [
+        'version' => '1.0.1',
+    ],
+    'get-proto/Object.getPrototypeOf' => [
+        'version' => '1.0.1',
+    ],
+    'get-proto/Reflect.getPrototypeOf' => [
+        'version' => '1.0.1',
+    ],
+    '@ai-sdk/gateway' => [
+        'version' => '2.0.22',
+    ],
+    '@ai-sdk/provider-utils' => [
+        'version' => '3.0.19',
+    ],
+    '@ai-sdk/provider' => [
+        'version' => '2.0.0',
+    ],
+    'zod/v4' => [
+        'version' => '4.2.1',
+    ],
+    '@opentelemetry/api' => [
+        'version' => '1.9.0',
+    ],
+    'react' => [
+        'version' => '19.2.3',
+    ],
+    '@vercel/oidc' => [
+        'version' => '3.0.5',
+    ],
+    'eventsource-parser/stream' => [
+        'version' => '3.0.6',
+    ],
+    'zod/v3' => [
+        'version' => '4.2.1',
+    ],
+    '@standard-schema/spec' => [
+        'version' => '1.1.0',
     ],
 ];

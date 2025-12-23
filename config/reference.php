@@ -2349,6 +2349,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * @psalm-type SurvosEzConfig = array{
  *     enabled?: bool, // Default: true
  * }
+ * @psalm-type SurvosLinguaConfig = array{
+ *     server?: scalar|null, // Default: "%env(default::LINGUA_BASE_URI)%"
+ *     api_key?: scalar|null, // Default: "%env(default::LINGUA_API_KEY)%"
+ *     timeout?: int, // Default: 10
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2384,6 +2389,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *     flysystem?: FlysystemConfig,
  *     survos_ez?: SurvosEzConfig,
+ *     survos_lingua?: SurvosLinguaConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2425,6 +2431,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2461,6 +2468,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2500,6 +2508,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         joli_media_easy_admin?: JoliMediaEasyAdminConfig,
  *         flysystem?: FlysystemConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
