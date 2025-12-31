@@ -109,9 +109,6 @@
             "config/packages/doctrine_diagram.yaml"
         ]
     },
-    "knplabs/knp-menu-bundle": {
-        "version": "v3.6.0"
-    },
     "league/flysystem-bundle": {
         "version": "3.6",
         "recipe": {
@@ -181,9 +178,6 @@
     },
     "survos/babel-bundle": {
         "version": "dev-main"
-    },
-    "survos/bootstrap-bundle": {
-        "version": "2.0.51"
     },
     "survos/code-bundle": {
         "version": "dev-main"

@@ -27,8 +27,6 @@ return [
     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
-    Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
-    Survos\BootstrapBundle\SurvosBootstrapBundle::class => ['all' => true],
     Zenstruck\Messenger\Monitor\ZenstruckMessengerMonitorBundle::class => ['all' => true],
     Survos\BabelBundle\SurvosBabelBundle::class => ['all' => true],
     Survos\StateBundle\SurvosStateBundle::class => ['all' => true],

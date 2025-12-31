@@ -1,12 +1,5 @@
 {
     "controllers": {
-        "@survos/bootstrap-bundle": {
-            "search": {
-                "enabled": true,
-                "fetch": "lazy",
-                "autoimport": []
-            }
-        },
         "@survos/meili-bundle": {
             "insta": {
                 "enabled": true,

@@ -1211,7 +1211,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         enabled?: bool, // Default: false
  *     },
  *     string?: bool|array{
- *         enabled?: bool, // Default: true
+ *         enabled?: bool, // Default: false
  *     },
  *     commonmark?: array{
  *         renderer?: array{ // Array of options for rendering HTML.
@@ -1894,44 +1894,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         vary?: list<scalar|null>,
  *     },
  * }
- * @psalm-type KnpMenuConfig = array{
- *     providers?: array{
- *         builder_alias?: bool, // Default: true
- *     },
- *     twig?: array{
- *         template?: scalar|null, // Default: "@KnpMenu/menu.html.twig"
- *     },
- *     templating?: bool, // Default: false
- *     default_renderer?: scalar|null, // Default: "twig"
- * }
- * @psalm-type SurvosBootstrapConfig = array{
- *     app?: array{
- *         impersonate?: array<string, scalar|null>,
- *         social?: array<string, scalar|null>,
- *         code?: scalar|null, // project code, default for repo, dokku deployment, etc. // Default: "my-project"
- *         abbr?: scalar|null, // text abbreviation // Default: "my<b>Project</b>"
- *         logo?: scalar|null, // Default: null
- *         logo_small?: scalar|null, // Default: null
- *     },
- *     routes?: array{
- *         home?: scalar|null, // name of the homepage route // Default: "app_homepage"
- *         login?: scalar|null, // name of the login // Default: "app_login"
- *         homepage?: scalar|null, // name of the home routes // Default: "app_homepage"
- *         logout?: scalar|null, // name of the logout route // Default: "app_logout"
- *         offcanvas?: scalar|null, // name of the offcanvas route (e.g. a settings sidebar) // Default: "app_settings"
- *         register?: scalar|null, // name of the register route // Default: "app_register"
- *         search?: scalar|null, // multi-entity search route // Default: false
- *     },
- *     options?: array{
- *         theme?: scalar|null, // theme name // Default: "bootswatch"
- *         layout_direction?: scalar|null, // Default: "horizontal"
- *         offcanvas?: scalar|null, // Offcanvas position (top,bottom,start,end // Default: "end"
- *         allow_login?: bool, // Login route exists // Default: false
- *         show_locale_dropdown?: bool, // Add a locale dropdown to the navbar // Default: false
- *     },
- *     menu_options?: array<string, scalar|null>,
- *     impersonate?: array<string, scalar|null>,
- * }
  * @psalm-type ZenstruckMessengerMonitorConfig = array{
  *     storage?: array{
  *         exclude?: list<scalar|null>,
@@ -2378,8 +2340,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     stimulus?: StimulusConfig,
  *     turbo?: TurboConfig,
  *     fos_js_routing?: FosJsRoutingConfig,
- *     knp_menu?: KnpMenuConfig,
- *     survos_bootstrap?: SurvosBootstrapConfig,
  *     zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     survos_babel?: SurvosBabelConfig,
  *     survos_state?: SurvosStateConfig,
@@ -2419,8 +2379,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         stimulus?: StimulusConfig,
  *         turbo?: TurboConfig,
  *         fos_js_routing?: FosJsRoutingConfig,
- *         knp_menu?: KnpMenuConfig,
- *         survos_bootstrap?: SurvosBootstrapConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_state?: SurvosStateConfig,
@@ -2457,8 +2415,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         stimulus?: StimulusConfig,
  *         turbo?: TurboConfig,
  *         fos_js_routing?: FosJsRoutingConfig,
- *         knp_menu?: KnpMenuConfig,
- *         survos_bootstrap?: SurvosBootstrapConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_state?: SurvosStateConfig,
@@ -2497,8 +2453,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         stimulus?: StimulusConfig,
  *         turbo?: TurboConfig,
  *         fos_js_routing?: FosJsRoutingConfig,
- *         knp_menu?: KnpMenuConfig,
- *         survos_bootstrap?: SurvosBootstrapConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_state?: SurvosStateConfig,
