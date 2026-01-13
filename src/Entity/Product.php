@@ -15,17 +15,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use JoliCode\MediaBundle\DeleteBehavior\Attribute\MediaDeleteBehavior;
-use JoliCode\MediaBundle\DeleteBehavior\Strategy;
-use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
-use JoliCode\MediaBundle\Model\Media;
-use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
 use Survos\BabelBundle\Attribute\BabelLocale;
 use Survos\BabelBundle\Attribute\BabelStorage;
 use Survos\BabelBundle\Attribute\BabelTerm;
 use Survos\BabelBundle\Contract\BabelHooksInterface;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
+use Survos\EzBundle\Attribute\Page;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\MeiliBundle\Metadata\Embedder;
 use Survos\MeiliBundle\Metadata\Facet;
@@ -35,6 +31,8 @@ use Survos\MeiliBundle\Metadata\FieldSet;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Survos\EzBundle\Attribute\EzAdmin;
+use Survos\EzBundle\Attribute\EzField;
 
 
 use Survos\BabelBundle\Entity\Traits\BabelHooksTrait;
@@ -69,6 +67,7 @@ use Survos\BabelBundle\Attribute\Translatable;
 )]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
 #[MeiliIndex(
+    enabled: false, //
     // serialization groups for the JSON sent to the index
     primaryKey: 'sku',
     persisted: new Fields(
@@ -89,6 +88,13 @@ use Survos\BabelBundle\Attribute\Translatable;
 )]
 #[BabelStorage()]
 #[BabelLocale(locale: 'en', targetLocales: ['es'])]
+#[EzAdmin(
+    label: 'Product',
+    icon: 'tabler:shopping-cart',
+    indexMax: 12,
+    editRoles: ['ROLE_ADMIN', 'ROLE_EDITOR'],
+    readOnlyByDefault: true,
+)]
 class Product implements RouteParametersInterface, BabelHooksInterface
 {
     use BabelHooksTrait;
@@ -99,6 +105,7 @@ class Product implements RouteParametersInterface, BabelHooksInterface
         #[ORM\Column(type: Types::STRING, length: 255)]
         #[ORM\Id]
         #[Groups(['product.read'])]
+        #[EzField(order: 900, label: 'SKU', showOn: [Page::DETAIL])]
         public ?string $sku,
 
 
@@ -107,7 +114,7 @@ class Product implements RouteParametersInterface, BabelHooksInterface
         private(set) array $data
     )
     {
-        $this->images = new ArrayCollection();
+        $this->images = $this->data->images??[];
         $this->stock = $this->data->stock??0;
         $this->rating = round($this->data->rating??0);
     }
@@ -117,11 +124,6 @@ class Product implements RouteParametersInterface, BabelHooksInterface
     {
         return $this->sku;
     }
-
-    #[MediaConstraint(allowedTypes: ['image', 'video'])]
-    #[MediaDeleteBehavior(strategy: Strategy::SET_NULL)]
-    #[ORM\Column(type: MediaTypes::MEDIA_LONG, nullable: true)]
-    public ?Media $thumb = null;
 
     #[Facet()]
     #[Groups(['product.read'])]
@@ -139,6 +141,7 @@ class Product implements RouteParametersInterface, BabelHooksInterface
     #[Groups(['product.read'])]
     #[Facet(label: 'Category', showMoreThreshold: 12)]
     #[ApiProperty('Category term code (TermSet=category)')]
+    #[EzField(index: true, order: 40, filter: true, label: 'Category')]
     public ?string $category {
         get => $this->categoryCode;
         set => $this->categoryCode = $value;
@@ -174,6 +177,7 @@ class Product implements RouteParametersInterface, BabelHooksInterface
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Facet(showMoreThreshold: 12)]
     #[ApiProperty("the registered brand name")]
+    #[EzField(index: true, order: 30, filter: true, label: 'Brand')]
     public ?string $brand;
 
     #[Groups(['product.read'])]
@@ -205,38 +209,9 @@ class Product implements RouteParametersInterface, BabelHooksInterface
     #[Facet()]
     public int $stock;
 
-    /**
-     * @var Collection<int, Image>
-     */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', orphanRemoval: true)]
-    private(set) Collection $images {
-        get {
-            return $this->images;
-        }
-    }
-
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
+    #[Groups(['product.read'])]
+    #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
+    public array $images;
 
         // <BABEL:TRANSLATABLE:START title>
         #[Column(type: Types::TEXT, nullable: true)]
@@ -244,6 +219,14 @@ class Product implements RouteParametersInterface, BabelHooksInterface
 
         #[Translatable(context: NULL)]
         #[Groups(['product.read', 'product.searchable'])]
+        #[EzField(
+            index: true,
+            order: 10,
+            label: 'Title',
+//            linkRoute: 'admin_app_product_show',
+//            linkParam: 'productId',
+//            linkProperty: 'sku',
+        )]
         public ?string $title {
             get => $this->resolveTranslatable('title', $this->titleBacking, NULL);
             set => $this->titleBacking = $value;

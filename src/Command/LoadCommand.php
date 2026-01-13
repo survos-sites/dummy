@@ -10,10 +10,9 @@ use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
 use Castor\Attribute\AsSymfonyTask;
 use Doctrine\ORM\EntityManagerInterface;
-use JoliCode\MediaBundle\Resolver\Resolver;
 use League\Flysystem\FilesystemOperator;
 use Survos\BabelBundle\Service\TermRegistry;
-use Survos\SaisBundle\Service\SaisClientService;
+use Survos\MediaBundle\Service\MediaRegistry;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -31,9 +30,7 @@ final class LoadCommand
         #[Autowire('%kernel.project_dir%/data/products.json')] private string $filename,
         private readonly EntityManagerInterface $entityManager,
         private readonly ProductRepository $productRepository,
-        private readonly ImageRepository $imageRepository,
-        private readonly SaisClientService $saisClientService,
-        private readonly Resolver $resolver,
+        private readonly MediaRegistry $mediaRegistry,
         private readonly TermRegistry $termRegistry,
         #[Target('filesystem.original.storage')]
         private readonly FilesystemOperator $originalFilesystem,
@@ -74,6 +71,7 @@ final class LoadCommand
             $product->description = $data->description ?? null;
             $product->brand = $data->brand ?? null;
 
+
             // TERM-BACKED: category + tags (store codes; ensure terms exist)
             $categoryCode = (string) ($data->category ?? '');
             $product->category = $categoryCode !== '' ? $categoryCode : null;
@@ -91,14 +89,9 @@ final class LoadCommand
                 $this->termRegistry->ensureTerm('tag', $tag, $tag);
             }
             $product->tags = $tagCodes;
-
-            if ($thumbUrl = ($data->thumbnail ?? null)) {
-                $code = hash('xxh3', (string) $thumbUrl);
-                $ext = pathinfo((string) parse_url((string) $thumbUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-                $thumbPath = "thumbs/$code.$ext";
-
-                $this->downloadImage((string) $thumbUrl, $thumbPath);
-                $product->thumb = $this->resolver->resolve($thumbPath);
+            $product->images = $data->images;
+            foreach ($data->images as $imageUrl) {
+                $this->mediaRegistry->ensureMedia($imageUrl);
             }
 
             if ($limit && ($idx >= $limit - 1)) {

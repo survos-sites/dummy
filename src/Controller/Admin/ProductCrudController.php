@@ -1,84 +1,69 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AvatarField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use JoliCode\MediaBundle\Bridge\EasyAdmin\Field\MediaChoiceField;
-use Survos\EzBundle\Controller\BaseCrudController;
+use Survos\EzBundle\Controller\AbstractEzCrudController;
+use Survos\EzBundle\Field\LinkedTextField;
+use Survos\MediaBundle\Service\MediaUrlGenerator;
 
-class ProductCrudController extends BaseCrudController
+final class ProductCrudController extends AbstractEzCrudController
 {
+    public function __construct(
+        private MediaUrlGenerator $mediaUrlGenerator
+    )
+    {
+    }
+
+    // Your app route that shows a product. Adjust if needed.
+    private const SHOW_ROUTE = 'meili_admin_app_product_show';
+
+
     public static function getEntityFqcn(): string
     {
         return Product::class;
     }
 
-    public function configureFields(string $pageName): iterable
+    /**
+     * CRUD override (highest precedence):
+     * Put the most important fields first, then let EzField drive the rest,
+     * then let EasyAdmin fill remaining defaults (deduped).
+     */
+    protected function preferredFields(string $pageName): iterable
     {
-
-        yield TextField::new('sku')
-            ->setHelp(sprintf(
-                'Request locale=%s, default=%s',
-                $this->getContext()?->getRequest()?->getLocale() ?? 'n/a',
-                $this->getContext()?->getRequest()?->getDefaultLocale() ?? 'n/a',
-            ));
-
-
-        yield MediaChoiceField::new('thumb')
-            ->setRequired(false)
-            ->setHelp('Thumbnail image')
-            ->setFolder('thumbs')
-        ;
-
-        // Visual priority order - most important first
-//        yield AvatarField::new('thumbnailUrl')->setHeight(36);  // Visual thumbnail first
-
-//        dd($this->generateUrl('admin_app_product_show', ['productId' => 1]));
-        yield TextField::new('snippet')->onlyOnIndex();
-        yield IntegerField::new('rating');
-
-        yield TextField::new('title');
-        yield TextField::new('title')
+        // config/image_presets.yaml or a service
+        yield TextField::new('sku', 'Image')
+            ->onlyOnIndex()
+            ->renderAsHtml()
             ->formatValue(function ($value, Product $entity) {
-                return sprintf(
-                    '<a href="%s">%s</a>',
-                    $this->generateUrl('admin_app_product_show', ['productId' => $entity->sku]),
-                    $value
-                );
+                $PRESETS = [
+                    'small' => 'resize:fit:150:75',
+                    'thumb' => 'resize:fill:200:200',
+                    'hero'  => 'resize:fit:1200:600',
+                ];
+                $prefix = $PRESETS['hero'];
+
+                $thumbUrl = $entity->data['thumbnail'];
+                $proxyUrl = $this->mediaUrlGenerator->resize($thumbUrl, 'large', true);
+//                if (!$value) return '';
+                // @todo: move to sais or core
+//                $encoded = rtrim(strtr(base64_encode($thumbUrl), '+/', '-_'), '=');
+//                $proxyUrl = "https://images.survos.com/{$prefix}/{$encoded}";
+//                return $proxyUrl;
+//                dd($proxyUrl);
+                return sprintf('<a href="%s" target="_blank"><img src="%s" style="max-height:50px" /></a>', $proxyUrl, $proxyUrl);
             });
 
-        yield TextField::new('marking');                     // Status/workflow state
-
-
-    }
-
-
-    public function SemiAutomaticConfigureFields(string $pageName): iterable
-    {
-        $thumb = MediaChoiceField::new('thumb')
-            ->setRequired(false)
-            ->setHelp('Attach an image to this post')
-            ->setFolder('articles');
-        yield $thumb;
-        foreach (parent::configureFields($pageName) as $field) {
-            $dto = $field->getAsDto();
-            $field = match ($dto->getProperty()) {
-                'thumb' => null,
-                default => $field,
-            };
-            if ($field) {
-                yield $field;
-            }
+        if ($pageName !== Crud::PAGE_INDEX) {
+            return [];
         }
+
+        yield LinkedTextField::new('title', 'Title')
+            ->setRoute(self::SHOW_ROUTE, 'productId', 'sku');
     }
-
-
 }

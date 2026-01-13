@@ -4,11 +4,18 @@ use Castor\Attribute\AsTask;
 
 use function Castor\{io,import,capture,run};
 
-try {
-    import('.castor/vendor/tacman/castor-tools/castor.php');
-} catch (Throwable $e) {
-    io()->error("castor composer install");
-    io()->error($e->getMessage());
+foreach (glob(__DIR__ . '/.castor/vendor/*/*/castor.php') as $castorFile) {
+    import($castorFile);
+}
+
+#[AsTask('bootstrap', description: 'bootstrap castor tools')]
+function bootstrap(): void
+{
+    io()>warning($cmd = 'castor composer req tacman/castortools');
+    if (io()>confirm("Run it now?", true)) {
+        run($cmd);
+        io()>error($cmd);
+    }
 }
 
 import('src/Command/LoadCommand.php');

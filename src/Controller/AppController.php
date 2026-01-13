@@ -33,7 +33,6 @@ class AppController extends AbstractController
     const SAIS_CLIENT_CODE='dummy-sais';
     public function __construct(
         private CacheInterface           $cache,
-        private SaisClientService        $saisService,
         private UrlGeneratorInterface    $urlGenerator,
         private ImageRepository          $imageRepository,
         private EntityManagerInterface   $entityManager,
@@ -67,41 +66,6 @@ class AppController extends AbstractController
             ['es', 'fr', 'hu', 'de','da','uk'], $text);
         return $_format === 'json' ? $this->json($response): $this->render('app/index.html.twig', [
             'response' => $response,
-        ]);
-    }
-
-    #[Route('/compress/{limit}', name: 'app_compress_images')]
-    public function listFeatured(int $limit=3): Response
-    {
-        // we only use this to make it easier to debug
-        // example of sending multiple images
-        $products = $this->getDummyProducts();
-        $responses = [];
-        // makes sure dummy exists on sais!
-        $response = $this->saisService->accountSetup(new AccountSetup(AppController::SAIS_CLIENT_CODE, 500));
-
-        foreach ($products->products as $idx => $product) {
-                $payload = new \Survos\SaisBundle\Model\ProcessPayload(
-                    AppController::SAIS_CLIENT_CODE,
-                    $product->images,
-                    ['small'],
-                    context: [
-                        'productId' => $product->id
-                    ],
-                    mediaCallbackUrl: $this->urlGenerator->generate('app_media_webhook', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                    thumbCallbackUrl: $this->urlGenerator->generate('app_thumb_webhook', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                );
-                $response = $this->saisService->dispatchProcess($payload);
-                $responses[] = [
-                    'payload' => $payload,
-                    'response' => $response,
-                ];
-            if ($limit && count($responses) >= $limit) {
-                break;
-            }
-        }
-        return $this->render('app/index.html.twig', [
-            'responses' => $responses,
         ]);
     }
 

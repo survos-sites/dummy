@@ -10,10 +10,12 @@ Markdown for ImageWorkflow
 
 ### dispatch.Transition
 
-        onTransitionDispatch()
+onTransitionDispatch()
+        // request resize
         // Send a resize request to sais
+
 ```php
-#[AsTransitionListener(self::WORKFLOW_NAME, IImageWorkflow::TRANSITION_DISPATCH)]
+#[AsTransitionListener(WF::WORKFLOW_NAME, WF::TRANSITION_DISPATCH)]
 public function onTransitionDispatch(TransitionEvent $event): void
 {
 
@@ -34,6 +36,6 @@ public function onTransitionDispatch(TransitionEvent $event): void
     }
 }
 ```
-[View source](dummy/blob/main/src/Workflow/ImageWorkflow.php#L31-L49)
+[View source](dummy/blob/main/src/Workflow/ImageWorkflow.php#L29-L47)
 
 

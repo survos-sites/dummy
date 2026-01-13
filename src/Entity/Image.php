@@ -60,12 +60,6 @@ class Image implements MarkingInterface, \Stringable
     }
     public string $id { get => $this->code; }
 
-    #[MediaConstraint(allowedTypes: ['image'])]
-    #[MediaDeleteBehavior(strategy: Strategy::SET_NULL)]
-    #[ORM\Column(type: MediaTypes::MEDIA_LONG, nullable: true)]
-    public ?Media $media = null;
-
-
     public function getId(): string
     {
         return $this->code;

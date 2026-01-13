@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 756)">
 <title>workflow</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-756 365,-756 365,4 -4,4"/>
-<text text-anchor="start" x="132.5" y="-8.8" font-family="Times,serif" font-weight="bold" font-size="14.00">ImageWorkflow</text>
+<text text-anchor="start" x="119.5" y="-8.8" font-family="Times,serif" font-weight="bold" font-size="14.00">ImageWorkflow</text>
 <!-- place_new -->
 <g id="node1" class="node">
 <title>place_new</title>
@@ -24,7 +24,7 @@
 <polygon fill="lightBlue" stroke="lightBlue" points="361,-635 217,-635 217,-563 361,-563 361,-635"/>
 <text text-anchor="start" x="271.5" y="-601.6" font-family="Arial" font-weight="bold" font-size="8.00">dispatch</text>
 <text text-anchor="start" x="263.5" y="-593.6" font-family="Arial" font-style="italic" font-size="8.00">request resize</text>
-<text text-anchor="middle" x="130.5" y="-637.6" font-family="Arial" font-size="8.00">Transition dispatch: Send a resize request to sais</text>
+<text text-anchor="middle" x="130" y="-637.6" font-family="Arial" font-size="8.00">Transition dispatch: Send a resize request to sais</text>
 </g>
 <!-- place_new&#45;&gt;transition_dispatch -->
 <!-- new -->
@@ -45,9 +45,8 @@
 <g id="node6" class="node">
 <title>transition_complete</title>
 <polygon fill="lightBlue" stroke="lightBlue" points="361,-419 217,-419 217,-347 361,-347 361,-419"/>
-<text text-anchor="start" x="270.5" y="-389.6" font-family="Arial" font-weight="bold" font-size="8.00">complete</text>
-<text text-anchor="start" x="268" y="-381.6" font-family="Arial" text-decoration="underline" font-size="8.00">Thumbnails</text>
-<text text-anchor="start" x="264" y="-373.6" font-family="Arial" font-style="italic" font-size="8.00">if resized exist</text>
+<text text-anchor="start" x="270.5" y="-385.6" font-family="Arial" font-weight="bold" font-size="8.00">complete</text>
+<text text-anchor="start" x="264" y="-377.6" font-family="Arial" font-style="italic" font-size="8.00">if resized exist</text>
 <text text-anchor="middle" x="108.5" y="-421.6" font-family="Arial" font-size="8.00">Transition complete: After thumb webhook has been received</text>
 </g>
 <!-- place_dispatched&#45;&gt;transition_complete -->
@@ -70,7 +69,7 @@
 <title>transition_fail</title>
 <polygon fill="lightBlue" stroke="lightBlue" points="361,-203 217,-203 217,-131 361,-131 361,-203"/>
 <text text-anchor="start" x="282.5" y="-166.1" font-family="Arial" font-weight="bold" font-size="8.00">fail</text>
-<text text-anchor="middle" x="191.5" y="-205.6" font-family="Arial" font-size="8.00">Transition fail: </text>
+<text text-anchor="middle" x="191" y="-205.6" font-family="Arial" font-size="8.00">Transition fail: </text>
 </g>
 <!-- place_ready&#45;&gt;transition_fail -->
 <!-- ready -->
