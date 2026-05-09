@@ -42,3 +42,5 @@ phpstan.neon
 /.phpunit.cache
 
 public/media
+config.bat
+node_modules

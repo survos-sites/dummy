@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
-use JoliCode\MediaBundle\Bridge\EasyAdmin\Field\MediaChoiceField;
 use Survos\EzBundle\Controller\BaseCrudController;
 
 class ImageCrudController extends BaseCrudController
@@ -21,11 +20,11 @@ class ImageCrudController extends BaseCrudController
     public function configureFields(string $pageName): iterable
     {
 
-        yield MediaChoiceField::new('image')
-            ->setRequired(false)
-            ->setHelp('Thumbnail image')
-            ->setFolder('original')
-        ;
+//        yield MediaChoiceField::new('image')
+//            ->setRequired(false)
+//            ->setHelp('Thumbnail image')
+//            ->setFolder('original')
+//        ;
 
         yield IdField::new('code', 'hash');
         yield UrlField::new('originalUrl');

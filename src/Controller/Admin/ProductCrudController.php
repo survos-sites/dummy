@@ -10,14 +10,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use JoliCode\MediaBundle\Bridge\EasyAdmin\Field\MediaChoiceField;
 use Survos\EzBundle\Controller\AbstractEzCrudController;
 use Survos\EzBundle\Field\LinkedTextField;
+use Survos\MediaBundle\Entity\Photo;
+use Survos\MediaBundle\Service\MediaRegistry;
 use Survos\MediaBundle\Service\MediaUrlGenerator;
 
 final class ProductCrudController extends AbstractEzCrudController
 {
     public function __construct(
-        private MediaUrlGenerator $mediaUrlGenerator
+        private MediaUrlGenerator $mediaUrlGenerator,
+        private MediaRegistry $mediaRegistry,
     )
     {
+//        parent::__construct();
     }
 
     // Your app route that shows a product. Adjust if needed.
@@ -36,20 +40,18 @@ final class ProductCrudController extends AbstractEzCrudController
      */
     protected function preferredFields(string $pageName): iterable
     {
+        // resolve to our local media
+
         // config/image_presets.yaml or a service
-        yield TextField::new('sku', 'Image')
+        yield TextField::new('sku', 'LargeImg')
             ->onlyOnIndex()
             ->renderAsHtml()
             ->formatValue(function ($value, Product $entity) {
-                $PRESETS = [
-                    'small' => 'resize:fit:150:75',
-                    'thumb' => 'resize:fill:200:200',
-                    'hero'  => 'resize:fit:1200:600',
-                ];
-                $prefix = $PRESETS['hero'];
-
                 $thumbUrl = $entity->data['thumbnail'];
-                $proxyUrl = $this->mediaUrlGenerator->resize($thumbUrl, 'large', true);
+                $photo = $this->mediaRegistry->ensureMedia($thumbUrl, Photo::class);
+                // if we have it, use it.
+                $proxyUrl =
+                    $photo->smallUrl ?:  $this->mediaUrlGenerator->resize($thumbUrl, 'large', true, client: 'dummy');
 //                if (!$value) return '';
                 // @todo: move to sais or core
 //                $encoded = rtrim(strtr(base64_encode($thumbUrl), '+/', '-_'), '=');

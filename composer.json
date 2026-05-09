@@ -18,7 +18,7 @@
         "doctrine/doctrine-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.5",
-        "easycorp/easyadmin-bundle": "^4.25",
+        "easycorp/easyadmin-bundle": "^4.25|^5.0",
         "friendsofsymfony/jsrouting-bundle": "^3.5",
         "imagine/imagine": "^1.3",
         "inspector-apm/inspector-symfony": "^1.8",
@@ -117,15 +117,17 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "fos:js-routing:dump --format=js --target=public/js/fos_js_routes.js --callback=\"export default  \"": "symfony-cmd",
+            
+            "fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
+            "php -d memory_limit=512M bin/console cache:clear",
             "@auto-scripts"
         ],
         "post-update-cmd": [
+            "php -d memory_limit=512M bin/console cache:clear",
             "@auto-scripts"
         ],
         "coverage": "rm var/test.db -f && bin/console d:sc:update --force --env=test && php -d xpcov.enabled=1 vendor/bin/phpunit --coverage-html coverage",
@@ -142,7 +144,7 @@
     "require-dev": {
         "jawira/doctrine-diagram-bundle": "^1.1",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^12.1",
+        "phpunit/phpunit": "^13.0",
         "roave/security-advisories": "dev-latest",
         "survos/code-bundle": "^2.0",
         "survos/command-bundle": "^2.0",
