@@ -90,6 +90,8 @@ final class LoadCommand
             }
             $product->tags = $tagCodes;
             $product->images = $data->images;
+            $this->mediaRegistry->ensureMedia($data->thumbnail);
+            $this->entityManager->flush();
             foreach ($data->images as $imageUrl) {
                 $this->mediaRegistry->ensureMedia($imageUrl);
             }
