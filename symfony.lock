@@ -237,11 +237,20 @@
     "survos/media-bundle": {
         "version": "2.0.83"
     },
+    "survos/menu-bundle": {
+        "version": "2.42.7"
+    },
     "survos/state-bundle": {
         "version": "dev-main"
     },
     "survos/tabler-bundle": {
         "version": "2.41.9"
+    },
+    "survos/workflow-extras-bundle": {
+        "version": "2.42.8"
+    },
+    "survos/workflow-messenger-bundle": {
+        "version": "2.42.9"
     },
     "symfony/asset-mapper": {
         "version": "7.4",

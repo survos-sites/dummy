@@ -11299,6 +11299,28 @@
                         "default": false,
                         "description": "Build the BREADCRUMB slot from the page's entities: each object option whose class has a #[RouteMeta(entity:, purpose: Show)] route becomes a crumb. See BreadcrumbMenuSubscriber."
                     },
+                    "menu_renderer": {
+                        "anyOf": [
+                            {
+                                "enum": [
+                                    "knp",
+                                    "survos"
+                                ]
+                            },
+                            {
+                                "$ref": "#/$defs/types/param"
+                            }
+                        ],
+                        "default": "knp",
+                        "description": "How tabler_menu() draws menus. knp: KnpMenu templates (@SurvosTabler/menu/*). survos: survos/menu-bundle themes (@SurvosTabler/menu_theme/*); register SurvosMenuBundle first. Same listeners either way."
+                    },
+                    "menu_themes": {
+                        "$ref": "#/$defs/types/object_null",
+                        "additionalProperties": {
+                            "$ref": "#/$defs/types/scalar"
+                        },
+                        "description": "With menu_renderer: survos, a template per slot holding only the blocks the app changes, e.g. SIDEBAR: \"menu/sidebar.html.twig\"."
+                    },
                     "menu_options": {
                         "$ref": "#/$defs/types/object_null",
                         "additionalProperties": {
@@ -11326,6 +11348,47 @@
                         "$ref": "#/$defs/types/boolean",
                         "default": false,
                         "description": "Prepend {_locale} (constrained to kernel.enabled_locales) to this bundle's route prefix, e.g. /{_locale}/f instead of /f -- for bundles whose routes are meant to be shared/bookmarked, so the URL itself carries the locale instead of a query param."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "survos_workflow_extras": {
+                "$ref": "#/$defs/types/object_null",
+                "properties": {
+                    "routes_enabled": {
+                        "$ref": "#/$defs/types/boolean",
+                        "default": true,
+                        "description": "Set false to manage this bundle's routes manually in your app. Bundles exposing sensitive routes (e.g. running console commands) should default this off."
+                    },
+                    "route_prefix": {
+                        "$ref": "#/$defs/types/scalar",
+                        "default": "/workflow",
+                        "description": "URL prefix applied to all routes from this bundle."
+                    },
+                    "locale_prefix": {
+                        "$ref": "#/$defs/types/boolean",
+                        "default": false,
+                        "description": "Prepend {_locale} (constrained to kernel.enabled_locales) to this bundle's route prefix, e.g. /{_locale}/f instead of /f -- for bundles whose routes are meant to be shared/bookmarked, so the URL itself carries the locale instead of a query param."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "survos_workflow_messenger": {
+                "$ref": "#/$defs/types/object_null",
+                "properties": {
+                    "subject_store": {
+                        "$ref": "#/$defs/types/scalar",
+                        "default": null,
+                        "description": "Service implementing SubjectStoreInterface; defaults to the Doctrine store when DoctrineBundle is installed."
+                    },
+                    "default_transport": {
+                        "$ref": "#/$defs/types/scalar",
+                        "default": null
+                    },
+                    "lock_factory": {
+                        "$ref": "#/$defs/types/scalar",
+                        "default": "lock.factory",
+                        "description": "LockFactory serializing transitions per subject across workers. Use a store shared by every worker host."
                     }
                 },
                 "additionalProperties": false
@@ -15035,6 +15098,12 @@
         "survos_tabler": {
             "$ref": "#/$defs/nodes/survos_tabler"
         },
+        "survos_workflow_extras": {
+            "$ref": "#/$defs/nodes/survos_workflow_extras"
+        },
+        "survos_workflow_messenger": {
+            "$ref": "#/$defs/nodes/survos_workflow_messenger"
+        },
         "translation": {
             "$ref": "#/$defs/nodes/translation"
         },
@@ -15215,6 +15284,12 @@
                 "survos_tabler": {
                     "$ref": "#/$defs/nodes/survos_tabler"
                 },
+                "survos_workflow_extras": {
+                    "$ref": "#/$defs/nodes/survos_workflow_extras"
+                },
+                "survos_workflow_messenger": {
+                    "$ref": "#/$defs/nodes/survos_workflow_messenger"
+                },
                 "translation": {
                     "$ref": "#/$defs/nodes/translation"
                 },
@@ -15392,6 +15467,12 @@
                 "survos_tabler": {
                     "$ref": "#/$defs/nodes/survos_tabler"
                 },
+                "survos_workflow_extras": {
+                    "$ref": "#/$defs/nodes/survos_workflow_extras"
+                },
+                "survos_workflow_messenger": {
+                    "$ref": "#/$defs/nodes/survos_workflow_messenger"
+                },
                 "translation": {
                     "$ref": "#/$defs/nodes/translation"
                 },
@@ -15561,6 +15642,12 @@
                 },
                 "survos_tabler": {
                     "$ref": "#/$defs/nodes/survos_tabler"
+                },
+                "survos_workflow_extras": {
+                    "$ref": "#/$defs/nodes/survos_workflow_extras"
+                },
+                "survos_workflow_messenger": {
+                    "$ref": "#/$defs/nodes/survos_workflow_messenger"
                 },
                 "translation": {
                     "$ref": "#/$defs/nodes/translation"

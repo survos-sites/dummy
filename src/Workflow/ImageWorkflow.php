@@ -5,7 +5,6 @@ namespace App\Workflow;
 use App\Controller\AppController;
 use App\Entity\Image;
 use Psr\Log\LoggerInterface;
-use Survos\StateBundle\Attribute\Workflow;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Workflow\Attribute\AsGuardListener;
 use Symfony\Component\Workflow\Attribute\AsTransitionListener;

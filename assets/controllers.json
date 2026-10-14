@@ -63,6 +63,12 @@
                 "fetch": "lazy"
             }
         },
+        "@survos/workflow-extras-bundle": {
+            "workflow": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
         "@symfony/ux-chartjs": {
             "chart": {
                 "enabled": true,

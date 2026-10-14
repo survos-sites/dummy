@@ -1,26 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Workflow;
 
 use App\Entity\Image;
-use Survos\StateBundle\Attribute\Place;
-use Survos\StateBundle\Attribute\Transition;
-use Survos\StateBundle\Attribute\Workflow;
+use Survos\WorkflowExtrasBundle\Attribute\Place;
+use Survos\WorkflowExtrasBundle\Attribute\Transition;
+use Survos\WorkflowExtrasBundle\Attribute\AsWorkflow;
 
-#[Workflow(supports: [Image::class], name: self::WORKFLOW_NAME)]
+#[AsWorkflow(supports: [Image::class], name: self::WORKFLOW_NAME)]
 class IImageWorkflow
 {
 	public const WORKFLOW_NAME = 'ImageWorkflow';
 
 	#[Place(initial: true,
-        info: "persisted to database",
+        label: "persisted to database",
         description: "Created during app:load")]
 	public const PLACE_NEW = 'new';
 
-	#[Place(info: 'dispatched to sais')]
+	#[Place(label: 'dispatched to sais')]
 	public const PLACE_DISPATCHED = 'dispatched';
 
-	#[Place(info: 'has resized')]
+	#[Place(label: 'has resized')]
 	public const PLACE_READY = 'ready';
 
 	#[Place]
@@ -28,14 +30,14 @@ class IImageWorkflow
 
 	#[Transition(from: [self::PLACE_NEW],
         to: self::PLACE_DISPATCHED,
-        info: 'request resize',
+        label: 'request resize',
         description: "Send a resize request to sais"
     )]
 
 	public const TRANSITION_DISPATCH = 'dispatch';
 
 	#[Transition(from: [self::PLACE_DISPATCHED], to: self::PLACE_READY,
-        info: "if resized exist",
+        label: "if resized exist",
         description: "After thumb webhook has been received",
         guard: "subject.hasThumbnails")]
 	public const TRANSITION_COMPLETE = 'complete';

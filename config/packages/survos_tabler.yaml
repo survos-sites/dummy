@@ -1,4 +1,5 @@
 survos_tabler:
+    menu_renderer: survos
     routes:
         home: app_homepage
     options:

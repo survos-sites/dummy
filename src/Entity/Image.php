@@ -16,8 +16,6 @@ use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
 use JoliCode\MediaBundle\Model\Media;
 use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
 use Survos\DataContracts\Util\MediaIdentity;
-use Survos\StateBundle\Traits\MarkingInterface;
-use Survos\StateBundle\Traits\MarkingTrait;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ApiResource(
@@ -26,9 +24,20 @@ use Symfony\Component\Serializer\Attribute\Groups;
 // old way
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Groups(['image.read'])]
-class Image implements MarkingInterface, \Stringable
+class Image implements \Stringable
 {
-    use MarkingTrait;
+    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    #[Groups(['transition', 'minimum', 'marking', 'searchable'])]
+    public ?string $marking = null;
+
+    public function getMarking(): ?string { return $this->marking; }
+
+    public function setMarking(?string $marking, array $context = []): self
+    {
+        $this->marking = $marking;
+        return $this;
+    }
+
     public function __construct(
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(referencedColumnName: 'sku', nullable: false)]
