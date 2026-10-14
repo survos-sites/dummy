@@ -1,0 +1,11 @@
+survos_tabler:
+    routes:
+        home: app_homepage
+    options:
+        theme: tabler
+    app:
+        code: dummy
+        title: 'Dummy'
+        description: 'DummyJSON products with an image workflow'
+        abbr: 'Dummy'
+        homepage_route: app_homepage

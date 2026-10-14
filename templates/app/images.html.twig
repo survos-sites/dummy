@@ -1,24 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+
+{% block title 'Images' %}
 
 {% block body %}
-
-    {% for image in images %}
-        <li>
-            {{ image.originalUrl }}
-        {% for size,thumb in image.resized %}
-            <b>{{ size }}</b>
-            <a href="{{ thumb }}" target="_blank">
-                <img src="{{ thumb }}" title="{{ thumb }}" style="max-height: 200px"/>
-            </a>
-        {% endfor %}
-        </li>
-    {% endfor %}
-
-
-
+    <div class="card">
+        <div class="card-body">
+            <twig:grid
+                :data="images"
+                :columns="[
+                    {name: 'thumbnail', title: 'Image'},
+                    {name: 'productTitle', title: 'Product'},
+                    {name: 'productSku', title: 'SKU'},
+                    {name: 'marking', title: 'State'},
+                    {name: 'originalUrl', title: 'Original'},
+                ]"
+                :pageLength="25"
+                :trans="false">
+                <twig:block name="thumbnail">
+                    <a href="{{ row.thumbnail }}" target="_blank">
+                        <img src="{{ row.thumbnail }}" alt="{{ row.productTitle }}" loading="lazy" style="max-height: 60px">
+                    </a>
+                </twig:block>
+                <twig:block name="originalUrl">
+                    <a href="{{ row.originalUrl }}" target="_blank" class="text-truncate d-inline-block" style="max-width: 24rem">{{ row.originalUrl }}</a>
+                </twig:block>
+            </twig:grid>
+        </div>
+    </div>
 {% endblock %}
-
-{% block title %}
-
-{% endblock %}
-

@@ -19,16 +19,10 @@ use Survos\BabelBundle\Attribute\BabelLocale;
 use Survos\BabelBundle\Attribute\BabelStorage;
 use Survos\BabelBundle\Attribute\BabelTerm;
 use Survos\BabelBundle\Contract\BabelHooksInterface;
-use Survos\CoreBundle\Entity\RouteParametersInterface;
-use Survos\CoreBundle\Entity\RouteParametersTrait;
+use Survos\FieldBundle\Attribute\RouteIdentity;
+use Survos\FieldBundle\Entity\RouteParametersInterface;
+use Survos\FieldBundle\Entity\RouteIdentityTrait;
 use Survos\EzBundle\Attribute\Page;
-use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
-use Survos\MeiliBundle\Metadata\Embedder;
-use Survos\MeiliBundle\Metadata\Facet;
-use Survos\MeiliBundle\Metadata\FacetWidget;
-use Survos\MeiliBundle\Metadata\Fields;
-use Survos\MeiliBundle\Metadata\FieldSet;
-use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Survos\EzBundle\Attribute\EzAdmin;
@@ -61,31 +55,7 @@ use Survos\BabelBundle\Attribute\Translatable;
 //    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
-#[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'tags', 'rating', 'stock', 'price'],
-    arguments: [ "searchParameterName" => "facet_filter"]
-)]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
-#[MeiliIndex(
-    enabled: false, //
-    // serialization groups for the JSON sent to the index
-    primaryKey: 'sku',
-    persisted: new Fields(
-        fields: ['sku', 'stock', 'price', 'title','brand', 'tags'],
-        groups: ['product.read', 'product.details', 'product.searchable']
-    ),
-    displayed: ['*'],
-    filterable: new Fields(
-        fields: ['category','tags','price','brand'],
-//        groups: ['product.read','product.details']
-    ),
-    sortable: ['price', 'imageCount'],
-    searchable: new Fields(
-//        fields: ['title', 'description'],
-        groups: ['product.searchable']
-    ),
-    embedders: ['best','small_product']
-)]
 #[BabelStorage()]
 #[BabelLocale(locale: 'en', targetLocales: ['es'])]
 #[EzAdmin(
@@ -95,12 +65,12 @@ use Survos\BabelBundle\Attribute\Translatable;
     editRoles: ['ROLE_ADMIN', 'ROLE_EDITOR'],
     readOnlyByDefault: true,
 )]
+#[RouteIdentity(field: 'sku', key: 'productId')]
 class Product implements RouteParametersInterface, BabelHooksInterface
 {
     use BabelHooksTrait;
 
-    use RouteParametersTrait;
-    public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
+    use RouteIdentityTrait;
     public function __construct(
         #[ORM\Column(type: Types::STRING, length: 255)]
         #[ORM\Id]
@@ -114,9 +84,9 @@ class Product implements RouteParametersInterface, BabelHooksInterface
         private(set) array $data
     )
     {
-        $this->images = $this->data->images??[];
-        $this->stock = $this->data->stock??0;
-        $this->rating = round($this->data->rating??0);
+        $this->images = new ArrayCollection();
+        $this->stock = $this->data['stock']??0;
+        $this->rating = (int) round($this->data['rating']??0);
     }
     public string $id { get => $this->sku; }
 
@@ -125,7 +95,6 @@ class Product implements RouteParametersInterface, BabelHooksInterface
         return $this->sku;
     }
 
-    #[Facet()]
     #[Groups(['product.read'])]
     public int $imageCount { get => $this->images->count(); }
 
@@ -139,7 +108,6 @@ class Product implements RouteParametersInterface, BabelHooksInterface
 
     #[BabelTerm(set: 'category')]
     #[Groups(['product.read'])]
-    #[Facet(label: 'Category', showMoreThreshold: 12)]
     #[ApiProperty('Category term code (TermSet=category)')]
     #[EzField(index: true, order: 40, filter: true, label: 'Category')]
     public ?string $category {
@@ -153,7 +121,6 @@ class Product implements RouteParametersInterface, BabelHooksInterface
 
     #[BabelTerm(set: 'tag', multiple: true)]
     #[Groups(['product.read'])]
-    #[Facet()]
     #[ApiProperty('Tag term codes (TermSet=tag)')]
     public array $tags {
         get => $this->tagCodes;
@@ -175,7 +142,6 @@ class Product implements RouteParametersInterface, BabelHooksInterface
 
     #[Groups(['product.read'])]
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    #[Facet(showMoreThreshold: 12)]
     #[ApiProperty("the registered brand name")]
     #[EzField(index: true, order: 30, filter: true, label: 'Brand')]
     public ?string $brand;
@@ -200,18 +166,39 @@ class Product implements RouteParametersInterface, BabelHooksInterface
         min: 0,
         max: 5
     )]
-    #[Facet(widget: FacetWidget::RangeSlider)]
     public int $rating;
 
     #[Groups(['product.read'])]
     #[ApiProperty("rounded rating, for range slider")]
     #[ORM\Column(type: Types::INTEGER)]
-    #[Facet()]
     public int $stock;
 
-    #[Groups(['product.read'])]
-    #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
-    public array $images;
+    /**
+     * @var Collection<int, Image>
+     */
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', orphanRemoval: true, cascade: ['persist'])]
+    private(set) Collection $images;
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
 
         // <BABEL:TRANSLATABLE:START title>
         #[Column(type: Types::TEXT, nullable: true)]

@@ -10,325 +10,198 @@
  *     be used as an "entrypoint" (and passed to the importmap() Twig function).
  *
  * The "importmap:require" command can be used to add new entries to this file.
+ *
+ * @return array<string, array{    // Import name as key, description of the imported file as value
+ *     path: string,               // Logical, relative or absolute path to the file
+ *     type?: 'js'|'css'|'json',   // Type of the file, defaults to 'js'
+ *     entrypoint?: bool,          // Whether the file is an entrypoint, for 'js' only
+ * }|array{
+ *     version: string,            // Version of the remote package
+ *     package_specifier?: string, // Remote "package-name/path" specifier, defaults to the import name
+ *     type?: 'js'|'css'|'json',
+ *     entrypoint?: bool,
+ *     esm?: bool,                 // Whether jsDelivr's ESM build is used, defaults to true
+ * }>
  */
 return [
-    'app' => [
-        'path' => './assets/app.js',
-        'entrypoint' => true,
-    ],
-    'admin' => [
-        'path' => './assets/admin.js',
-        'entrypoint' => true,
-    ],
-    '@symfony/stimulus-bundle' => [
-        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
-    ],
-    'twig' => [
-        'version' => '1.17.1',
-    ],
-    'locutus/php/strings/sprintf' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/strings/vsprintf' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/round' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/max' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/min' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/strings/strip_tags' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/datetime/strtotime' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/datetime/date' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/var/boolval' => [
-        'version' => '2.0.32',
-    ],
-    'stimulus-attributes' => [
-        'version' => '1.0.2',
-    ],
-    'escape-html' => [
-        'version' => '1.0.3',
-    ],
-    'fos-routing' => [
-        'version' => '0.0.6',
-    ],
-    'flag-icons' => [
-        'version' => '7.5.0',
-    ],
-    'flag-icons/css/flag-icons.min.css' => [
-        'version' => '7.5.0',
-        'type' => 'css',
-    ],
-    'instantsearch.js' => [
-        'version' => '4.85.2',
-    ],
-    '@algolia/events' => [
-        'version' => '4.0.1',
-    ],
-    'algoliasearch-helper' => [
-        'version' => '3.26.1',
-    ],
-    'qs' => [
-        'version' => '6.14.0',
-    ],
-    'algoliasearch-helper/types/algoliasearch.js' => [
-        'version' => '3.26.1',
-    ],
-    'instantsearch.js/es/widgets' => [
-        'version' => '4.85.2',
-    ],
-    'instantsearch-ui-components' => [
-        'version' => '0.15.2',
-    ],
-    'preact' => [
-        'version' => '10.28.0',
-    ],
-    'hogan.js' => [
-        'version' => '3.0.2',
-    ],
-    'htm/preact' => [
-        'version' => '3.1.1',
-    ],
-    'preact/hooks' => [
-        'version' => '10.28.0',
-    ],
-    '@babel/runtime/helpers/extends' => [
-        'version' => '7.28.4',
-    ],
-    '@babel/runtime/helpers/defineProperty' => [
-        'version' => '7.28.4',
-    ],
-    '@babel/runtime/helpers/objectWithoutProperties' => [
-        'version' => '7.28.4',
-    ],
-    'htm' => [
-        'version' => '3.1.1',
-    ],
-    '@meilisearch/instant-meilisearch' => [
-        'version' => '0.29.0',
-    ],
-    'meilisearch' => [
-        'version' => '0.54.0',
-    ],
-    '@stimulus-components/dialog' => [
-        'version' => '1.0.1',
-    ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
-    'pretty-print-json' => [
-        'version' => '3.0.6',
-    ],
-    'pretty-print-json/dist/css/pretty-print-json.min.css' => [
-        'version' => '3.0.6',
-        'type' => 'css',
-    ],
-    '@hotwired/turbo' => [
-        'version' => '8.0.20',
-    ],
-    'instantsearch.css/themes/algolia.min.css' => [
-        'version' => '8.9.0',
-        'type' => 'css',
-    ],
-    '@andypf/json-viewer' => [
-        'version' => '2.2.0',
-    ],
-    '@tabler/core' => [
-        'version' => '1.4.0',
-    ],
-    '@tabler/core/dist/css/tabler.min.css' => [
-        'version' => '1.4.0',
-        'type' => 'css',
-    ],
-    'bootstrap' => [
-        'version' => '5.3.8',
-    ],
-    '@popperjs/core' => [
-        'version' => '2.11.8',
-    ],
-    'bootstrap/dist/css/bootstrap.min.css' => [
-        'version' => '5.3.8',
-        'type' => 'css',
-    ],
-    'side-channel' => [
-        'version' => '1.1.0',
-    ],
-    'es-errors/type' => [
-        'version' => '1.3.0',
-    ],
-    'object-inspect' => [
-        'version' => '1.13.4',
-    ],
-    'side-channel-list' => [
-        'version' => '1.0.0',
-    ],
-    'side-channel-map' => [
-        'version' => '1.0.1',
-    ],
-    'side-channel-weakmap' => [
-        'version' => '1.0.2',
-    ],
-    'get-intrinsic' => [
-        'version' => '1.3.0',
-    ],
-    'call-bound' => [
-        'version' => '1.0.4',
-    ],
-    'es-errors' => [
-        'version' => '1.3.0',
-    ],
-    'es-errors/eval' => [
-        'version' => '1.3.0',
-    ],
-    'es-errors/range' => [
-        'version' => '1.3.0',
-    ],
-    'es-errors/ref' => [
-        'version' => '1.3.0',
-    ],
-    'es-errors/syntax' => [
-        'version' => '1.3.0',
-    ],
-    'es-errors/uri' => [
-        'version' => '1.3.0',
-    ],
-    'gopd' => [
-        'version' => '1.2.0',
-    ],
-    'es-define-property' => [
-        'version' => '1.0.1',
-    ],
-    'has-symbols' => [
-        'version' => '1.1.0',
-    ],
-    'dunder-proto/get' => [
-        'version' => '1.0.1',
-    ],
-    'call-bind-apply-helpers/functionApply' => [
-        'version' => '1.0.2',
-    ],
-    'call-bind-apply-helpers/functionCall' => [
-        'version' => '1.0.2',
-    ],
-    'function-bind' => [
-        'version' => '1.1.2',
-    ],
-    'hasown' => [
-        'version' => '2.0.2',
-    ],
-    'call-bind' => [
-        'version' => '1.0.8',
-    ],
-    'call-bind-apply-helpers' => [
-        'version' => '1.0.2',
-    ],
-    'set-function-length' => [
-        'version' => '1.2.2',
-    ],
-    'call-bind-apply-helpers/applyBind' => [
-        'version' => '1.0.2',
-    ],
-    'define-data-property' => [
-        'version' => '1.1.4',
-    ],
-    'has-property-descriptors' => [
-        'version' => '1.0.2',
-    ],
-    'debug' => [
-        'version' => '4.4.3',
-    ],
-    'ms' => [
-        'version' => '2.1.3',
-    ],
-    'ai' => [
-        'version' => '5.0.115',
-    ],
-    '@babel/runtime/helpers/typeof' => [
-        'version' => '7.28.4',
-    ],
-    '@babel/runtime/helpers/slicedToArray' => [
-        'version' => '7.28.4',
-    ],
-    '@babel/runtime/helpers/toConsumableArray' => [
-        'version' => '7.28.4',
-    ],
-    'markdown-to-jsx' => [
-        'version' => '9.4.2',
-    ],
-    'es-object-atoms' => [
-        'version' => '1.1.1',
-    ],
-    'math-intrinsics/abs' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/floor' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/max' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/min' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/pow' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/round' => [
-        'version' => '1.1.0',
-    ],
-    'math-intrinsics/sign' => [
-        'version' => '1.1.0',
-    ],
-    'get-proto' => [
-        'version' => '1.0.1',
-    ],
-    'get-proto/Object.getPrototypeOf' => [
-        'version' => '1.0.1',
-    ],
-    'get-proto/Reflect.getPrototypeOf' => [
-        'version' => '1.0.1',
-    ],
-    '@ai-sdk/gateway' => [
-        'version' => '2.0.22',
-    ],
-    '@ai-sdk/provider-utils' => [
-        'version' => '3.0.19',
-    ],
-    '@ai-sdk/provider' => [
-        'version' => '2.0.0',
-    ],
-    'zod/v4' => [
-        'version' => '4.2.1',
-    ],
-    '@opentelemetry/api' => [
-        'version' => '1.9.0',
-    ],
-    'react' => [
-        'version' => '19.2.3',
-    ],
-    '@vercel/oidc' => [
-        'version' => '3.0.5',
-    ],
-    'eventsource-parser/stream' => [
-        'version' => '3.0.6',
-    ],
-    'zod/v3' => [
-        'version' => '4.2.1',
-    ],
-    '@standard-schema/spec' => [
-        'version' => '1.1.0',
-    ],
-    'chart.js' => [
-        'version' => '3.9.1',
-    ],
+    '@ai-sdk/gateway' => ['version' => '2.0.22'],
+    '@ai-sdk/provider' => ['version' => '2.0.0'],
+    '@ai-sdk/provider-utils' => ['version' => '3.0.19'],
+    '@algolia/events' => ['version' => '4.0.1'],
+    '@andypf/json-viewer' => ['version' => '2.8.0'],
+    '@babel/runtime/helpers/defineProperty' => ['version' => '7.28.4'],
+    '@babel/runtime/helpers/extends' => ['version' => '7.28.4'],
+    '@babel/runtime/helpers/objectWithoutProperties' => ['version' => '7.28.4'],
+    '@babel/runtime/helpers/slicedToArray' => ['version' => '7.28.4'],
+    '@babel/runtime/helpers/toConsumableArray' => ['version' => '7.28.4'],
+    '@babel/runtime/helpers/typeof' => ['version' => '7.28.4'],
+    '@floating-ui/core' => ['version' => '1.8.0'],
+    '@floating-ui/dom' => ['version' => '1.8.0'],
+    '@floating-ui/utils' => ['version' => '0.2.12'],
+    '@floating-ui/utils/dom' => ['version' => '0.2.12'],
+    '@hotwired/stimulus' => ['version' => '3.2.2'],
+    '@hotwired/turbo' => ['version' => '8.0.20'],
+    '@hpcc-js/wasm/graphviz' => ['version' => '2.20.0'],
+    '@opentelemetry/api' => ['version' => '1.9.0'],
+    '@popperjs/core' => ['version' => '2.11.8'],
+    '@standard-schema/spec' => ['version' => '1.1.0'],
+    '@stimulus-components/dialog' => ['version' => '1.0.1'],
+    '@swc/helpers/esm/_call_super.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_class_call_check.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_create_class.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_define_property.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_extends.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_inherits.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_instanceof.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_object_destructuring_empty.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_object_spread.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_object_spread_props.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_object_without_properties.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_sliced_to_array.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_to_consumable_array.js' => ['version' => '0.5.18'],
+    '@swc/helpers/esm/_type_of.js' => ['version' => '0.5.18'],
+    '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
+    '@tabler/core' => ['version' => '1.6.1'],
+    '@tabler/core/dist/css/tabler.min.css' => ['version' => '1.6.1', 'type' => 'css'],
+    '@tacman1123/twig-browser' => ['version' => '1.0.0'],
+    '@tacman1123/twig-browser/adapters/symfony' => ['version' => '1.0.0'],
+    '@tacman1123/twig-browser/src/compat/compileTwigBlocks.js' => ['version' => '1.0.0'],
+    '@vercel/oidc' => ['version' => '3.0.5'],
+    'admin' => ['path' => './assets/admin.js', 'entrypoint' => true],
+    'ai' => ['version' => '5.0.115'],
+    'algoliasearch-helper' => ['version' => '3.30.0'],
+    'algoliasearch-helper/types/algoliasearch.js' => ['version' => '3.30.0'],
+    'app' => ['path' => './assets/app.js', 'entrypoint' => true],
+    'bootstrap' => ['version' => '5.3.8'],
+    'bootstrap/dist/css/bootstrap.min.css' => ['version' => '5.3.8', 'type' => 'css'],
+    'call-bind' => ['version' => '1.0.8'],
+    'call-bind-apply-helpers' => ['version' => '1.0.0'],
+    'call-bind-apply-helpers/applyBind' => ['version' => '1.0.0'],
+    'call-bind-apply-helpers/functionApply' => ['version' => '1.0.0'],
+    'call-bind-apply-helpers/functionCall' => ['version' => '1.0.0'],
+    'call-bound' => ['version' => '1.0.2'],
+    'chart.js' => ['version' => '3.9.1'],
+    'd3-color' => ['version' => '3.0.1'],
+    'd3-dispatch' => ['version' => '3.0.1'],
+    'd3-drag' => ['version' => '3.0.0'],
+    'd3-ease' => ['version' => '3.0.1'],
+    'd3-format' => ['version' => '3.1.0'],
+    'd3-graphviz' => ['version' => '5.6.0'],
+    'd3-interpolate' => ['version' => '3.0.1'],
+    'd3-path' => ['version' => '3.1.0'],
+    'd3-selection' => ['version' => '3.0.0'],
+    'd3-timer' => ['version' => '3.0.1'],
+    'd3-transition' => ['version' => '3.0.1'],
+    'd3-zoom' => ['version' => '3.0.0'],
+    'datatables.net' => ['version' => '3.1.2'],
+    'datatables.net-bs5' => ['version' => '3.1.2'],
+    'datatables.net-bs5/css/dataTables.bootstrap5.css' => ['version' => '3.1.3', 'type' => 'css'],
+    'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => ['version' => '3.1.2', 'type' => 'css'],
+    'datatables.net-buttons' => ['version' => '4.1.2'],
+    'datatables.net-buttons-bs5' => ['version' => '4.1.2'],
+    'datatables.net-buttons-bs5/css/buttons.bootstrap5.css' => ['version' => '4.1.2', 'type' => 'css'],
+    'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css' => ['version' => '4.1.2', 'type' => 'css'],
+    'datatables.net-columncontrol' => ['version' => '2.1.2'],
+    'datatables.net-columncontrol-bs5' => ['version' => '2.1.2'],
+    'datatables.net-columncontrol-bs5/css/columnControl.bootstrap5.css' => ['version' => '2.1.2', 'type' => 'css'],
+    'datatables.net-columncontrol-bs5/css/columnControl.bootstrap5.min.css' => ['version' => '2.1.2', 'type' => 'css'],
+    'datatables.net-fixedcolumns' => ['version' => '6.1.1'],
+    'datatables.net-fixedcolumns-bs5' => ['version' => '6.1.1'],
+    'datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.css' => ['version' => '6.1.1', 'type' => 'css'],
+    'datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css' => ['version' => '6.1.1', 'type' => 'css'],
+    'datatables.net-fixedheader' => ['version' => '5.1.2'],
+    'datatables.net-fixedheader-bs5' => ['version' => '5.1.2'],
+    'datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.css' => ['version' => '5.1.2', 'type' => 'css'],
+    'datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css' => ['version' => '5.1.2', 'type' => 'css'],
+    'datatables.net-plugins/i18n/de-DE.mjs' => ['version' => '3.1.2'],
+    'datatables.net-plugins/i18n/en-GB.mjs' => ['version' => '3.1.2'],
+    'datatables.net-plugins/i18n/es-ES.mjs' => ['version' => '3.1.2'],
+    'datatables.net-responsive' => ['version' => '4.1.1'],
+    'datatables.net-responsive-bs5' => ['version' => '4.1.1'],
+    'datatables.net-responsive-bs5/css/responsive.bootstrap5.css' => ['version' => '4.1.1', 'type' => 'css'],
+    'datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css' => ['version' => '4.1.1', 'type' => 'css'],
+    'datatables.net-rowgroup' => ['version' => '2.1.1'],
+    'datatables.net-rowgroup-bs5' => ['version' => '2.1.1'],
+    'datatables.net-rowgroup-bs5/css/rowGroup.bootstrap5.css' => ['version' => '2.1.1', 'type' => 'css'],
+    'datatables.net-rowgroup-bs5/css/rowGroup.bootstrap5.min.css' => ['version' => '2.1.1', 'type' => 'css'],
+    'datatables.net-searchbuilder' => ['version' => '2.1.1'],
+    'datatables.net-searchbuilder-bs5' => ['version' => '2.1.1'],
+    'datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.css' => ['version' => '2.1.1', 'type' => 'css'],
+    'datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css' => ['version' => '2.1.1', 'type' => 'css'],
+    'datatables.net-select' => ['version' => '4.1.1'],
+    'datatables.net-select-bs5' => ['version' => '4.1.1'],
+    'datatables.net-select-bs5/css/select.bootstrap5.css' => ['version' => '4.1.1', 'type' => 'css'],
+    'datatables.net-select-bs5/css/select.bootstrap5.min.css' => ['version' => '4.1.1', 'type' => 'css'],
+    'debug' => ['version' => '4.4.3'],
+    'define-data-property' => ['version' => '1.1.4'],
+    'dexie' => ['version' => '4.4.6'],
+    'diva.js' => ['version' => '7.5.2'],
+    'dunder-proto/get' => ['version' => '1.0.0'],
+    'es-define-property' => ['version' => '1.0.1'],
+    'es-errors' => ['version' => '1.3.0'],
+    'es-errors/eval' => ['version' => '1.3.0'],
+    'es-errors/range' => ['version' => '1.3.0'],
+    'es-errors/ref' => ['version' => '1.3.0'],
+    'es-errors/syntax' => ['version' => '1.3.0'],
+    'es-errors/type' => ['version' => '1.3.0'],
+    'es-errors/uri' => ['version' => '1.3.0'],
+    'es-object-atoms' => ['version' => '1.1.1'],
+    'escape-html' => ['version' => '1.0.3'],
+    'eventsource-parser/stream' => ['version' => '3.0.6'],
+    'flag-icons' => ['version' => '7.5.0'],
+    'flag-icons/css/flag-icons.min.css' => ['version' => '7.5.0', 'type' => 'css'],
+    'fos-routing' => ['version' => '0.0.6'],
+    'function-bind' => ['version' => '1.1.2'],
+    'get-intrinsic' => ['version' => '1.2.5'],
+    'get-proto' => ['version' => '1.0.1'],
+    'get-proto/Object.getPrototypeOf' => ['version' => '1.0.1'],
+    'get-proto/Reflect.getPrototypeOf' => ['version' => '1.0.1'],
+    'gopd' => ['version' => '1.2.0'],
+    'has-property-descriptors' => ['version' => '1.0.2'],
+    'has-symbols' => ['version' => '1.1.0'],
+    'hasown' => ['version' => '2.0.2'],
+    'hogan.js' => ['version' => '3.0.2'],
+    'htm' => ['version' => '3.1.1'],
+    'htm/preact' => ['version' => '3.1.1'],
+    'instantsearch-ui-components' => ['version' => '0.43.0'],
+    'instantsearch.css/themes/algolia.min.css' => ['version' => '8.24.1', 'type' => 'css'],
+    'instantsearch.js' => ['version' => '4.120.0'],
+    'instantsearch.js/es/widgets' => ['version' => '4.120.0'],
+    'locutus/php/datetime/date' => ['version' => '2.0.32'],
+    'locutus/php/datetime/strtotime' => ['version' => '2.0.32'],
+    'locutus/php/math/max' => ['version' => '2.0.32'],
+    'locutus/php/math/min' => ['version' => '2.0.32'],
+    'locutus/php/math/round' => ['version' => '2.0.32'],
+    'locutus/php/strings/sprintf' => ['version' => '2.0.32'],
+    'locutus/php/strings/strip_tags' => ['version' => '2.0.32'],
+    'locutus/php/strings/vsprintf' => ['version' => '2.0.32'],
+    'locutus/php/var/boolval' => ['version' => '2.0.32'],
+    'markdown-to-jsx' => ['version' => '9.4.2'],
+    'marked' => ['version' => '18.1.1'],
+    'math-intrinsics/abs' => ['version' => '1.1.0'],
+    'math-intrinsics/floor' => ['version' => '1.1.0'],
+    'math-intrinsics/max' => ['version' => '1.1.0'],
+    'math-intrinsics/min' => ['version' => '1.1.0'],
+    'math-intrinsics/pow' => ['version' => '1.1.0'],
+    'math-intrinsics/round' => ['version' => '1.1.0'],
+    'math-intrinsics/sign' => ['version' => '1.1.0'],
+    'ms' => ['version' => '2.1.3'],
+    'object-inspect' => ['version' => '1.13.4'],
+    'openseadragon' => ['version' => '6.1.1'],
+    'pdfjs-dist' => ['version' => '6.4.299'],
+    'preact' => ['version' => '10.29.8'],
+    'preact/hooks' => ['version' => '10.29.8'],
+    'pretty-print-json' => ['version' => '3.0.8'],
+    'pretty-print-json/dist/css/pretty-print-json.min.css' => ['version' => '3.0.8', 'type' => 'css'],
+    'qs' => ['version' => '6.16.0'],
+    'react' => ['version' => '19.2.3'],
+    'set-function-length' => ['version' => '1.2.2'],
+    'side-channel' => ['version' => '1.1.1'],
+    'side-channel-list' => ['version' => '1.0.1'],
+    'side-channel-map' => ['version' => '1.0.1'],
+    'side-channel-weakmap' => ['version' => '1.0.2'],
+    'stimulus-attributes' => ['version' => '1.0.2'],
+    'twig' => ['version' => '1.17.1'],
+    'zod/v3' => ['version' => '4.2.1'],
+    'zod/v4' => ['version' => '4.2.1'],
 ];

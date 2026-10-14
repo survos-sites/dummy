@@ -1,25 +1,20 @@
-{% extends "@SurvosBootstrap/%s/base.html.twig"|format(theme) %}
+{% extends "@SurvosTabler/layout/base.html.twig" %}
+
+{% set appShortName = 'Dummy' %}
+
+{% block logo_mini 'Dummy' %}
+{% block logo_large 'Dummy' %}
+
+{% block title 'Dummy' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
-    {% block importmap %}
-        {{ importmap('app') }}
-    {% endblock %}
 {% endblock %}
 
-{% block body %}
-    Replace the body tag
-    {% if block('content') is defined %}
-        Use body, not content!
-    {% endif %}
+{% block content %}
+    {% block body %}{% endblock %}
 {% endblock %}
-
-{% block logo_mini 'Repo' %}
-{% block logo_large 'Repo Manager' %}
-
-{% set logo_large = 'Repository Manager (LOGO LARGE)' %}
-
-{# idea
-<span class="fa-layers fa-fw">
-    <span class="fa-layers-text" style="font-family:Arial; font-weight: 900;">TY</span>
-</span>
-#}

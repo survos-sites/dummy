@@ -24,7 +24,6 @@ function build(): void
 {
     io()->title("Installing the application data");
 
-    run('bin/console meili:settings:update --force');
     run('bin/console app:load');
 }
 

@@ -1,18 +1,66 @@
 {
     "controllers": {
-        "@survos/meili-bundle": {
-            "insta": {
-                "enabled": true,
-                "fetch": "eager",
-                "autoimport": {
-                    "instantsearch.css/themes/algolia.min.css": true,
-                    "pretty-print-json/dist/css/pretty-print-json.min.css": true
-                }
-            },
-            "json": {
+        "@survos/grid-bundle": {
+            "grid": {
                 "enabled": true,
                 "fetch": "lazy",
                 "autoimport": []
+            }
+        },
+        "@survos/iiif-bundle": {
+            "iiif-viewer": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            },
+            "iiif-diva": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            },
+            "iiif-pdf": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
+        "@survos/imgproxy-bundle": {
+            "imgproxy": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
+        "@survos/state-bundle": {
+            "workflow": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
+        "@survos/tabler-bundle": {
+            "accordion": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "search": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "clipboard": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "closeable": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "tooltip": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "conditional-fields": {
+                "enabled": true,
+                "fetch": "lazy"
             }
         },
         "@symfony/ux-chartjs": {
@@ -24,7 +72,10 @@
         "@symfony/ux-turbo": {
             "turbo-core": {
                 "enabled": true,
-                "fetch": "eager"
+                "fetch": "eager",
+                "autoimport": {
+                    "@symfony/ux-turbo/dist/mercure_stream_source_element.js": true
+                }
             },
             "mercure-turbo-stream": {
                 "enabled": false,

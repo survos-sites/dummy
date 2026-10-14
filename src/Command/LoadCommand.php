@@ -89,11 +89,14 @@ final class LoadCommand
                 $this->termRegistry->ensureTerm('tag', $tag, $tag);
             }
             $product->tags = $tagCodes;
-            $product->images = $data->images;
             $this->mediaRegistry->ensureMedia($data->thumbnail);
             $this->entityManager->flush();
             foreach ($data->images as $imageUrl) {
                 $this->mediaRegistry->ensureMedia($imageUrl);
+                $code = Image::calculateCode($imageUrl);
+                if (!$this->entityManager->find(Image::class, $code)) {
+                    $product->addImage(new Image($product, $imageUrl, $code));
+                }
             }
 
             if ($limit && ($idx >= $limit - 1)) {

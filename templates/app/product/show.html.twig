@@ -1,25 +1,15 @@
-{% extends '@EasyAdmin/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}{{ package.name }}{% endblock %}
+{% block title %}{{ product.title }}{% endblock %}
 
-{% block content_header %}
-    <div class="content-header-title">
-        <h1 class="title">{{ product.title }}</h1>
-    </div>
-
-    <div class="page-actions">
-{#        <a href="{{ path('admin_product_index') }}" class="btn btn-secondary">#}
-            <i class="fa fa-arrow-left"></i> Back to list
-{#        </a>#}
-    </div>
-{% endblock %}
-
-{% block main %}
-{#    {{ dump(product.thumb) }}#}
-{#    {{ dump(product.thumb.url) }}#}
-{#    {{ dump(product.thumb.url|joli_media_absolute_url) }}#}
+{% block body %}
     {% set original = product %}
     {% set product = product.data %}
+
+    <div class="d-flex align-items-center mb-3">
+        <h1 class="me-auto mb-0">{{ original.title }}</h1>
+        <a href="{{ path('app_homepage') }}" class="btn btn-outline-secondary">&larr; Back to list</a>
+    </div>
 
 
     <div class="container-fluid">
@@ -248,14 +238,14 @@
         <div class="row mt-5">
             <div class="col-12">
                 <h3 class="mb-4">All Images</h3>
-                <div>
-                    {% for image in original.data.images %}
-                        {{ image }}
+                <div class="row g-3">
+                    {% for image in images %}
+                        <div class="col-6 col-md-3 col-lg-2">
+                            <a href="{{ image.originalUrl }}" target="_blank" class="d-block">
+                                <img src="{{ image.thumbnail }}" alt="{{ original.title }}" loading="lazy" class="img-fluid rounded border">
+                            </a>
+                        </div>
                     {% endfor %}
-                    {{ dump(original) }}
-            {% for image in original.images %}
-
-            {% endfor %}
                 </div>
             </div>
         </div>
@@ -263,7 +253,7 @@
     </div>
 {% endblock %}
 
-{% block head_stylesheets %}
+{% block stylesheets %}
     {{ parent() }}
     <style>
         .product-image {

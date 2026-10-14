@@ -109,6 +109,9 @@
             "config/packages/doctrine_diagram.yaml"
         ]
     },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.8.0"
+    },
     "league/flysystem-bundle": {
         "version": "3.6",
         "recipe": {
@@ -137,16 +140,16 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
-    "php-http/discovery": {
-        "version": "1.20",
+    "nyholm/psr7": {
+        "version": "1.8",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "1.18",
-            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+            "version": "1.0",
+            "ref": "4a8c0345442dcca1d8a2c65633dcf0285dd5a5a2"
         },
         "files": [
-            "config/packages/http_discovery.yaml"
+            "config/packages/nyholm_psr7.yaml"
         ]
     },
     "phpstan/phpstan": {
@@ -176,6 +179,9 @@
             "bin/phpunit"
         ]
     },
+    "survos/atlas-bundle": {
+        "version": "2.41.9"
+    },
     "survos/babel-bundle": {
         "version": "dev-main"
     },
@@ -204,8 +210,26 @@
     "survos/ez-bundle": {
         "version": "2.0.61"
     },
+    "survos/fetch-bundle": {
+        "version": "2.41.9"
+    },
+    "survos/field-bundle": {
+        "version": "2.41.9"
+    },
+    "survos/grid-bundle": {
+        "version": "2.36.1"
+    },
+    "survos/iiif-bundle": {
+        "version": "2.41.9"
+    },
+    "survos/imgproxy-bundle": {
+        "version": "2.41.9"
+    },
     "survos/jsonl-bundle": {
         "version": "dev-main"
+    },
+    "survos/kit-bundle": {
+        "version": "2.41.9"
     },
     "survos/lingua-bundle": {
         "version": "2.0.85"
@@ -213,11 +237,11 @@
     "survos/media-bundle": {
         "version": "2.0.83"
     },
-    "survos/meili-bundle": {
-        "version": "dev-main"
-    },
     "survos/state-bundle": {
         "version": "dev-main"
+    },
+    "survos/tabler-bundle": {
+        "version": "2.41.9"
     },
     "symfony/asset-mapper": {
         "version": "7.4",
@@ -541,6 +565,18 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
+        ]
+    },
+    "symfony/webhook": {
+        "version": "8.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "b70844963dc84e9a99b94ae552efe691d74b087f"
+        },
+        "files": [
+            "config/routes/webhook.yaml"
         ]
     },
     "symfony/workflow": {

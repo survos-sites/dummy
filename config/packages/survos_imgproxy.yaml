@@ -1,0 +1,4 @@
+survos_imgproxy:
+    host: 'https://imgproxy.survos.com'
+    key: '%env(IMGPROXY_KEY)%'
+    salt: '%env(IMGPROXY_SALT)%'

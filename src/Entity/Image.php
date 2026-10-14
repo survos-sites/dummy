@@ -15,10 +15,7 @@ use JoliCode\MediaBundle\DeleteBehavior\Strategy;
 use JoliCode\MediaBundle\Doctrine\Types as MediaTypes;
 use JoliCode\MediaBundle\Model\Media;
 use JoliCode\MediaBundle\Validator\Media as MediaConstraint;
-use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
-use Survos\MeiliBundle\Metadata\Fields;
-use Survos\MeiliBundle\Metadata\MeiliIndex;
-use Survos\SaisBundle\Service\SaisClientService;
+use Survos\DataContracts\Util\MediaIdentity;
 use Survos\StateBundle\Traits\MarkingInterface;
 use Survos\StateBundle\Traits\MarkingTrait;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -27,15 +24,8 @@ use Symfony\Component\Serializer\Attribute\Groups;
     normalizationContext: ['groups' => ['image.read','marking']],
 )]
 // old way
-#[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['marking', 'productSku'],
-    arguments: [ "searchParameterName" => "facet_filter"]
-)]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Groups(['image.read'])]
-#[MeiliIndex(
-    persisted: new Fields(groups: ['image.read']),
-)]
 class Image implements MarkingInterface, \Stringable
 {
     use MarkingTrait;
@@ -54,10 +44,15 @@ class Image implements MarkingInterface, \Stringable
     {
         if (!$this->code) {
             //$this->code = hash('xxh3', $originalUrl);
-            $this->code = SaisClientService::calculateCode($originalUrl,AppController::SAIS_CLIENT_CODE);
+            $this->code = self::calculateCode($originalUrl);
         }
         $this->marking = IImageWorkflow::PLACE_NEW;
     }
+    public static function calculateCode(string $url): string
+    {
+        return MediaIdentity::idFromOriginalUrl($url);
+    }
+
     public string $id { get => $this->code; }
 
     public function getId(): string

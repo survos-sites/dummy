@@ -25,7 +25,7 @@ final class ProductCrudController extends AbstractEzCrudController
     }
 
     // Your app route that shows a product. Adjust if needed.
-    private const SHOW_ROUTE = 'meili_admin_app_product_show';
+    private const SHOW_ROUTE = 'app_product_show';
 
 
     public static function getEntityFqcn(): string

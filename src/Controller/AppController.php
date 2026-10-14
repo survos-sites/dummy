@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
 use App\Workflow\IImageWorkflow;
 use App\Workflow\ImageWorkflow;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Survos\LibreTranslateBundle\Service\TranslationClientService;
-use Survos\SaisBundle\Model\AccountSetup;
-use Survos\SaisBundle\Service\SaisClientService;
+use Survos\DataContracts\Vocabulary\MediaPreset;
+use Survos\MediaBundle\Entity\BaseMedia;
+use Survos\MediaBundle\Service\MediaUrlGenerator;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\CacheItem;
@@ -40,6 +41,7 @@ class AppController extends AbstractController
         private TexterInterface          $texter,
         #[Target(IImageWorkflow::WORKFLOW_NAME)] private WorkflowInterface $imageWorkflow,
         private readonly ProductRepository $productRepository,
+        private readonly MediaUrlGenerator $mediaUrlGenerator,
 //        private readonly ImageWorkflow $imageWorkflow,
     )
     {
@@ -69,12 +71,13 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[AdminRoute('/app/product/{productId}', name: 'app_product_show')]
+    #[Route('/product/{productId}', name: 'app_product_show')]
     #[Template('app/product/show.html.twig')]
     public function showProduct(Product $product): Response|array
     {
         return [
             'product' => $product,
+            'images' => $this->imageRows($product->images),
         ];
     }
     #[Route('/webhook/media', name: 'app_media_webhook')]
@@ -167,15 +170,47 @@ class AppController extends AbstractController
 
     }
 
+    #[Route('/', name: 'app_homepage')]
+    #[Template('app/home.html.twig')]
+    public function home(): array
+    {
+        return [
+            'productCount' => $this->productRepository->count(),
+            'imageCount' => $this->imageRepository->count(),
+            'products' => $this->productRepository->findAll(),
+        ];
+    }
+
     #[Route('/images', name: 'app_images')]
     #[Template('app/images.html.twig')]
     public function images(
         HttpClientInterface $httpClient,
         string         $target = 'es'): Response|array
     {
-        return [
-            'images' => $this->imageRepository->findBy([], [], 10),
-        ];
+        return ['images' => $this->imageRows($this->imageRepository->findAll())];
+    }
+
+    /**
+     * @param iterable<Image> $images
+     * @return list<array<string, mixed>>
+     */
+    private function imageRows(iterable $images): array
+    {
+        $rows = [];
+        foreach ($images as $image) {
+            $photo = $this->entityManager->find(BaseMedia::class, $image->getId());
+            $rows[] = [
+                'code' => $image->getId(),
+                'productSku' => $image->productSku,
+                'productTitle' => $image->getProduct()?->title,
+                'originalUrl' => $image->originalUrl,
+                'marking' => $image->marking,
+                'thumbnail' => $photo?->smallUrl
+                    ?: $this->mediaUrlGenerator->resize($image->originalUrl, MediaPreset::SMALL, true, client: 'dummy'),
+            ];
+        }
+
+        return $rows;
     }
 
 }
