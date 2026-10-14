@@ -13,6 +13,8 @@ final class NativeWorkflowTest extends WebTestCase
     public function testImageLifecyclePreservesGuardAndMarking(): void
     {
         self::bootKernel();
+        self::assertArrayNotHasKey('SurvosStateBundle', self::$kernel->getBundles());
+        self::assertArrayHasKey('SurvosMenuBundle', self::$kernel->getBundles());
         $image = new Image(originalUrl: 'https://example.com/image.jpg');
         $workflow = self::getContainer()->get(Registry::class)->get($image, 'ImageWorkflow');
         self::assertSame('new', $image->marking);

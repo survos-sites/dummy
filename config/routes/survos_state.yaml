@@ -1,4 +1,0 @@
-survos_state:
-  resource: '@SurvosStateBundle/src/Controller/'
-  type: attribute
-  prefix: '/state'

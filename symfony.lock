@@ -240,9 +240,6 @@
     "survos/menu-bundle": {
         "version": "2.42.7"
     },
-    "survos/state-bundle": {
-        "version": "dev-main"
-    },
     "survos/tabler-bundle": {
         "version": "2.41.9"
     },
